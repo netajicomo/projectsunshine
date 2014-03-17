@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b4cecb2a945661e65a5f27611a39213e",
+    "hash": "8b0054de613e01eb040d66f2b973cca8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2365,12 +2365,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "ae6949a5b807f46d2b718dd235056e3dc26ffa71"
+                "reference": "55d575b6c9691e8fc7242143d06d2fb4190e92c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/ae6949a5b807f46d2b718dd235056e3dc26ffa71",
-                "reference": "ae6949a5b807f46d2b718dd235056e3dc26ffa71",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/55d575b6c9691e8fc7242143d06d2fb4190e92c9",
+                "reference": "55d575b6c9691e8fc7242143d06d2fb4190e92c9",
                 "shasum": ""
             },
             "require": {
@@ -2428,7 +2428,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2014-03-12 18:59:43"
+            "time": "2014-03-14 09:14:08"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -1,5 +1,5 @@
-sunshine:
-    resource: "@SunshineBundle/Resources/config/routing.yml"
+ps_balance_budget:
+    resource: "@PSBalanceBudgetBundle/Resources/config/routing.yml"
     prefix:   /
 
 sonata_user_security:

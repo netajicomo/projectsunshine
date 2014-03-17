@@ -1,0 +1,34 @@
+PS\Bundle\BalanceBudgetBundle\Entity\Issue:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\IssueRepository
+    table: issue
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+        lead:
+            type: text
+        description:
+            type: text
+        is_activate:
+            type: boolean
+            nullable: true
+        created_at:
+            type: datetime    
+    oneToOne:
+        type:
+            targetEntity: IssueType
+            joinColumn:
+                name: issue_type_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]
+        
+    

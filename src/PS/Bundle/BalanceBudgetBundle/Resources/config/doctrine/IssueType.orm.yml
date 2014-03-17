@@ -1,0 +1,24 @@
+PS\Bundle\BalanceBudgetBundle\Entity\IssueType:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\IssueTypeRepository
+    table: issuetype
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        is_active:
+            type: boolean
+            nullable: true
+        created_at:
+            type: datetime
+    oneToMany:
+        properties:
+            targetEntity: IssueTypeProperties
+            mappedBy: issuetype
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]
+       

@@ -1,0 +1,7 @@
+parameters:
+#    sunshine.example.class: PS\Bundle\SunshineBundle\Example
+
+services:
+#    sunshine.example:
+#        class: %sunshine.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

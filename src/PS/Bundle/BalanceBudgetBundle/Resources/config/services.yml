@@ -5,3 +5,26 @@ services:
 #    ps_balance_budget.example:
 #        class: %ps_balance_budget.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    ps_balance_budget.admin.issue:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\IssueAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Issue, PSBalanceBudgetBundle:IssueAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: Issue}
+
+    ps_balance_budget.admin.issue_type:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\IssueTypeAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\IssueType, PSBalanceBudgetBundle:IssueTypeAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: IssueType}
+
+    ps_balance_budget.admin.issue_type_properties:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\IssueTypePropertiesAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\IssueTypeProperties, PSBalanceBudgetBundle:IssueTypePropertiesAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: IssueTypeProperties}
+
+    ps_balance_budget.admin.widget_type:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\WidgetTypeAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\WidgetType, PSBalanceBudgetBundle:WidgetTypeAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Widgets, label: WidgetType}

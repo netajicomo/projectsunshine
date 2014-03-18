@@ -33,3 +33,8 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin    
+
+PSBalanceBudgetBundle_issue:
+        resource: "@PSBalanceBudgetBundle/Resources/config/routing/issue.yml"
+        prefix:   /issues
+    

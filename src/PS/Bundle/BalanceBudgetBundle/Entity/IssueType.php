@@ -162,4 +162,38 @@ class IssueType
             $this->created_at = new \DateTime();
         }
     }
+    
+    public function __toString(){
+       return $this->name;
+   }
+   
+   
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\WidgetType
+     */
+    private $widgettype;
+
+
+    /**
+     * Set widgettype
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\WidgetType $widgettype
+     * @return IssueType
+     */
+    public function setWidgettype(\PS\Bundle\BalanceBudgetBundle\Entity\WidgetType $widgettype = null)
+    {
+        $this->widgettype = $widgettype;
+
+        return $this;
+    }
+
+    /**
+     * Get widgettype
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\WidgetType 
+     */
+    public function getWidgettype()
+    {
+        return $this->widgettype;
+    }
 }

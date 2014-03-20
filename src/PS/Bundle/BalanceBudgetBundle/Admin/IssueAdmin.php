@@ -16,16 +16,14 @@ class IssueAdmin extends Admin
 //    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 //    {
 //        $datagridMapper
-//           // ->add('id')
+//            ->add('id')
 //            ->add('name')
-//            ->add('type')    
 //            ->add('title')
 //            ->add('lead')
 //            ->add('description')
-//    
-//            ->add('is_activate')
-//                
-//            //->add('created_at')
+//            ->add('option_values')
+//            ->add('is_active')
+//            ->add('created_at')
 //        ;
 //    }
 
@@ -35,14 +33,14 @@ class IssueAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-           // ->add('id')
+            //->add('id')
             ->add('name')
-            ->add('type')    
             ->add('title')
             ->add('lead')
             ->add('description')
-            ->add('is_activate')
-           // ->add('created_at')
+            ->add('option_values')
+           // ->add('is_active')
+            ->add('created_at')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -60,13 +58,14 @@ class IssueAdmin extends Admin
     {
         $formMapper
            // ->add('id')
+            ->add('section','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))                
             ->add('name')
-            ->add('type','entity',array('class' => 'PSBalanceBudgetBundle:IssueType','property' => 'name'))    
             ->add('title')
             ->add('lead')
             ->add('description')
-          
-            ->add('is_activate')
+            ->add('controltype','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:ControlType','property' => 'name'))                
+            ->add('option_values')
+           // ->add('is_active')
            // ->add('created_at')
         ;
     }
@@ -79,12 +78,29 @@ class IssueAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('name')
-            ->add('type')    
             ->add('title')
             ->add('lead')
             ->add('description')
-            ->add('is_activate')
+            ->add('option_values')
+            ->add('is_active')
             ->add('created_at')
         ;
+    }
+    
+    public function getTemplate($name)
+    {
+        switch ($name) {
+            case 'edit':
+               return 'PSBalanceBudgetBundle:Admin:edit.html.twig';
+                break;
+            default:
+                return parent::getTemplate($name);
+                break;
+        }
+    }
+    
+    protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection) {
+      $collection->add('getControlTypeProperties');
+    
     }
 }

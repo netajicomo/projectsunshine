@@ -1,3 +1,0 @@
-ps_balance_budget_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PSBalanceBudgetBundle:Default:index }

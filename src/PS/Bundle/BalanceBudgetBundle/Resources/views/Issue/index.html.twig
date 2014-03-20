@@ -1,33 +1,411 @@
 {% extends '::base.html.twig' %}
+ {% block stylesheets %}
+ <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/normalize.min.css') }}" type="text/css" media="all"  />
+  <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/cssreset.css') }}" type="text/css" media="all"  />
+   <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/bootstrap/bootstrap.min.css') }}" type="text/css" media="all"  />
+    <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/bootstrap/bootstrap-responsive.min.css') }}" type="text/css" media="all"  />
+  <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/font-awesome/css/font-awesome.css') }}" type="text/css" media="all"  />
+   <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/iconmoon.css') }}" type="text/css" media="all"  />
+    <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/jquery-ui.css') }}" type="text/css" media="all"  />
+  <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/jquery.switchButton.css') }}" type="text/css" media="all"  />
+   <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/main.css') }}" type="text/css" media="all"  />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300,100' rel='stylesheet' type='text/css'>
 
+  {% endblock %}
+     {% block javascripts %}
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/modernizr-2.6.2.min.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/jquery-1.10.1.min.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/jquery-ui-1.10.1.min.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/jquery.switchButton.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/psbalancebudget/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('bundles/psbalancebudget/js/main.js') }}" type="text/javascript"></script>
+    {% endblock %}
 {% block body -%}
   
+ <header class="topHeader">
+            <div class="container">
+                <div class="row">
 
-    <table class="records_list">
-        <thead>
-            <tr>
+                    <div class="span12">
+                        <div class="row">
+                            <div class="span9">
+                                <a href="#" class="mainLogo">Queensland Goverment</a>
+                            </div>
+                            <div class="span3 hidden-phone">
+                                <ul class="subNav">
+                                    <li><a href="#">Search</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span12 hidden-phone">
+                        <h1>Project Sunshine</h1>    
+                    </div>
+
+                    <div class="span12 mainNav">
+                        <div class="navbar">
+
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-menu2"></span>
+                            </a>                            
+                            <div>
+                                <nav class="nav">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Budget Planner</a></li>
+                                </nav>
+                            </div>   
+
+                        </div>                    
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <section class="leadSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span8">
+                            <h2>Balance the budget</h2>
+                            <p class="descriptionLead">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="span4">
+                            <img src="{{ asset('bundles/psbalancebudget/img/video-sample-1.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="primeSlider">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10">
+                                <ul class="totalSliderLabel topLabel">
+                                    <li>$om</li>
+                                    <li>$10b</li>
+                                    <li>$20b</li>
+                                    <li>$30b</li>
+                                    <li>$40b</li>
+                                    <li>$50b</li>
+                                    <li>$60b</li>
+                                </ul>                                
+                                <div id="totalSlider"></div>
+                                <ul class="totalSliderLabel">
+                                    <li>$5b</li>
+                                    <li>$15b</li>
+                                    <li>$25b</li>
+                                    <li>$35b</li>
+                                    <li>$45b</li>
+                                    <li>$55b</li>
+                                    <li>$65b</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contentSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span8">
+                                <h2>Saving Options</h2>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+
+            <!-- Start of First Row -->
+            <section class="subSection promotSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll">
+                                        <img src="{{ asset('bundles/psbalancebudget/img/video-sample-2.jpg') }}" alt="" class="pull-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>$4,000,000</span></label>
+                                        
+                                        <div id="slider_1"></div>
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">$1.0M</span>
+                                            <span class="pull-right">$2.0M</span>
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_1" value="0"></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>$407,000,000</span></label>
+                                        
+                                        <div class="switchButtonWrapper">
+                                            <input type="checkbox" value="1">
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_1" value="0"></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>     
+
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>$257,000,000</span></label>
+                                        
+                                        <div id="slider_2"></div>
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">$0.1M</span>
+                                            <span class="pull-right">$0.8M</span>
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_2" value="0"></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>  
             
-                <th>Name</th>
-                <th>Title</th>
-                <th>Lead</th>
-                <th>Description</th>
-               
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-             
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.title }}</td>
-                <td>{{ entity.lead }}</td>
-                <td>{{ entity.description }}</td>
-             
-              
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <!-- Start of Second Row -->
+            <section class="subSection promotSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll">
+                                        <img src="{{ asset('bundles/psbalancebudget/img/video-sample-2.jpg') }}" alt="" class="pull-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>            
 
-       
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>$4,000,000</span></label>
+                                        
+                                        <div id="slider_3"></div>
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">$1.0M</span>
+                                            <span class="pull-right">$2.0M</span>
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_3" value="0"></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>$407,000,000</span></label>
+                                        
+                                        <div class="switchButtonWrapper">
+                                            <input type="checkbox" value="1">
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_1" value="0"></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>     
+
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>Reduce mortgage deduction and others for high-income households</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>$257,000,000</span></label>
+                                        
+                                        <div id="slider_4"></div>
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">$0.1M</span>
+                                            <span class="pull-right">$0.8M</span>
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_4" value="0"></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>                               
+
+            <section class="contentSection finishedSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span8">
+                                <h4>Saving Options</h4>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                <a href="#" class="nextButton">Next Section</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>              
+
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <nav>
+                            <ul>
+                                <li><a href="#">Copyright</a></li>
+                                <li><a href="#">Disclaimer</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Right to Information</a></li>
+                                <li><a href="#">Accessibility</a></li>
+                                <li><a href="#">Jobs in Queensland</a></li>
+                                <li><a href="#">Government</a></li>
+                                <li><a href="#">Deutsch (Other languages)</a></li>
+                            </ul>
+                        </nav>
+
+                        <p>© The State of Queensland 2002–2013 <br> Queensland Government</p>
+
+                        <h5>Great State. Great opportunity.</h5>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+         
     {% endblock %}

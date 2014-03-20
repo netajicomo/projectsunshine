@@ -211,6 +211,6 @@ class IssueTypeProperties
     }
     
      public function __toString(){
-       return $this->issuetype;
+      // return $this->issuetype;
    }
 }

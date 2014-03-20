@@ -1,0 +1,101 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+          var options = $('select').parent().parent().next().find('div');
+         var id = options.children().first().attr('id');
+       var theId = id.replace("_option_values","");
+     var savedValues = $('#'+id).val();
+     
+        var results = jQuery.parseJSON(savedValues);
+       
+   
+  if(results)
+   buildOptions(results);
+  else
+   getSliderOptions()
+        
+         $('select').change(function(){
+             getSliderOptions()
+         });
+         
+      function getSliderOptions(){
+         
+           var widgetvalue = $('select').val();
+         var newUrl = "{{ admin.generateUrl('getControlTypeProperties') }}";
+     
+      console.log(widgetvalue)
+      
+     $.ajax({
+  type: "POST",
+  url: newUrl,
+  data:{id: widgetvalue},
+  success: function(result){
+     buildOptions(result)
+     
+  }
+  
+})
+      }
+      
+      function buildOptions(result){
+            var html = '';
+         for(var key in result)
+      {
+       html += '<div id="'+id+'" class="">'+
+                '<div class="sonata-collection-row">'+
+                '<div class="control-group ">'+
+                    '<label class="control-label required" > '+key+' </label>'+
+                        '<div class="controls ">'+
+                            '<input type="text" class="properties"  id="'+key+'" required="required" value="'+result[key]+'">'+
+                        '</div>'+
+                       '</div>'+
+                    '</div>';
+            
+            
+      }
+      options.html(html);  
+      options.append('<input type="hidden" id="newInput" name="'+theId+'[option_values]"  class="span5" value=""></input>');
+      }
+      
+     $('form').on('submit',function(e){  
+         // e.preventDefault();
+          var properties = $('.properties');
+            if(properties.length > 0)
+            {  
+                  var dataObj = {};
+           properties.each(function(){
+              
+                  var $key = $(this).attr('id');
+                  var  val = $(this).val();
+                 dataObj[$key] = val;
+                
+                
+              }); 
+             // console.log(dataObj)
+             var json = JSON.stringify(dataObj);
+            //console.log(json)
+           // console.log($('#newInput').attr('name'))
+           $('#newInput').val(json);
+           
+      }
+          
+      })
+        });
+    </script>
+{% endblock %}
+  

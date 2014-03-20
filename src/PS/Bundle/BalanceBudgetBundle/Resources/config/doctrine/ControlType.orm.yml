@@ -1,0 +1,17 @@
+PS\Bundle\BalanceBudgetBundle\Entity\ControlType:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\ControlTypeRepository
+    table: ps_controltype
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        properties:
+            type: array
+            
+        
+        

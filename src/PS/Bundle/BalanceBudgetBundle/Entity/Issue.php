@@ -35,9 +35,14 @@ class Issue
     private $description;
 
     /**
+     * @var string
+     */
+    private $option_values;
+
+    /**
      * @var boolean
      */
-    private $is_activate;
+    private $is_active = true;
 
     /**
      * @var \DateTime
@@ -45,11 +50,14 @@ class Issue
     private $created_at;
 
     /**
-     * @var \PS\Bundle\BalanceBudgetBundle\Entity\IssueType
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Section
      */
-    private $type;
+    private $section;
 
-
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\ControlType
+     */
+    private $controltype;
     /**
      * Get id
      *
@@ -153,26 +161,49 @@ class Issue
     }
 
     /**
-     * Set is_activate
+     * Set option_values
      *
-     * @param boolean $isActivate
+     * @param string $optionValues
      * @return Issue
      */
-    public function setIsActivate($isActivate)
+    public function setOptionValues($optionValues)
     {
-        $this->is_activate = $isActivate;
+        $this->option_values = $optionValues;
 
         return $this;
     }
 
     /**
-     * Get is_activate
+     * Get option_values
+     *
+     * @return string 
+     */
+    public function getOptionValues()
+    {
+        return $this->option_values;
+    }
+
+    /**
+     * Set is_active
+     *
+     * @param boolean $isActive
+     * @return Issue
+     */
+    public function setIsActive($isActive)
+    {
+        $this->is_active = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get is_active
      *
      * @return boolean 
      */
-    public function getIsActivate()
+    public function getIsActive()
     {
-        return $this->is_activate;
+        return $this->is_active;
     }
 
     /**
@@ -199,34 +230,59 @@ class Issue
     }
 
     /**
-     * Set type
+     * Set section
      *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueType $type
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Section $section
      * @return Issue
      */
-    public function setType(\PS\Bundle\BalanceBudgetBundle\Entity\IssueType $type = null)
+    public function setSection(\PS\Bundle\BalanceBudgetBundle\Entity\Section $section = null)
     {
-        $this->type = $type;
+        $this->section = $section;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get section
      *
-     * @return \PS\Bundle\BalanceBudgetBundle\Entity\IssueType 
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Section 
      */
-    public function getType()
+    public function getSection()
     {
-        return $this->type;
+        return $this->section;
     }
     /**
      * @ORM\PrePersist
      */
     public function setCreatedAtValue()
     {
-        if(!$this->getCreatedAt()) {
+         if(!$this->getCreatedAt()) {
             $this->created_at = new \DateTime();
         }
+    }
+    
+
+
+    /**
+     * Set controltype
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\ControlType $controltype
+     * @return Issue
+     */
+    public function setControltype(\PS\Bundle\BalanceBudgetBundle\Entity\ControlType $controltype = null)
+    {
+        $this->controltype = $controltype;
+
+        return $this;
+    }
+
+    /**
+     * Get controltype
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\ControlType 
+     */
+    public function getControltype()
+    {
+        return $this->controltype;
     }
 }

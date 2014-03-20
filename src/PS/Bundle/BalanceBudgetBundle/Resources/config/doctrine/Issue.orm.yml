@@ -1,7 +1,7 @@
 PS\Bundle\BalanceBudgetBundle\Entity\Issue:
     type: entity
     repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\IssueRepository
-    table: issue
+    table: ps_issue
     id:
         id:
             type: integer
@@ -12,23 +12,29 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
             length: 255
         title:
             type: string
-            length: 255
+            length: 255  
         lead:
             type: text
         description:
             type: text
-        is_activate:
+        option_values:
+            type: text    
+        is_active:
             type: boolean
-            nullable: true
+            default: true
         created_at:
-            type: datetime    
-    oneToOne:
-        type:
-            targetEntity: IssueType
+            type: datetime
+    manyToOne:
+        controltype:
+            targetEntity: ControlType
             joinColumn:
-                name: issue_type_id
+                name: control_type_id
                 referencedColumnName: id
+        section:
+            targetEntity: Section
+            joinColumn:
+                name: section_id
+                referencedColumnName: id            
     lifecycleCallbacks:
         prePersist: [  setCreatedAtValue]
-        
-    
+       

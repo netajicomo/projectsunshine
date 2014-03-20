@@ -29,11 +29,7 @@ class IssueType
      */
     private $created_at;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $properties;
-
+    
     /**
      * Constructor
      */
@@ -121,38 +117,7 @@ class IssueType
         return $this->created_at;
     }
 
-    /**
-     * Add properties
-     *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueTypeProperties $properties
-     * @return IssueType
-     */
-    public function addProperty(\PS\Bundle\BalanceBudgetBundle\Entity\IssueTypeProperties $properties)
-    {
-        $this->properties[] = $properties;
-
-        return $this;
-    }
-
-    /**
-     * Remove properties
-     *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueTypeProperties $properties
-     */
-    public function removeProperty(\PS\Bundle\BalanceBudgetBundle\Entity\IssueTypeProperties $properties)
-    {
-        $this->properties->removeElement($properties);
-    }
-
-    /**
-     * Get properties
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProperties()
-    {
-        return $this->properties;
-    }
+    
     /**
      * @ORM\PrePersist
      */
@@ -168,4 +133,64 @@ class IssueType
    }
    
    
+   
+   
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\WidgetType
+     */
+    private $widgettype;
+
+
+    /**
+     * Set widgettype
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\WidgetType $widgettype
+     * @return IssueType
+     */
+    public function setWidgettype(\PS\Bundle\BalanceBudgetBundle\Entity\WidgetType $widgettype = null)
+    {
+        $this->widgettype = $widgettype;
+
+        return $this;
+    }
+
+    /**
+     * Get widgettype
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\WidgetType 
+     */
+    public function getWidgettype()
+    {
+        return $this->widgettype;
+    }
+    
+   
+    /**
+     * @var string
+     */
+    private $option_values;
+
+
+    /**
+     * Set option_values
+     *
+     * @param string $optionValues
+     * @return IssueType
+     */
+    public function setOptionValues($optionValues)
+    {
+        $this->option_values = $optionValues;
+
+        return $this;
+    }
+
+    /**
+     * Get option_values
+     *
+     * @return string 
+     */
+    public function getOptionValues()
+    {
+        return $this->option_values;
+    }
 }

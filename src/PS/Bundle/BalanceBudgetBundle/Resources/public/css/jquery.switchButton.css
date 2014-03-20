@@ -10,7 +10,7 @@
 }
 
 .switch-button-label.on {
-    color: #0088CC;
+    
 }
 
 .switch-button-background {
@@ -32,7 +32,7 @@
 .switch-button-button {
     position: absolute;
 
-    left: -1px;
+    left: 0;
     top : -1px;
 
     background: #FAFAFA;

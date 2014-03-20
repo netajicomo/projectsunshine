@@ -1,0 +1,3 @@
+planner:
+    pattern:  /planner
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:index" }

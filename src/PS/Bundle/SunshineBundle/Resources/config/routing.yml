@@ -1,3 +1,0 @@
-sunshine_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: SunshineBundle:Default:index }

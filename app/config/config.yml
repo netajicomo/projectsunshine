@@ -65,6 +65,7 @@ doctrine:
                     ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
                     FOSUserBundle: ~
+                    PSBalanceBudgetBundle: ~
         auto_generate_proxy_classes: "%kernel.debug%"
         
 

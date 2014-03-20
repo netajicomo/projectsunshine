@@ -11,7 +11,8 @@ PS\Bundle\BalanceBudgetBundle\Entity\ControlType:
             type: string
             length: 255
         properties:
-            type: array
+            type: string
+            length: 255
             
         
         

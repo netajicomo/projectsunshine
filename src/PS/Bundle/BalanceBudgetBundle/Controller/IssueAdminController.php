@@ -14,8 +14,9 @@ class IssueAdminController extends CRUDController
    
         $properties = $widget->getProperties();
         
+        $propertiesArray = explode(',',$properties);
         $results = array();
-        foreach($properties as $property)
+        foreach($propertiesArray as $property)
         {
             $results[$property] = '';
         } 

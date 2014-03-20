@@ -16,7 +16,7 @@ file that was distributed with this source code.
     <script type="text/javascript">
 
         $(document).ready(function(){
-          var options = $('select').parent().parent().next().find('div');
+          var options = $('select:eq(1)').parent().parent().next().find('div');
          var id = options.children().first().attr('id');
        var theId = id.replace("_option_values","");
      var savedValues = $('#'+id).val();
@@ -29,13 +29,13 @@ file that was distributed with this source code.
   else
    getSliderOptions()
         
-         $('select').change(function(){
+         $('select:eq(1)').change(function(){
              getSliderOptions()
          });
          
       function getSliderOptions(){
          
-           var widgetvalue = $('select').val();
+           var widgetvalue = $('select:eq(1)').val();
          var newUrl = "{{ admin.generateUrl('getControlTypeProperties') }}";
      
       console.log(widgetvalue)

@@ -285,4 +285,32 @@ class Issue
     {
         return $this->controltype;
     }
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Section
+     */
+    private $sectionissue;
+
+
+    /**
+     * Set sectionissue
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Section $sectionissue
+     * @return Issue
+     */
+    public function setSectionissue(\PS\Bundle\BalanceBudgetBundle\Entity\Section $sectionissue = null)
+    {
+        $this->sectionissue = $sectionissue;
+
+        return $this;
+    }
+
+    /**
+     * Get sectionissue
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Section 
+     */
+    public function getSectionissue()
+    {
+        return $this->sectionissue;
+    }
 }

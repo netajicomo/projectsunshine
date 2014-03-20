@@ -67,7 +67,7 @@ class ControlType
     public function setProperties($properties)
     {
         
-        $properties = explode (',', $properties);    
+     
         
         $this->properties = $properties;
 
@@ -82,8 +82,6 @@ class ControlType
     public function getProperties()
     
     {
-       // if(is_array($this->properties))
-       // $this->properties = implode (',', $this->properties);
             
         return $this->properties;
     }

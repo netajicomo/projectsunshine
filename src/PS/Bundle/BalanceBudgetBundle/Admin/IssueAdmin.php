@@ -36,9 +36,9 @@ class IssueAdmin extends Admin
             //->add('id')
             ->add('name')
             ->add('title')
-            ->add('lead')
-            ->add('description')
-            ->add('option_values')
+           // ->add('lead')
+          //  ->add('description')
+            //->add('option_values')
            // ->add('is_active')
             ->add('created_at')
             ->add('_action', 'actions', array(

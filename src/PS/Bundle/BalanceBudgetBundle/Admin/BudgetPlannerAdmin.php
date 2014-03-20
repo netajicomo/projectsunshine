@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CategoryAdmin extends Admin
+class BudgetPlannerAdmin extends Admin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -17,11 +17,10 @@ class CategoryAdmin extends Admin
 //    {
 //        $datagridMapper
 //            ->add('id')
-//            ->add('name')
 //            ->add('title')
 //            ->add('description')
-//            ->add('is_active')
-//            ->add('created_at')
+//            ->add('media')
+//            ->add('debt')
 //        ;
 //    }
 
@@ -31,12 +30,11 @@ class CategoryAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-         //   ->add('id')
-            ->add('name')
+            //->add('id')
             ->add('title')
            // ->add('description')
-          //  ->add('is_active')
-            ->add('created_at')
+            ->add('media')
+            ->add('debt')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -53,12 +51,11 @@ class CategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
-            ->add('name')
+           // ->add('id')
             ->add('title')
             ->add('description')
-           // ->add('is_active')
-           // ->add('created_at')
+            ->add('media')
+            ->add('debt')
         ;
     }
 
@@ -69,11 +66,10 @@ class CategoryAdmin extends Admin
     {
         $showMapper
             //->add('id')
-            ->add('name')
             ->add('title')
             ->add('description')
-            //->add('is_active')
-            ->add('created_at')
+            ->add('media')
+            ->add('debt')
         ;
     }
 }

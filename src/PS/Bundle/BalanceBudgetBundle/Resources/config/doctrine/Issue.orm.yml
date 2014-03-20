@@ -30,7 +30,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
             joinColumn:
                 name: control_type_id
                 referencedColumnName: id
-        section:
+        sectionissue:
             targetEntity: Section
             joinColumn:
                 name: section_id

@@ -38,15 +38,15 @@ $(document).ready(function(){
         
         var debt = $( "#totalSlider" ).attr('data-total');
         var debtString = '$ '+parseInt(debt,10)/100000000+' B';
-$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ debtString +'" !important;}</style>')
+//$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ debtString +'" !important;}</style>')
 	$( "#totalSlider" ).slider({
                 value:debt,
 		min: 0,
 		max: debt,
 		range: "min",
 		slide: function( event, ui ) {
-                    var value = '$ '+Math.floor(parseInt(ui.value,10)/100000000)+' B'
-			$('.primeSlider').append('<style>.ui-slider-handle:before{content:"'+ value +'" !important;}</style>')
+                  //  var value = '$ '+Math.floor(parseInt(ui.value,10)/100000000)+' B'
+		//	$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ value +'" !important;}</style>')
       	}
 	});				
 

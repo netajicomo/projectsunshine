@@ -38,7 +38,7 @@ class SectionAdmin extends Admin
             ->add('name')
             ->add('title')
             //->add('lead')
-           // ->add('description')
+            ->add('category')
             ->add('media')
            // ->add('is_active')
             ->add('created_at')

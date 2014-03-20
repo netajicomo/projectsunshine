@@ -49,10 +49,7 @@ class Issue
      */
     private $created_at;
 
-    /**
-     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Section
-     */
-    private $section;
+    
 
     /**
      * @var \PS\Bundle\BalanceBudgetBundle\Entity\ControlType
@@ -229,28 +226,7 @@ class Issue
         return $this->created_at;
     }
 
-    /**
-     * Set section
-     *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Section $section
-     * @return Issue
-     */
-    public function setSection(\PS\Bundle\BalanceBudgetBundle\Entity\Section $section = null)
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Section 
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
+    
     /**
      * @ORM\PrePersist
      */
@@ -313,4 +289,5 @@ class Issue
     {
         return $this->sectionissue;
     }
+    
 }

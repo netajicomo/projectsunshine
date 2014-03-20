@@ -218,4 +218,8 @@ class Category
             $this->created_at = new \DateTime();
         }
     }
+    
+    public function __toString(){
+       return $this->name;
+   }
 }

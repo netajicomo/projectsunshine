@@ -38,8 +38,8 @@ class IssueAdmin extends Admin
             ->add('title')
            // ->add('lead')
           //  ->add('description')
-            //->add('option_values')
-           // ->add('is_active')
+           ->add('sectionissue')
+            ->add('controltype')
             ->add('created_at')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -58,7 +58,7 @@ class IssueAdmin extends Admin
     {
         $formMapper
            // ->add('id')
-            ->add('section','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))                
+            ->add('sectionissue','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))                
             ->add('name')
             ->add('title')
             ->add('lead')

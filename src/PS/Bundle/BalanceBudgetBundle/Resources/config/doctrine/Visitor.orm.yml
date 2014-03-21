@@ -14,8 +14,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Visitor:
             type: string
             length: 255   
         user_agent:
-            type: string
-            length: 255
+            type: text
         created_at:
             type: datetime
     lifecycleCallbacks:

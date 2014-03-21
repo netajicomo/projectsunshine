@@ -1,7 +1,7 @@
-PS\Bundle\BalanceBudgetBundle\Entity\Visitor:
+PS\Bundle\BalanceBudgetBundle\Entity\VisitorActivity:
     type: entity
-    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\VisitorRepository
-    table: ps_visitor
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\VisitorActivityRepository
+    table: ps_visitoractivity
     id:
         id:
             type: integer
@@ -10,12 +10,14 @@ PS\Bundle\BalanceBudgetBundle\Entity\Visitor:
         session_id:
             type: string
             length: 255    
-        ip:
+        issue_id:
             type: string
             length: 255   
-        user_agent:
+        issue_value:
             type: string
             length: 255
+        has_touched:
+            type: boolean
         created_at:
             type: datetime
     lifecycleCallbacks:

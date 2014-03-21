@@ -5,9 +5,9 @@ namespace PS\Bundle\BalanceBudgetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Visitor
+ * VisitorActivity
  */
-class Visitor
+class VisitorActivity
 {
     /**
      * @var integer
@@ -22,12 +22,17 @@ class Visitor
     /**
      * @var string
      */
-    private $ip;
+    private $issue_id;
 
     /**
      * @var string
      */
-    private $user_agent;
+    private $issue_value;
+
+    /**
+     * @var boolean
+     */
+    private $has_touched;
 
     /**
      * @var \DateTime
@@ -49,7 +54,7 @@ class Visitor
      * Set session_id
      *
      * @param string $sessionId
-     * @return Visitor
+     * @return VisitorActivity
      */
     public function setSessionId($sessionId)
     {
@@ -69,56 +74,79 @@ class Visitor
     }
 
     /**
-     * Set ip
+     * Set issue_id
      *
-     * @param string $ip
-     * @return Visitor
+     * @param string $issueId
+     * @return VisitorActivity
      */
-    public function setIp($ip)
+    public function setIssueId($issueId)
     {
-        $this->ip = $ip;
+        $this->issue_id = $issueId;
 
         return $this;
     }
 
     /**
-     * Get ip
+     * Get issue_id
      *
      * @return string 
      */
-    public function getIp()
+    public function getIssueId()
     {
-        return $this->ip;
+        return $this->issue_id;
     }
 
     /**
-     * Set user_agent
+     * Set issue_value
      *
-     * @param string $userAgent
-     * @return Visitor
+     * @param string $issueValue
+     * @return VisitorActivity
      */
-    public function setUserAgent($userAgent)
+    public function setIssueValue($issueValue)
     {
-        $this->user_agent = $userAgent;
+        $this->issue_value = $issueValue;
 
         return $this;
     }
 
     /**
-     * Get user_agent
+     * Get issue_value
      *
      * @return string 
      */
-    public function getUserAgent()
+    public function getIssueValue()
     {
-        return $this->user_agent;
+        return $this->issue_value;
+    }
+
+    /**
+     * Set has_touched
+     *
+     * @param boolean $hasTouched
+     * @return VisitorActivity
+     */
+    public function setHasTouched($hasTouched)
+    {
+        $this->has_touched = $hasTouched;
+
+        return $this;
+    }
+
+    /**
+     * Get has_touched
+     *
+     * @return boolean 
+     */
+    public function getHasTouched()
+    {
+        return $this->has_touched;
     }
 
     /**
      * Set created_at
      *
      * @param \DateTime $createdAt
-     * @return Visitor
+     * @return VisitorActivity
      */
     public function setCreatedAt($createdAt)
     {
@@ -141,8 +169,6 @@ class Visitor
      */
     public function setCreatedAtValue()
     {
-          if(!$this->getCreatedAt()) {
-            $this->created_at = new \DateTime();
-        }
+        // Add your code here
     }
 }

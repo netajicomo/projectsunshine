@@ -38,8 +38,8 @@ class IssueAdmin extends Admin
             ->add('title')
            // ->add('lead')
           //  ->add('description')
-           ->add('sectionissue',null, array('label' => 'Section Issue'))
-            ->add('category', array('code'=> 'getControlType'))    
+            ->add('sectionissue',null, array('label' => 'Section'))
+            ->add('category','entity', array('code'=> 'getCategory'))    
             ->add('controltype',null, array('label' => 'Control Type'))
             ->add('created_at')
             ->add('_action', 'actions', array(

@@ -79,6 +79,7 @@ swiftmailer:
 # config for the sonata admin
 sonata_block:
     default_contexts: [cms]
+    
     blocks:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
@@ -108,6 +109,12 @@ fos_user:
         user_manager: sonata.user.orm.user_manager 
 
 sonata_admin:
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: left, type: sonata.admin.block.admin_list }
+
+        
     templates:
             # default global templates
             layout:  SonataAdminBundle::standard_layout.html.twig

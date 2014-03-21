@@ -21,6 +21,10 @@ class BudgetController extends Controller
      */
     public function indexAction()
     {
+        $service = $this->get('visitor_tracker_service');
+        echo $service->createVisitor();
+       //exit;
+        
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('PSBalanceBudgetBundle:Category')->findAll();
@@ -41,5 +45,8 @@ class BudgetController extends Controller
             
         ));
     }
+    
+    
+    
 }   
 

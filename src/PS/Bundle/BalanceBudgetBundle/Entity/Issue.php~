@@ -290,4 +290,9 @@ class Issue
         return $this->sectionissue;
     }
     
+    public function getCategory()
+    {
+        return $this->sectionissue->getCategory();
+    }        
+    
 }

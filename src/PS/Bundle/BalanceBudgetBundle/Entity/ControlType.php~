@@ -85,4 +85,9 @@ class ControlType
             
         return $this->properties;
     }
+    
+    public function __toString()
+    {
+          return $this->name;
+    }
 }

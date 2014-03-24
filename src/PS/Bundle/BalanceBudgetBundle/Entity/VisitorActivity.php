@@ -169,6 +169,8 @@ class VisitorActivity
      */
     public function setCreatedAtValue()
     {
-        // Add your code here
+         if(!$this->getCreatedAt()) {
+            $this->created_at = new \DateTime();
+        }
     }
 }

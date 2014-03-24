@@ -25,6 +25,9 @@ PS\Bundle\BalanceBudgetBundle\Entity\Section:
             default: true
         created_at:
             type: datetime    
+        updated_at:
+            type: datetime
+            nullable: true
     manyToOne:
         category:
             targetEntity: Category
@@ -37,6 +40,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Section:
             targetEntity: Issue
             mappedBy: sectionissue          
     lifecycleCallbacks:
-        prePersist: [  setCreatedAtValue]
+        prePersist: [  setCreatedAtValue, lifecycleFileUpload]
+        preUpdate:    [ lifecycleFileUpload ]
         
     

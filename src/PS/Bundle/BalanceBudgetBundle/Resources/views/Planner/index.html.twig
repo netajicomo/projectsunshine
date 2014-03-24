@@ -247,6 +247,26 @@
                 </div>
             </div>
         </footer>
+<script type="text/javascript">
 
+          
+          function saveIssue(id,value){
+          // console.log(id);
+         //  console.log(value);
+              $.ajax({
+  type: "POST",
+  url: "{{ path('save_issue')}}",
+  data:{id: id, value: value},
+  success: function(result){
+   
+  }
+  
+})
+  }
+          
+   
+      
+      </script>
          
     {% endblock %}
+  

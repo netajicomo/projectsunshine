@@ -249,15 +249,10 @@
         _toggleSwitch: function() {
             this.options.checked = !this.options.checked;
             var newLeft = "";
-            // custom code by pipe
-             var id = this.element.prop('id').replace('switch_', '');
-            var max = parseInt($('#options_'+id).attr('data-max'),10)/1000000;
-            var min = $('#options_'+id).attr('data-min')/1000000;
+           
             if (this.options.checked) {
                 // Update the underlying checkbox state
                 //console.log(this.element);
-                // custom code by pipe -- start
-                 $('#value_'+id).val(max);   
                 
                 this.element.prop("checked", true);
                 this.element.change();
@@ -283,7 +278,7 @@
             else {
               //  console.log(this.element);
                 // Update the underlying checkbox state
-                  $('#value_'+id).val(min);   
+                   
                 this.element.prop("checked", false);
                 this.element.change();
                 newLeft = "0";

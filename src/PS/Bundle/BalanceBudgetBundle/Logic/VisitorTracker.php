@@ -22,13 +22,7 @@ class VisitorTracker
         $this->em = $entityManager;
     }
     
-    public function createSession(){
-        $session = new Session();
-        $session->start();
-        
-        $this->session = $session;
-    }
-    
+   
     public function getSessionId(){
         return $this->session->getId();
     }
@@ -44,23 +38,36 @@ class VisitorTracker
     }
     
     
-    public function createVisitor(){
+    public function createVisitor($request){
         
-      // echo 'id: '.$this->request->getSession()->getId();
-      // if (!$this->getSessionId())
-      // $this->createVisitorObject();    
+      $session = $request->getSession();
+      $sessionId = $session->get('id');
+      
+      $visitor = $this->em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->findOneBy(array('session_id'=>$sessionId));
+      // check if the session id exists and if it exists in the DB
+      if(!isset($sessionId) || !isset($visitor))
+      {    
+           
+           $session->set('id', $session->getId());
+          $this->createVisitorObject($session->getId());
+      }  
+     
         
     }
     
-    public function createVisitorObject(){
-        $this->createSession();
+   
+    
+    public function createVisitorObject($sessionId){
+        
         $visitor = new Visitor();
-        $visitor->setSessionId($this->getSessionId());
+        $visitor->setSessionId($sessionId);
         $visitor->setIp($this->getIP());
         $visitor->setUserAgent($this->getUserAgent());
         $this->em->persist($visitor);
         $this->em->flush();
     }
+    
+   
     
 }
 

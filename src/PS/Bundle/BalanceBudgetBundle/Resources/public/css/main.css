@@ -178,12 +178,14 @@ section + section{
 .subSection .span12:after{
     content: '';
     position: absolute;
-
     height: 4px;
     left: -1px;
     right: -1px;
+    background-color: #4b131b;
+}
 
-    background-color: #8b2331;
+.promotSection .span12:after {
+    background: none
 }
 
 .subSection .spacingAll{ 
@@ -206,9 +208,8 @@ section + section{
     color: white;
     font-size: 14px;
     font-weight: 500;
-    background-color: #8b2331;
+    background-color: #4b131b;
     display: inline-block;
-
     padding: 6px 18px;
     text-transform:  uppercase;;
 }
@@ -222,12 +223,12 @@ section + section{
 
 .promotSection .span12{
     color: white;
-    background-color: #8b2331;
-    border-color: #8b2331;
+    background-color: #4b131b;
+    border-color: #4b131b;
 }
 
 .promotSection .moreInfo{
-    background-color: #4b131b;
+    background-color: #8b2331;
 }
 
 .contentSection .span12{
@@ -415,6 +416,8 @@ section + section{
             box-shadow: inset 0 10px 40px 10px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
+.fixed-header { position: fixed; top: -30px; width: 100%; z-index: 10 }
+
 .primeSlider .ui-slider-range{
     background: #ff9900; /* Old browsers */
     background: -moz-linear-gradient(left,  #ff9900 0%, #7ab800 100%); /* FF3.6+ */
@@ -549,6 +552,77 @@ section + section{
     top: 3px;    
     padding-left: 0;
 }
+
+/**
+* Modal Popup Styles Starts Here
+*/
+
+.text-upper {
+    text-transform: uppercase
+}
+
+.custom-modal {
+    background-color: #fafafa;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+.custom-modal-header {
+    background-color: #8b2331;
+    border-bottom: none;
+}
+
+.custom-modal-header .close {
+    color: #fafafa;
+    font: 700 14px 'Roboto', sans-serif;
+    opacity: 1;
+    text-shadow: none
+}
+
+.custom-modal-header i {
+    margin-left: 10px;
+    position: relative;
+    top: -1px;
+}
+
+.custom-modal-header .icon-remove:before {
+    background: #fafafa;
+    border-radius: 8px;
+    color: #8b2331;
+    height: 16px;
+    width: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.custom-modal-body {
+    padding: 35px 15px 20px 30px;
+}
+
+.custom-modal a {
+    color: #8b2331;
+    font-weight: 500
+}
+
+.custom-modal-footer {
+    background-color: #fafafa;
+    border-top: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    padding: 15px 15px 35px 30px;
+    text-align: left
+}
+
+.custom-modal-footer span {
+    font-weight: normal
+}
+
+/**
+* Modal Popup Styles Ends Here
+*/
 
 /* ==========================================================================
    Footer Styles

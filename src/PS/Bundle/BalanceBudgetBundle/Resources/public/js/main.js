@@ -59,5 +59,5 @@ $(function() {
     $(window).scroll(function() {
         if($(this).scrollTop() > (pos.top) && fixadent.css('position') == 'static') { fixadent.addClass('fixed-header'); }
         else if($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed-header')){ fixadent.removeClass('fixed-header'); }
-    })
+    });
 });

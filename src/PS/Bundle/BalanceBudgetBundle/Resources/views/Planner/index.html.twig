@@ -31,7 +31,7 @@
                             <div class="span9">
                                 <a href="#" class="mainLogo">Queensland Goverment</a>
                             </div>
-                            <div class="span3 hidden-phone">
+                            <div class="span3 visible-desktop">
                                 <ul class="subNav">
                                     <li><a href="#">Search</a></li>
                                     <li><a href="#">Contact Us</a></li>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="span12 hidden-phone">
+                    <div class="span12">
                         <h1>Project Sunshine</h1>    
                     </div>
 
@@ -48,13 +48,15 @@
                         <div class="navbar">
 
                             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                                <span class="icon-menu2"></span>
+                                <span class="iconmoon-menu2"></span>
                             </a>                            
-                            <div>
+                            <div class="nav-collapse collapse">
                                 <nav class="nav">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Budget Planner</a></li>
+                                    <ul class="clearfix">
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">About <i class="icon-angle-down"></i></a></li>
+                                        <li><a href="#">Budget Planner <i class="icon-angle-down"></i></a></li>
+                                    </ul>
                                 </nav>
                             </div>   
 
@@ -165,7 +167,7 @@
                 </div>
             </section>            
            {% for issue in section.issues%}
-            <section class="subSection">
+            <section class="subSection subSection-row">
                 <div class="container">
                     <div class="row">
                         <div class="span12">
@@ -272,7 +274,7 @@
                             </ul>
                         </nav>
 
-                        <p>© The State of Queensland 2002–2013 <br> Queensland Government</p>
+                        <p>© The State of Queensland 2002–2013 <span>Queensland Government</span></p>
 
                         <h5>Great State. Great opportunity.</h5>
                     </div>

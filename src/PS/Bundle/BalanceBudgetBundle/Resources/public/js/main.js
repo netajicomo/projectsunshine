@@ -70,11 +70,11 @@ $(document).ready(function(){
 		slide: function( event, ui ) {
                   //  var value = '$ '+Math.floor(parseInt(ui.value,10)/100000000)+' B'
 		//	$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ value +'" !important;}</style>')
-                    $('#totalSlider .sliderValue em').text(ui.value);
+                    
                 }
 	});
         
-        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em></em> DEBT</span>" );
+        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em>"+(debt/1000).toFixed(2)+"</em> B </span>" );
 
 	/** Planner page add comment toggle **/        
         $( ".add-comment" ).click(function(e) {

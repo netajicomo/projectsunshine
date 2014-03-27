@@ -216,7 +216,7 @@
                                         </div>
 
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0"></label>
-                                           <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                           <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -231,7 +231,7 @@
                                         </div>
                                         <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
-                                        <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                        <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                {% endif %}
@@ -278,9 +278,11 @@
                                             <span class="pull-left">0%</span>
                                             <span class="pull-right">100%</span>
                                         </div>
-                                            <label class="redLabel">cutting <span>$</span><input type="text" readonly id="parent_value_{{issue.id}}" value="0"></label>
-                                        <label class="redLabel"><input type="text" readonly id="value_{{issue.id}}" value="0">%</label>
-                                            <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">   
+                                            <label class="redLabel">cutting <span>$</span><input type="text" readonly id="parent_value_{{issue.id}}" value="0">
+                                            (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
+                                            </label>
+                                        
+                                            <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">   
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -301,7 +303,7 @@
                                    </div>    
                                 </div>
                                <div class="span5 total-val-column">
-                                      <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0"></label>
+                                      <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0">M</label>
                                </div>
                             </div>   
                             
@@ -316,7 +318,7 @@
             {% endfor%}
                             
 
-            <section class="contentSection finishedSection">
+           {# <section class="contentSection finishedSection">
                 <div class="container">
                     <div class="row">
                         <div class="span12">
@@ -328,7 +330,7 @@
                         </div>
                     </div>
                 </div>
-            </section>              
+            </section>  #}            
 
         </div>
 
@@ -390,7 +392,7 @@
          var childrenValuesJson = JSON.stringify(childrenValues);
          // var childrenDebtValuesJson = JSON.stringify(childrenDebtValues);
          var parentId = results.parentId;
-          var currentTotalSliderValue =  $('#totalSlider').slider( "option", "value");
+          var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
       
          {#this is a child issue#}
         if(results.isChild === true)
@@ -398,13 +400,14 @@
            
            var parentDebt = $('#value_'+results.parentId).val(); 
            var childDebt = $('#debt_value_'+results.issueId).val(); 
-            var data = {parentId: results.parentId, childDebt: childDebt, isChild: 'true',  parentDebt: parentDebt, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
+            var parentPercentageDebt = $('#debt_value_'+results.parentId).val();   
+            var data = {parentId: results.parentId, childDebt: childDebt, isChild: 'true',  parentDebt: parentDebt,parentPercentageDebt: parentPercentageDebt, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
         }
         {#this is the parent issue#}
         else if(typeof results.percentage !== 'undefined')
         {
-         var childDebt = $('#debt_value_'+results.parentId).val();   
-        var data = {parentId: results.parentId, parentPercentage: results.percentage, isParent: 'true', childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
+         var parentPercentageDebt = $('#debt_value_'+results.parentId).val();   
+        var data = {parentId: results.parentId, parentPercentage: results.percentage, parentPercentageDebt: parentPercentageDebt, isParent: 'true', childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
         {#this is an independent issue#}
         else
@@ -427,6 +430,8 @@
             
                  console.log(result.currentDebt);
                  $('#totalSlider').slider( "option", "value", result.currentDebt );
+                 var debtHeader =  (result.currentDebt/1000).toFixed(2)
+                 $('#totalSlider .sliderValue em').text(debtHeader);
                  // update the section total
                  $('#total_'+parentId).val(result.sectiontotal);  
                  // update the parent slider value

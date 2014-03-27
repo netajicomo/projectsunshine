@@ -123,7 +123,8 @@ class BudgetController extends Controller
             if($parentDebt == '0'){
              //   echo ' with parent untouched<br>';   
              //   echo $childDebt;
-                $totalDebt = $request->request->get('currentDebt') - ($childDebt);
+               // $totalDebt = $request->request->get('currentDebt') - ($childDebt);
+                 $totalDebt = $request->request->get('currentDebt') - ($childTotal);
                 $result = array('sectiontotal' => $childTotal, 'currentDebt' => $totalDebt );
              return new JsonResponse($result);
         }
@@ -131,7 +132,8 @@ class BudgetController extends Controller
           else
         {
            
-           //   echo ' with parent having value<br>';   
+           //   echo ' with parent having value<br>'; 
+                 $parentPercentageDebt = $request->request->get('parentPercentageDebt');
               $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
             $valuesArray = json_decode($values,TRUE);
             $total = $valuesArray['total'];
@@ -140,7 +142,8 @@ class BudgetController extends Controller
           $sectionTotal = $newParentDebt + $childTotal;
             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
         
-         $totalDebt = $request->request->get('currentDebt') - $sectionTotal;
+        // $totalDebt = $request->request->get('currentDebt') - ($childDebt);
+            $totalDebt = $request->request->get('currentDebt') - ($sectionTotal);
        $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal, 'currentDebt' => $totalDebt);
                     return new JsonResponse($result);
         }  
@@ -150,6 +153,7 @@ class BudgetController extends Controller
        {
          // echo 'is parent<br>'.$parentPercentage.'<br>';   
            $parentPercentage = $request->request->get('parentPercentage');
+             $parentPercentageDebt = $request->request->get('parentPercentageDebt');
             $childrenValues = $request->request->get('childrenValues');
                $parentId = $request->request->get('parentId');
                   $sessionId = $request->getSession()->get('id');  
@@ -164,8 +168,9 @@ class BudgetController extends Controller
         $newParentDebt = ($total - $childTotal) * $parentPercentage/100 ;
         $sectionTotal = $newParentDebt + $childTotal;
 
-         $totalDebt = $request->request->get('currentDebt') - $newParentDebt;
-         $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
+        // $totalDebt = $request->request->get('currentDebt') - ($total - $childTotal) * $parentPercentageDebt/100 ;
+         $totalDebt = $request->request->get('currentDebt') - $sectionTotal;
+        $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
          $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal, 'currentDebt' => $totalDebt);
                     return new JsonResponse($result);
        } 
@@ -176,8 +181,9 @@ class BudgetController extends Controller
             $siblingValues = $request->request->get('siblingValues');
              $siblingValueArray = json_decode($siblingValues,TRUE);
               $siblingTotal = array_sum($siblingValueArray);
-               $totalDebt = $request->request->get('currentDebt') - $request->request->get('independentValue');
-          $result = array('sectiontotal' => $siblingTotal, 'currentDebt' => $totalDebt);
+              // $totalDebt = $request->request->get('currentDebt') - $request->request->get('independentValue');
+              $totalDebt = $request->request->get('currentDebt') - $sectionTotal;
+              $result = array('sectiontotal' => $siblingTotal, 'currentDebt' => $totalDebt);
 
               
        }   

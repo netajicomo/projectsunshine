@@ -62,7 +62,7 @@ $(document).ready(function(){
         var debt = $( "#totalSlider" ).attr('data-total');
   //      var debtString = '$ '+parseInt(debt,10)/100000000+' B';
 //$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ debtString +'" !important;}</style>')
-	$( "#totalSlider" ).slider({
+	var totalSlider = $( "#totalSlider" ).slider({
                 value:debt,
 		min: 0,
 		max: debt,
@@ -70,9 +70,25 @@ $(document).ready(function(){
 		slide: function( event, ui ) {
                   //  var value = '$ '+Math.floor(parseInt(ui.value,10)/100000000)+' B'
 		//	$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ value +'" !important;}</style>')
-      	}
-	});				
+                    $('#totalSlider .sliderValue em').text(ui.value);
+                }
+	});
+        
+        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em></em> DEBT</span>" );
 
-	
+	/** Planner page add comment toggle **/        
+        $( ".add-comment" ).click(function(e) {
+            e.preventDefault();
+            $(this).toggleClass( "add-comment-open" );
+            $(this).parents('.subSection').find(".comment-wrapper" ).slideToggle( "slow" );
+        });
 
+});
+
+$(function() {
+    var fixadent = $("#fixedheader"), pos = fixadent.offset();
+    $(window).scroll(function() {
+        if($(this).scrollTop() > (pos.top) && fixadent.css('position') == 'static') { fixadent.addClass('fixed-header'); }
+        else if($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed-header')){ fixadent.removeClass('fixed-header'); }
+    });
 });

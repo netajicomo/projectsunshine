@@ -99,7 +99,6 @@ h1, h2, h3, h4, h5, h6, ul{
     color: #003c69;
     font-size: 24px;
     font-weight: 400;
-
     margin-bottom: 18px;
 }
 
@@ -108,7 +107,6 @@ h1, h2, h3, h4, h5, h6, ul{
 }
 
 .subNav li{ 
- 
     display: inline; 
 }
 .subNav li a{ 
@@ -126,23 +124,38 @@ h1, h2, h3, h4, h5, h6, ul{
 .mainLogo{
     display: block;
     background: url(../img/queensland-logo.png) no-repeat left top;
-
     width: 286px;
     height: 50px;
-
     text-indent: -9999em;
-
     margin-bottom: 30px;
 }
 
-.mainNav .nav>li>a{
+.mainNav .nav {
+    float: none
+}
+
+.mainNav .nav>ul>li {
+    float: left
+}
+
+.mainNav .nav>ul>li>a{
     color: #003c69;
     font-size: 14px;
     padding-left: 0;
     padding-right: 0;
     margin-right: 30px;
-
     font-weight: 500;
+}
+
+.mainNav .nav i {
+    font-weight: bold;
+    margin-left: 4px
+}
+
+.mainNav .nav i:before {
+    content: "\f107";
+    position: relative;
+    top: 1px;
 }
 
 /* ==========================================================================
@@ -178,12 +191,14 @@ section + section{
 .subSection .span12:after{
     content: '';
     position: absolute;
-
     height: 4px;
     left: -1px;
     right: -1px;
+    background-color: #4b131b;
+}
 
-    background-color: #8b2331;
+.promotSection .span12:after {
+    background: none
 }
 
 .subSection .spacingAll{ 
@@ -206,9 +221,8 @@ section + section{
     color: white;
     font-size: 14px;
     font-weight: 500;
-    background-color: #8b2331;
+    background-color: #4b131b;
     display: inline-block;
-
     padding: 6px 18px;
     text-transform:  uppercase;;
 }
@@ -222,12 +236,12 @@ section + section{
 
 .promotSection .span12{
     color: white;
-    background-color: #8b2331;
-    border-color: #8b2331;
+    background-color: #4b131b;
+    border-color: #4b131b;
 }
 
 .promotSection .moreInfo{
-    background-color: #4b131b;
+    background-color: #8b2331;
 }
 
 .contentSection .span12{
@@ -269,6 +283,8 @@ section + section{
 
 .finishedSection .span12{
     border: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
     padding: 30px;
 }
 
@@ -301,13 +317,10 @@ section + section{
 .ui-slider-handle.ui-state-default{
     border-radius: 0;
     border: none;
-
     background: #be461d;
-
     width: 36px;
     height: 36px;
     top: -9px;
-
     outline: none;
 }
 
@@ -340,26 +353,28 @@ section + section{
 }
 
 .switch-button-background{
-    border: none;
+    background-color: #fafafa;
+    border: 1px solid #d6d9da;
     border-radius: 0;
     background: #ecf0f1;
+    margin-bottom: 24px;     
+}
 
-    margin-bottom: 24px;
-
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-       -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);       
+.switch-button-background.checked {
+    background-color: #be461d;
+    border-color: #22bbff;
+    -webkit-box-shadow: 1px 0px 3px 4px rgba(34, 187, 255, 0.1);
+       -moz-box-shadow: 1px 0px 3px 4px rgba(34, 187, 255, 0.1);
+            box-shadow: 1px 0px 3px 4px rgba(34, 187, 255, 0.1);  
 }
 
 .switch-button-button{
     border: none;
     border-radius: 0;
-    background: #be461d;
-
     top: 0;
 }
 
-.switch-button-button:after{
+.switch-button-button:after {
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -369,18 +384,40 @@ section + section{
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    content: "\e6fe";
+    
+    content: "\e6fd";
     position: absolute;
 
     width: 100%;
     height: 100%;    
     
-    color: white;
+    color: #a0a0a0;
     font-size: 21px;
+    left: 100%;
     
     text-align: center;
     line-height: 36px;
+}
+
+.checked .switch-button-button:after {
+    color: #fff;
+    content: "\e6fe";
+    left: -100%
+}
+
+.switch-button-button:before {
+    color: #0a2f40;
+    content: "cut";
+    font-size: 14px;
+    font-weight: 500;
+    left: 11px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 7px;
+}
+
+.checked .switch-button-button:before {
+    left: 11px
 }
 
 .switch-button-label{
@@ -410,20 +447,25 @@ section + section{
     height: 40px;
     background-color: white;
 
-    -webkit-box-shadow: inset 0 10px 40px 10px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1);
-       -moz-box-shadow: inset 0 10px 40px 10px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1);
-            box-shadow: inset 0 10px 40px 10px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 10px 50px 10px rgba(0, 0, 0, 0.2), inset 0 0 0 -10px rgba(0, 0, 0, 0.1);
+       -moz-box-shadow: inset 0 10px 50px 10px rgba(0, 0, 0, 0.2), inset 0 0 0 -10px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 10px 50px 10px rgba(0, 0, 0, 0.2), inset 0 0 0 -10px rgba(0, 0, 0, 0.1);
 }
 
+.fixed-header {left: 0; position: fixed; top: -30px; width: 100%; z-index: 10 }
+
 .primeSlider .ui-slider-range{
-    background: #ff9900; /* Old browsers */
-    background: -moz-linear-gradient(left,  #ff9900 0%, #7ab800 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ff9900), color-stop(100%,#7ab800)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left,  #ff9900 0%,#7ab800 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left,  #ff9900 0%,#7ab800 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left,  #ff9900 0%,#7ab800 100%); /* IE10+ */
-    background: linear-gradient(to right,  #ff9900 0%,#7ab800 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9900', endColorstr='#7ab800',GradientType=1 ); /* IE6-9 */
+    background: #7ab800; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdhYjgwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjk5MDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(left,  #7ab800 0%, #ff9900 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#7ab800), color-stop(100%,#ff9900)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #7ab800 0%,#ff9900 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #7ab800 0%,#ff9900 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #7ab800 0%,#ff9900 100%); /* IE10+ */
+background: linear-gradient(to right,  #7ab800 0%,#ff9900 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', endColorstr='#ff9900',GradientType=1 ); /* IE6-8 */
+
 }
 
 .primeSlider .ui-slider-handle.ui-state-default{
@@ -437,6 +479,10 @@ section + section{
 }
 
 .primeSlider .ui-slider-handle:before{
+    content: '';
+}
+
+.primeSlider .ui-slider-handle span{
     font-size: 32px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
@@ -444,14 +490,17 @@ section + section{
     color: white;
     background-color: #8b2331;
 
-    content: '$0B DEBT';
-
     min-width: 200px;
     height: 58px;
     right: 0;
 
     line-height: 58px;
+    position: absolute;
+    display: block;
+    text-align: center;    
 }
+
+.primeSlider .ui-slider-handle span em{ font-style: normal; }
 
 .totalSliderLabel{
     display: table;
@@ -488,8 +537,7 @@ section + section{
 .totalSliderLabel.topLabel{
     margin: 0;
     margin-bottom: 24px;
-
-    margin-left: -63px;
+    margin-left: -25px;
 }
 
 .totalSliderLabel.topLabel li:after{
@@ -550,6 +598,147 @@ section + section{
     padding-left: 0;
 }
 
+a.add-comment {
+    background-color: #0d4058;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 18px;
+    text-transform: uppercase
+}
+
+.add-comment i {
+    background-color: #fff;
+    border-radius: 8px;
+    color: #0d4058;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    width: 16px;
+}
+
+.add-comment i:before {
+    font-size: 10px;
+    position: relative;
+    top: 1px;
+    vertical-align: middle
+}
+
+.add-comment-open i:before {
+    content: "\f068" 
+}
+
+.row div.comment-wrapper {
+    border: none;
+    display: none;
+}
+
+.comment-wrapper form {
+    padding: 0 30px 16px;
+}
+
+.comment-wrapper textarea {
+    border-color: #d7d7d7;
+    border-radius: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: #a2a2a2;
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 15px 18px;
+    width: 100%;
+}
+
+.comment-wrapper p {
+    margin-bottom: 0;
+    padding-top: 10px
+}
+
+.total-val-column {
+    padding-top: 35px
+}
+
+.total-val-column span {
+    margin-left: 10px
+}
+
+/**
+* Modal Popup Styles Starts Here
+*/
+
+.text-upper {
+    text-transform: uppercase
+}
+
+.custom-modal {
+    background-color: #fafafa;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+.promotSection .custom-modal {
+    color: #464646
+}
+
+.custom-modal-header {
+    background-color: #8b2331;
+    border-bottom: none;
+}
+
+.custom-modal-header .close {
+    color: #fafafa;
+    font: 700 14px 'Roboto', sans-serif;
+    opacity: 1;
+    text-shadow: none
+}
+
+.custom-modal-header i {
+    margin-left: 10px;
+    position: relative;
+    top: -1px;
+}
+
+.custom-modal-header .icon-remove:before {
+    background: #fafafa;
+    border-radius: 8px;
+    color: #8b2331;
+    height: 16px;
+    width: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.custom-modal-body {
+    padding: 35px 15px 20px 30px;
+}
+
+.custom-modal a {
+    color: #8b2331;
+    font-weight: 500
+}
+
+.custom-modal-footer {
+    background-color: #fafafa;
+    border-top: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    padding: 15px 15px 35px 30px;
+    text-align: left
+}
+
+.custom-modal-footer span {
+    font-weight: normal
+}
+
+/**
+* Modal Popup Styles Ends Here
+*/
+
 /* ==========================================================================
    Footer Styles
    ========================================================================== */
@@ -561,7 +750,7 @@ footer{
 
 footer nav{
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
 }
 footer nav li{ 
    display: inline; 
@@ -570,8 +759,7 @@ footer nav li{
 footer nav li a{
     color: white;
     display: inline-block;
-    font-size: 13px;
-
+    font-size: 12px;
     padding: 0 18px;
 }
 
@@ -580,10 +768,14 @@ footer nav li a:hover{
 }
 
 footer p{
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
-
     margin-bottom: 30px;
+}
+
+footer p span {
+    display: block;
+    margin-top: 6px
 }
 
 footer h5{
@@ -749,3 +941,183 @@ footer h5{
         page-break-after: avoid;
     }
 }
+
+@media (max-width: 979px) {
+    .topHeader .container {
+        position: relative
+    }
+    
+    .mainNav .navbar {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    
+    .mainNav .navbar .btn-navbar {
+        background: none;
+        border: none;
+        font-size: 34px;
+        margin: 0;
+        padding: 0;
+        text-shadow: none;
+    }
+    
+    .mainNav .nav>ul>li {
+        float: none
+    }
+    
+    .iconmoon-menu2 {
+        color: #BE461D
+    }
+}
+
+/**
+* Mobile View Styles Starts Here
+*/
+
+@media (max-width: 767px) {
+    body {
+        padding: 0
+    }
+    
+    .topHeader,
+    .content,
+    .fixed-header {
+        padding-left: 10px;
+        padding-right: 10px
+    }
+    
+    .mainLogo {
+        background-size: 100%;
+        height: 36px;
+        width: 210px
+    }
+    
+    .iconmoon-menu2 {
+        color: #003c69
+    }
+    
+    .content {
+        padding-bottom: 0;
+        padding-top: 24px
+    }
+    
+    .primeSlider {
+        margin-left: -10px;
+        margin-right: -9px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    
+    .fixed-header {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .primeSlider .ui-slider {
+        height: 23px
+    }
+    
+    .primeSlider .ui-slider-handle.ui-state-default {
+        height: 55px;
+        margin-left: -1px
+    }
+    
+    .primeSlider .ui-slider-handle:before {
+        font-size: 14px;
+        height: 22px;
+        line-height: 22px;
+        min-width: 86px
+    }
+    
+    .totalSliderLabel.topLabel {
+        margin-left: 0
+    }
+    
+    .promotSection {
+        margin-left: -10px;
+        margin-right: -10px
+    }
+    
+    .promotSection img {
+        float: none
+    }
+    
+    .subSection .spacingAll {
+        padding-left: 10px;
+        padding-right: 10px
+    }
+    
+    .subSection-row .costSlider {
+        margin-top: 0;
+        padding-top: 0;
+        width: auto
+    }
+    
+    .contentSection .nextButton {
+        padding-bottom: 8px;
+        padding-top: 8px;
+        width: 227px
+    }
+    
+    footer {
+        padding: 30px 20px;
+    }
+    
+    footer nav li a {
+        font-size: 15px;
+        padding: 6px 13px;
+    }
+    
+    footer p {
+        font-size: 14px
+    }
+    
+    footer h5 {
+        margin-bottom: 0
+    }
+}
+
+/**
+* Mobile View Styles Ends Here
+*/
+
+/**
+* Tablet View Styles Starts Here
+*/
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .subSection-row .costSlider {
+        padding: 0;
+        width: auto
+    }
+    
+    .subSection-row .span5 {
+        margin-left: 0
+    }
+}
+
+/**
+* Tablet View Styles Ends Here
+*/
+
+/**
+* 940 View Media Queries Starts Here
+*/
+
+@media (min-width: 980px) and (max-width: 1199px) {
+    .hidden-980 {
+        display: none
+    }
+    
+    footer nav li a {
+        padding-left: 13px;
+        padding-right: 13px
+    }
+}
+
+/**
+* 940 View Media Queries Ends Here
+*/

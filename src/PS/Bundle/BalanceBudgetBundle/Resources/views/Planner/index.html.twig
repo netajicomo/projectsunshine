@@ -179,7 +179,7 @@
                                         </div>
 
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0"></label>
-
+                                           <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -194,7 +194,7 @@
                                         </div>
                                         <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
-
+                                        <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                {% endif %} 
@@ -232,7 +232,7 @@
                                         </div>
                                             <label class="redLabel">cutting <span>$</span><input type="text" readonly id="parent_value_{{issue.id}}" value="0"></label>
                                         <label class="redLabel"><input type="text" readonly id="value_{{issue.id}}" value="0">%</label>
-
+                                            <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">   
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -313,11 +313,11 @@
 // save the users values
           
           function saveIssue(id,value){
-         
+         var debtValue = $('#debt_value_'+id).val();
               $.ajax({
   type: "POST",
   url: "{{ path('save_issue')}}",
-  data:{id: id, value: value},
+  data:{id: id, value: value, debtvalue: debtValue},
   success: function(results){
 
         if(typeof results !== 'undefined')
@@ -332,33 +332,37 @@
   
   function updateDebt(results){
     var childrenValues = {};
+    // var childrenDebtValues = {};
         for (var i=0;i<results.children.length;i++)
         { 
             var $key = results.children[i];
-            childrenValues[$key] = $('#value_'+results.children[i]).val();
+         //   childrenDebtValues[$key] = $('#debt_value_'+results.children[i]).val();
+             childrenValues[$key] = $('#value_'+results.children[i]).val();
               
         }
-         var json = JSON.stringify(childrenValues);
+         var childrenValuesJson = JSON.stringify(childrenValues);
+         // var childrenDebtValuesJson = JSON.stringify(childrenDebtValues);
          var parentId = results.parentId;
           var currentTotalSliderValue =  $('#totalSlider').slider( "option", "value");
-          var maxTotalSliderValue =  $('#totalSlider').slider( "option", "max");
+      
          {#this is a child issue#}
         if(results.isChild === true)
         {
            
            var parentDebt = $('#value_'+results.parentId).val(); 
-           var childDebt = results.value;
-            var data = {parentId: results.parentId, childDebt: childDebt,isChild: 'true',  parentDebt: parentDebt, childrenValues: json, totalDebt:maxTotalSliderValue, currentDebt:currentTotalSliderValue };
+           var childDebt = $('#debt_value_'+results.issueId).val(); 
+            var data = {parentId: results.parentId, childDebt: childDebt, isChild: 'true',  parentDebt: parentDebt, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
         }
         {#this is the parent issue#}
         else if(typeof results.percentage !== 'undefined')
         {
-          var data = {parentId: results.parentId, parentPercentage: results.percentage, isParent: 'true', childrenValues: json, totalDebt:maxTotalSliderValue, currentDebt:currentTotalSliderValue};  
+         var childDebt = $('#debt_value_'+results.parentId).val();   
+        var data = {parentId: results.parentId, parentPercentage: results.percentage, isParent: 'true', childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
         {#this is an independent issue#}
         else
         {
-           var data = {independentId: results.issueId,isIndependent: 'true', independentValue:  results.value, siblingValues: json, totalDebt:maxTotalSliderValue, currentDebt:currentTotalSliderValue} 
+           var data = {independentId: results.issueId,isIndependent: 'true', independentValue:  results.value, siblingValues: childrenValuesJson, currentDebt:currentTotalSliderValue} 
         }
         
         
@@ -374,8 +378,8 @@
                 // update the main debt slider
                
             
-                 console.log(result.totalDebt);
-                 $('#totalSlider').slider( "option", "value", result.totalDebt );
+                 console.log(result.currentDebt);
+                 $('#totalSlider').slider( "option", "value", result.currentDebt );
                  // update the section total
                  $('#total_'+parentId).val(result.sectiontotal);  
                  // update the parent slider value

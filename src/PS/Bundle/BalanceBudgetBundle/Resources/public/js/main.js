@@ -14,7 +14,13 @@ $(document).ready(function(){
 		range: "min",
 		change: function( event, ui ) {
                     var id = $(this).attr('id').replace('slider_','');
-			$('#value_'+id).val(ui.value);
+			var value = $('#value_'+id).val();
+                       
+                            var debtValue = value - ui.value
+                          $('#debt_value_'+id).val(-debtValue);
+                         
+                          
+                         $('#value_'+id).val(ui.value); 
                     saveIssue(id, ui.value);    
       	}
 	});
@@ -33,16 +39,18 @@ $(document).ready(function(){
 	  width: 100,
 	  height: 35,
 	  button_width: 50,
-          on_callback: function(){  $('#value_'+id).val(dataMax);   saveIssue(id, dataMax);     },
+          on_callback: function(){  $('#value_'+id).val(dataMax);   saveIssue(id, dataMax);  $('#debt_value_'+id).val(dataMax);      },
           off_callback: function(){ 
               if( $('#value_'+id).hasClass('loaded'))
               {
                   saveIssue(id, dataMin);
+                   $('#debt_value_'+id).val(-dataMax);  
                    $('#value_'+id).removeClass('loaded');
               }
               $('#value_'+id).addClass('loaded');
               
               $('#value_'+id).val(dataMin);  
+             
                                         
           }
 	  

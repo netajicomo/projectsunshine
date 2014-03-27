@@ -12,17 +12,20 @@ $(document).ready(function(){
 		min: min,
 		max: max,
 		range: "min",
-		slide: function( event, ui ) {
+		change: function( event, ui ) {
                     var id = $(this).attr('id').replace('slider_','');
 			$('#value_'+id).val(ui.value);
+                    saveIssue(id, ui.value);    
       	}
 	});
    }) 
 
 	$(".switch").each(function(){
            var id = $(this).attr('id').replace('switch_', '');
-            var max = parseInt($('#options_'+id).attr('data-max'),10)/1000000;
-        var min = $('#options_'+id).attr('data-min')/1000000;
+           var dataMax = $('#options_'+id).attr('data-max');
+           var dataMin = $('#options_'+id).attr('data-min');
+            var max = parseInt(dataMax,10);
+            var min = parseInt(dataMin,10);
             
             $(this).switchButton({
 	  on_label: '$'+max+'M',
@@ -30,6 +33,18 @@ $(document).ready(function(){
 	  width: 100,
 	  height: 35,
 	  button_width: 50,
+          on_callback: function(){  $('#value_'+id).val(dataMax);   saveIssue(id, dataMax);     },
+          off_callback: function(){ 
+              if( $('#value_'+id).hasClass('loaded'))
+              {
+                  saveIssue(id, dataMin);
+                   $('#value_'+id).removeClass('loaded');
+              }
+              $('#value_'+id).addClass('loaded');
+              
+              $('#value_'+id).val(dataMin);  
+                                        
+          }
 	  
 	});
         
@@ -37,7 +52,7 @@ $(document).ready(function(){
         })
         
         var debt = $( "#totalSlider" ).attr('data-total');
-        var debtString = '$ '+parseInt(debt,10)/100000000+' B';
+  //      var debtString = '$ '+parseInt(debt,10)/100000000+' B';
 //$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ debtString +'" !important;}</style>')
 	$( "#totalSlider" ).slider({
                 value:debt,

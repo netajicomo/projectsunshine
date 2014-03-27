@@ -39,7 +39,7 @@ class SectionAdmin extends Admin
             ->add('title')
             //->add('lead')
             ->add('category')
-            ->add('media')
+            ->add('file')
            // ->add('is_active')
             ->add('created_at')
             ->add('_action', 'actions', array(
@@ -64,7 +64,7 @@ class SectionAdmin extends Admin
             ->add('title')
             ->add('lead')
             ->add('description')
-           // ->add('media')
+            //->add('file','file')
            // ->add('is_active')
             //->add('created_at')
         ;

@@ -89,13 +89,15 @@
                         <div class="span12">
                             <div class="span10">
                                 <ul class="totalSliderLabel topLabel">
-                                    <li>$om</li>
+                                    <li>$0</li>
                                     <li>$10b</li>
                                     <li>$20b</li>
                                     <li>$30b</li>
                                     <li>$40b</li>
                                     <li>$50b</li>
                                     <li>$60b</li>
+                                    <li>$70b</li>
+                                    <li>$80b</li>
                                 </ul>                                
                                 <div id="totalSlider" data-total="{{budgetdata.debt}}"></div>
                                 <ul class="totalSliderLabel">
@@ -106,6 +108,7 @@
                                     <li>$45b</li>
                                     <li>$55b</li>
                                     <li>$65b</li>
+                                    <li>$75b</li>
                                 </ul>
                             </div>
                         </div>
@@ -167,7 +170,10 @@
                 </div>
             </section>            
            {% for issue in section.issues%}
+
+              {% if  issue.isparent != '1'%}
             <section class="subSection subSection-row">
+
                 <div class="container">
                     <div class="row">
                         <div class="span12">
@@ -199,30 +205,31 @@
                                 <div class="span5">
                                     <div class="spacingAll costSlider">
 
-                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}</span></label>
+                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
                                        
-                                        <div id="slider_{{loop.index}}"class="slider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                        <div id="slider_{{issue.id}}"class="slider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
                                         
                                         <div class="sliderLabel clearfix">
-                                            <span class="pull-left">${{ issue.optionvalues['min']/1000000 }}M</span>
-                                            <span class="pull-right">${{ issue.optionvalues['max']/1000000 }}M</span>
+                                            <span class="pull-left">${{ issue.optionvalues['min'] }}M</span>
+                                            <span class="pull-right">${{ issue.optionvalues['max'] }}M</span>
                                         </div>
 
-                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{loop.index}}" value="0"></label>
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0"></label>
 
                                     </div>
                                 </div>
-                               {% else %} 
+                                 {% endif %} 
+                                 {% if  issue.controltype.name == 'switch'%}
                            <div class="span5">
                                     <div class="spacingAll costSlider">
 
-                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}</span></label>
+                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
                                         
                                         <div class="switchButtonWrapper">
-                                            <input class="switch" type="checkbox" value="1" id="switch_{{loop.index}}">
+                                            <input class="switch" type="checkbox" value="1" id="switch_{{issue.id}}">
                                         </div>
-                                        <input type="hidden" id="options_{{loop.index}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
-                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{loop.index}}" value="{{ issue.optionvalues['min']/1000000}}M"></label>
+                                        <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
 
                                     </div>
                                 </div>
@@ -232,9 +239,66 @@
                     </div>
                 </div>
             </section>
+              {% endif %} 
+            {#for the parent of the section#}
+         {% if  issue.isparent == '1'%}
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ issue.title}}</h3>
+                                        <p>{{ issue.lead}}</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                {% if  issue.controltype.name == 'Total Slider'%}
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
 
-         
+                                       
+                                       
+                                        <div id="slider_{{issue.id}}"class="slider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                        
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">0%</span>
+                                            <span class="pull-right">100%</span>
+                                        </div>
+                                            <label class="redLabel">cutting <span>$</span><input type="text" readonly id="parent_value_{{issue.id}}" value="0"></label>
+                                        <label class="redLabel"><input type="text" readonly id="value_{{issue.id}}" value="0">%</label>
 
+                                    </div>
+                                </div>
+                                 {% endif %} 
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                             <div class="span7">
+                                <div class="spacingAll">
+
+                                    <h3>       TOTAL DEBT REDUCTION FROM {{ category.title}} - {{ section.title}}</h3>
+                                    
+                                </div>    
+                             </div>
+                            <div class="span5">
+                                   <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0"></label>
+                            </div>
+                                
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>    
+            {% endif %} 
             {% endfor%}
                    
                 {% endfor%}
@@ -281,6 +345,76 @@
                 </div>
             </div>
         </footer>
+<script type="text/javascript">
+// save the users values
+          
+          function saveIssue(id,value){
+         
+              $.ajax({
+  type: "POST",
+  url: "{{ path('save_issue')}}",
+  data:{id: id, value: value},
+  success: function(results){
 
+        if(typeof results !== 'undefined')
+        {
+            updateDebt(results);
+        }
+        
+  }
+  
+})
+  }
+  
+  function updateDebt(results){
+    var childrenValues = {};
+        for (var i=0;i<results.children.length;i++)
+        { 
+            var $key = results.children[i];
+            childrenValues[$key] = $('#value_'+results.children[i]).val();
+              
+        }
+         var json = JSON.stringify(childrenValues);
+         var parentId = results.parentId;
+        if(typeof results.isChild !== 'undefined')
+        {
+           var parentDebt = $('#value_'+results.parentId).val(); 
+           var childDebt = results.value;
+            var data = {parentId: results.parentId, childDebt: childDebt, parentDebt: parentDebt, childrenValues: json};
+        }
+        else
+        {
+          var data = {parentId: results.parentId, parentPercentage: results.percentage, childrenValues: json};  
+        }    
+        $.ajax({
+        type: "POST",
+        url: "{{ path('update_debt')}}",
+        data: data,
+        success: function(result){
+
+              if(typeof result !== 'undefined')
+              {
+                 
+                 var totalSliderCurrentValue =  $('#totalSlider').slider( "option", "value");
+                 var totalSliderValue = totalSliderCurrentValue - result.sectiontotal;
+                 console.log(totalSliderValue);
+                 $('#totalSlider').slider( "option", "value", totalSliderValue );
+                 $('#total_'+parentId).val(result.sectiontotal);  
+                 if(typeof result.newParentDebt !== 'undefined'){
+                      console.log(result.newParentDebt);
+                    $('#parent_value_'+parentId).val(result.newParentDebt);   
+                 }
+               
+              } 
+
+        }
+  
+})  
+    
+  }
+  
+ 
+      </script>
          
     {% endblock %}
+  

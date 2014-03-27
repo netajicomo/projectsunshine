@@ -3,7 +3,7 @@
 namespace PS\Bundle\BalanceBudgetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
+use PS\Bundle\BalanceBudgetBundle\Entity\VisitorActivity;
 /**
  * VisitorActivityRepository
  *
@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class VisitorActivityRepository extends EntityRepository
 {
+    public function saveActivity($sessionId, $issueId, $value){
+        
+        $visitorActivity  = $this->findOneBy(array('session_id'=>$sessionId, 'issue_id' => $issueId));
+        // update the row
+        if(isset($visitorActivity))
+        {
+          $visitorActivity->setIssueValue($value);  
+        }
+        else // create the row
+        {
+           $visitorActivity = new VisitorActivity();
+           $visitorActivity->setSessionId($sessionId);
+           $visitorActivity->setIssueId($issueId);
+           $visitorActivity->setIssueValue($value);
+           $visitorActivity->setHasTouched(true);
+        }
+        
+        $em = $this->getEntityManager();
+        $em->persist($visitorActivity);
+        $em->flush();
+        
+    }
+    
 }

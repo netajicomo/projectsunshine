@@ -295,4 +295,105 @@ class Issue
         return $this->sectionissue->getCategory();
     }        
     
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $children;
+
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Issue
+     */
+    private $parent;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add children
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $children
+     * @return Issue
+     */
+    public function addChild(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $children
+     */
+    public function removeChild(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $parent
+     * @return Issue
+     */
+    public function setParent(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Issue 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    /**
+     * @var boolean
+     */
+    private $is_parent;
+
+
+    /**
+     * Set is_parent
+     *
+     * @param boolean $isParent
+     * @return Issue
+     */
+    public function setIsParent($isParent)
+    {
+        $this->is_parent = $isParent;
+
+        return $this;
+    }
+
+    /**
+     * Get is_parent
+     *
+     * @return boolean 
+     */
+    public function getIsParent()
+    {
+        return $this->is_parent;
+    }
 }

@@ -18,13 +18,23 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
         description:
             type: text
         option_values:
-            type: text    
+            type: text 
+        is_parent:
+            type: boolean
+            default: false    
         is_active:
             type: boolean
             default: true
         created_at:
             type: datetime
+    oneToMany:
+        children:
+          targetEntity: Issue
+          mappedBy: parent        
     manyToOne:
+        parent:
+            targetEntity: Issue
+            inversedBy: children
         controltype:
             targetEntity: ControlType
             joinColumn:

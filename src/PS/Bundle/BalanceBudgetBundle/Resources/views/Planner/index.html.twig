@@ -182,6 +182,7 @@
                                     <div class="spacingAll">
                                         <h3>{{ issue.title}}</h3>
                                         <p>{{ issue.lead}}</p>
+                                        <a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>
                                         <a href="#subsection_{{loop.index}}" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
                                         <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header custom-modal-header clearfix">
@@ -220,7 +221,7 @@
                                 </div>
                                  {% endif %} 
                                  {% if  issue.controltype.name == 'switch'%}
-                           <div class="span5">
+                                <div class="span5">
                                     <div class="spacingAll costSlider">
 
                                         <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
@@ -233,8 +234,19 @@
 
                                     </div>
                                 </div>
-                               {% endif %} 
-                            </div>
+                               {% endif %}
+                                <div class="span12 comment-wrapper">
+                                    <form action="#" method="post">
+                                        <div>
+                                            <div class="form-textarea">
+                                                <textarea rows="4" cols="50">Enter your response...</textarea>
+                                            </div>
+                                            <p>By adding your comments you will be required to complete a short registration at the end of the survery</p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>                      
+                            
                         </div>
                     </div>
                 </div>
@@ -282,17 +294,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="span12">
-                             <div class="span7">
-                                <div class="spacingAll">
-
-                                    <h3>       TOTAL DEBT REDUCTION FROM {{ category.title}} - {{ section.title}}</h3>
-                                    
-                                </div>    
-                             </div>
-                            <div class="span5">
-                                   <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0"></label>
-                            </div>
-                                
+                            <div class="row">
+                                <div class="span7">
+                                   <div class="spacingAll">
+                                       <h3>TOTAL DEBT REDUCTION FROM {{ category.title}} - {{ section.title}}</h3>                                    
+                                   </div>    
+                                </div>
+                               <div class="span5 total-val-column">
+                                      <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0"></label>
+                               </div>
+                            </div>   
                             
                         </div>
                     </div>

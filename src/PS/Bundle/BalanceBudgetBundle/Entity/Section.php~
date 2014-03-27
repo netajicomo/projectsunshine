@@ -37,17 +37,27 @@ class Section
     /**
      * @var string
      */
-    private $media;
+    private $file;
+
+    /**
+     * @var string
+     */
+    private $video;
 
     /**
      * @var boolean
      */
-    private $is_active = true;
+    private $is_active;
 
     /**
      * @var \DateTime
      */
     private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -170,26 +180,49 @@ class Section
     }
 
     /**
-     * Set media
+     * Set file
      *
-     * @param string $media
+     * @param string $file
      * @return Section
      */
-    public function setMedia($media)
+    public function setFile($file)
     {
-        $this->media = $media;
+        $this->file = $file;
 
         return $this;
     }
 
     /**
-     * Get media
+     * Get file
      *
      * @return string 
      */
-    public function getMedia()
+    public function getFile()
     {
-        return $this->media;
+        return $this->file;
+    }
+
+    /**
+     * Set video
+     *
+     * @param string $video
+     * @return Section
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    /**
+     * Get video
+     *
+     * @return string 
+     */
+    public function getVideo()
+    {
+        return $this->video;
     }
 
     /**
@@ -236,6 +269,29 @@ class Section
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return Section
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
     }
 
     /**
@@ -302,8 +358,16 @@ class Section
             $this->created_at = new \DateTime();
         }
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function lifecycleFileUpload()
+    {
+        // Add your code here
+    }
     
-    public function __toString()
+     public function __toString()
     {
           return $this->name;
     }

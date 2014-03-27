@@ -29,11 +29,11 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: Issues, label: Issues}
 
-#    ps_balance_budget.admin.control_type:
-#        class: PS\Bundle\BalanceBudgetBundle\Admin\ControlTypeAdmin
-#        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\ControlType, PSBalanceBudgetBundle:ControlTypeAdmin]
-#        tags:
-#            - {name: sonata.admin, manager_type: orm, group: Control Types, label: ControlType}
+    ps_balance_budget.admin.control_type:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\ControlTypeAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\ControlType, PSBalanceBudgetBundle:ControlTypeAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Control Types, label: ControlType}
 
     ps_balance_budget.admin.budget_planner:
         class: PS\Bundle\BalanceBudgetBundle\Admin\BudgetPlannerAdmin

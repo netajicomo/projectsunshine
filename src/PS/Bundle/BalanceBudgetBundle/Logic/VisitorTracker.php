@@ -43,7 +43,7 @@ class VisitorTracker
       $session = $request->getSession();
       $sessionId = $session->get('id');
       
-      $visitor = $this->em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->findOneBy(array('session_id'=>$sessionId));
+      $visitor = $this->em->getRepository('PSBalanceBudgetBundle:Visitor')->findOneBy(array('session_id'=>$sessionId));
       // check if the session id exists and if it exists in the DB
       if(!isset($sessionId) || !isset($visitor))
       {    

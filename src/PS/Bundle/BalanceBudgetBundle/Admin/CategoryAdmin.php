@@ -56,7 +56,7 @@ class CategoryAdmin extends Admin
             //->add('id')
             ->add('name')
             ->add('title')
-            ->add('description')
+            ->add('description',null, array('required' => false))
            // ->add('is_active')
            // ->add('created_at')
         ;

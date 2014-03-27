@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class IssueRepository extends EntityRepository
 {
+    public function getChildrenIds($issueId){
+       
+        $parentIssue = $this->findOneById($issueId);
+        $children = $parentIssue->getChildren();
+        $childrenIdArray = array();
+        foreach($children as $child)
+        {
+            $childrenIdArray[] = $child->getId();
+        }
+     
+       return $childrenIdArray; 
+    }
 }

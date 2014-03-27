@@ -24,8 +24,8 @@ $(document).ready(function(){
            var id = $(this).attr('id').replace('switch_', '');
            var dataMax = $('#options_'+id).attr('data-max');
            var dataMin = $('#options_'+id).attr('data-min');
-            var max = parseInt(dataMax,10)/1000000;
-            var min = parseInt(dataMin,10)/1000000;
+            var max = parseInt(dataMax,10);
+            var min = parseInt(dataMin,10);
             
             $(this).switchButton({
 	  on_label: '$'+max+'M',
@@ -52,7 +52,7 @@ $(document).ready(function(){
         })
         
         var debt = $( "#totalSlider" ).attr('data-total');
-        var debtString = '$ '+parseInt(debt,10)/100000000+' B';
+  //      var debtString = '$ '+parseInt(debt,10)/100000000+' B';
 //$('#totalSlider .primeSlider').append('<style>.ui-slider-handle:before{content:"'+ debtString +'" !important;}</style>')
 	$( "#totalSlider" ).slider({
                 value:debt,

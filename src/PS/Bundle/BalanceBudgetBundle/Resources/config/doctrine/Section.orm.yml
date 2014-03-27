@@ -17,9 +17,12 @@ PS\Bundle\BalanceBudgetBundle\Entity\Section:
             type: text
         description:
             type: text
-        media:
-            type: text 
+        file:
+            type: string
+            lenght: 100
             nullable: true
+        video:
+            type: text
         is_active:
             type: boolean
             default: true

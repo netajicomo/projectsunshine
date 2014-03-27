@@ -164,10 +164,10 @@ class BudgetController extends Controller
         $valuesArray = json_decode($values,TRUE);
         $total = $valuesArray['total'];  
        
-
+ 
         $newParentDebt = ($total - $childTotal) * $parentPercentage/100 ;
         $sectionTotal = $newParentDebt + $childTotal;
-
+ $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
         // $totalDebt = $request->request->get('currentDebt') - ($total - $childTotal) * $parentPercentageDebt/100 ;
          $totalDebt = $request->request->get('currentDebt') - $sectionTotal;
         $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 

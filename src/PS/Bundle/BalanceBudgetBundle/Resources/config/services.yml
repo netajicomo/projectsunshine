@@ -40,3 +40,15 @@ services:
         arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\BudgetPlanner, PSBalanceBudgetBundle:BudgetPlannerAdmin]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Settings, label: Budget Planner}
+
+    ps_balance_budget.admin.visitor:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\VisitorAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Visitor, PSBalanceBudgetBundle:VisitorAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Settings, label: Visitor}
+
+    ps_balance_budget.admin.visitor_activity:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\VisitorActivityAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\VisitorActivity, PSBalanceBudgetBundle:VisitorActivityAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Settings, label: VisitorActivity}

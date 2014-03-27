@@ -83,9 +83,17 @@ class BudgetController extends Controller
                 {
                  // echo 'is the parent<br>';
                     $children =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getChildrenIds($issueId);     
-                     $result = array('children' => $children, 'percentage' => $value,'parentId' => $issueId);
+                     $result = array('children' => $children, 'percentage' => $value,'parentId' => $issueId, 'isParent' => true);
                    
                 }
+               // else is an independent and does its own work but we need its siblings for the section total
+                else
+                {
+                         $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $value);   
+                       $siblings = $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIssueIds($issue->getSection()->getId());  
+                        $result = array('issueId' => $issueId, 'value' => $value, 'isIndependent' => true, 'children' => $siblings); 
+                }
+                    
                  return new JsonResponse($result);
      
    
@@ -96,9 +104,9 @@ class BudgetController extends Controller
    
     
      public function updateDebtAction(Request $request){
-
+              $em = $this->getDoctrine()->getManager();
          // to check if it is a child issue
-         if($request->request->get('childDebt'))  
+         if($request->request->get('isChild'))  
          {
             
             // echo 'is child<br>';
@@ -109,41 +117,43 @@ class BudgetController extends Controller
               $childrenValueArray = json_decode($childrenValues,TRUE);
               $childTotal = array_sum($childrenValueArray);
             $sessionId = $request->getSession()->get('id');  
-             $em = $this->getDoctrine()->getManager();
+        
         // if the the parent value is zero dont do anything but just return the total
             if($parentDebt == '0'){
-               // echo ' with parent untouched<br>';        
-    
-                $result = array('sectiontotal' => $childTotal);
+              //  echo ' with parent untouched<br>';        
+                $totalDebt = $request->request->get('totalDebt') - $childDebt;
+                $result = array('sectiontotal' => $childTotal, 'totalDebt' => $totalDebt );
              return new JsonResponse($result);
         }
         
           else
         {
            
-          //    echo ' with parent having value<br>';   
+           //   echo ' with parent having value<br>';   
               $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
             $valuesArray = json_decode($values,TRUE);
             $total = $valuesArray['total'];
             
              $newParentDebt = ($total - $childTotal) * $parentDebt/100 ;
           $sectionTotal = $newParentDebt + $childTotal;
-       $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
-         $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal);
+            $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
+        
+         $totalDebt = $request->request->get('totalDebt') - $sectionTotal;
+       $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal, 'totalDebt' => $totalDebt);
                     return new JsonResponse($result);
         }  
         
          }
-       else
+       elseif($request->request->get('isParent'))
        {
-      //    echo 'is parent<br>'.$parentPercentage.'<br>';   
+         // echo 'is parent<br>'.$parentPercentage.'<br>';   
            $parentPercentage = $request->request->get('parentPercentage');
             $childrenValues = $request->request->get('childrenValues');
                $parentId = $request->request->get('parentId');
                   $sessionId = $request->getSession()->get('id');  
               $childrenValueArray = json_decode($childrenValues,TRUE);
               $childTotal = array_sum($childrenValueArray);
-           $em = $this->getDoctrine()->getManager();
+          
           $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
         $valuesArray = json_decode($values,TRUE);
         $total = $valuesArray['total'];  
@@ -152,10 +162,22 @@ class BudgetController extends Controller
         $newParentDebt = ($total - $childTotal) * $parentPercentage/100 ;
         $sectionTotal = $newParentDebt + $childTotal;
 
-        
+         $totalDebt = $request->request->get('totalDebt') - $newParentDebt;
          $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
-         $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal);
+         $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal, 'totalDebt' => $totalDebt);
                     return new JsonResponse($result);
+       } 
+       
+       else
+       {  
+             //   echo 'is an independent<br>';  
+            $siblingValues = $request->request->get('siblingValues');
+             $siblingValueArray = json_decode($siblingValues,TRUE);
+              $siblingTotal = array_sum($siblingValueArray);
+               $totalDebt = $request->request->get('totalDebt') - $request->request->get('independentValue');
+          $result = array('sectiontotal' => $siblingTotal, 'totalDebt' => $totalDebt);
+
+              
        }   
        
       

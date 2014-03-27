@@ -24,4 +24,15 @@ class IssueRepository extends EntityRepository
      
        return $childrenIdArray; 
     }
+    
+    public function getSiblingIssueIds($sectionId){
+        
+        $siblings = $this->findBy('section_id', $sectionId);
+        $siblingsArray = array();
+        foreach($siblings as $sibling){
+            
+            $siblingsArray[] = $sibling->getId();
+        }
+        return $siblingsArray;
+    }
 }

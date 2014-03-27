@@ -376,16 +376,28 @@
         }
          var json = JSON.stringify(childrenValues);
          var parentId = results.parentId;
-        if(typeof results.isChild !== 'undefined')
+          var currentTotalSliderValue =  $('#totalSlider').slider( "option", "value");
+          var maxTotalSliderValue =  $('#totalSlider').slider( "option", "max");
+         {#this is a child issue#}
+        if(results.isChild === true)
         {
+           
            var parentDebt = $('#value_'+results.parentId).val(); 
            var childDebt = results.value;
-            var data = {parentId: results.parentId, childDebt: childDebt, parentDebt: parentDebt, childrenValues: json};
+            var data = {parentId: results.parentId, childDebt: childDebt,isChild: 'true',  parentDebt: parentDebt, childrenValues: json, totalDebt:maxTotalSliderValue, currentDebt:currentTotalSliderValue };
         }
+        {#this is the parent issue#}
+        else if(typeof results.percentage !== 'undefined')
+        {
+          var data = {parentId: results.parentId, parentPercentage: results.percentage, isParent: 'true', childrenValues: json, totalDebt:maxTotalSliderValue, currentDebt:currentTotalSliderValue};  
+        }
+        {#this is an independent issue#}
         else
         {
-          var data = {parentId: results.parentId, parentPercentage: results.percentage, childrenValues: json};  
-        }    
+           var data = {independentId: results.issueId,isIndependent: 'true', independentValue:  results.value, siblingValues: json, totalDebt:maxTotalSliderValue, currentDebt:currentTotalSliderValue} 
+        }
+        
+        
         $.ajax({
         type: "POST",
         url: "{{ path('update_debt')}}",
@@ -395,11 +407,14 @@
               if(typeof result !== 'undefined')
               {
                  
-                 var totalSliderCurrentValue =  $('#totalSlider').slider( "option", "value");
-                 var totalSliderValue = totalSliderCurrentValue - result.sectiontotal;
-                 console.log(totalSliderValue);
-                 $('#totalSlider').slider( "option", "value", totalSliderValue );
+                // update the main debt slider
+               
+            
+                 console.log(result.totalDebt);
+                 $('#totalSlider').slider( "option", "value", result.totalDebt );
+                 // update the section total
                  $('#total_'+parentId).val(result.sectiontotal);  
+                 // update the parent slider value
                  if(typeof result.newParentDebt !== 'undefined'){
                       console.log(result.newParentDebt);
                     $('#parent_value_'+parentId).val(result.newParentDebt);   

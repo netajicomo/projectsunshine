@@ -1,0 +1,54 @@
+parameters:
+  
+
+services:
+    visitor_tracker_service:
+        class: PS\Bundle\BalanceBudgetBundle\Logic\VisitorTracker
+        arguments: [@request,@doctrine.orm.entity_manager]
+        scope: request
+   
+
+   
+    
+
+    ps_balance_budget.admin.category:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\CategoryAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Category, PSBalanceBudgetBundle:CategoryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: Categories}
+
+    ps_balance_budget.admin.section:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SectionAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Section, PSBalanceBudgetBundle:SectionAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: Sections}
+
+    ps_balance_budget.admin.issue:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\IssueAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Issue, PSBalanceBudgetBundle:IssueAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: Issues}
+
+    ps_balance_budget.admin.control_type:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\ControlTypeAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\ControlType, PSBalanceBudgetBundle:ControlTypeAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Control Types, label: ControlType}
+
+    ps_balance_budget.admin.budget_planner:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\BudgetPlannerAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\BudgetPlanner, PSBalanceBudgetBundle:BudgetPlannerAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Settings, label: Budget Planner}
+
+    ps_balance_budget.admin.visitor:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\VisitorAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Visitor, PSBalanceBudgetBundle:VisitorAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Settings, label: Visitor}
+
+    ps_balance_budget.admin.visitor_activity:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\VisitorActivityAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\VisitorActivity, PSBalanceBudgetBundle:VisitorActivityAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Settings, label: VisitorActivity}

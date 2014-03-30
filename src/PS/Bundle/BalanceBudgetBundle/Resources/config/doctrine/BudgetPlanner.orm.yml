@@ -1,0 +1,22 @@
+PS\Bundle\BalanceBudgetBundle\Entity\BudgetPlanner:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\BudgetPlannerRepository
+    table: ps_budgetplanner
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        title:
+            type: string
+            length: 255    
+        description:
+            type: text
+        media:
+            type: text    
+        debt:
+            type: string
+            length: 255    
+           
+        
+    

@@ -1,0 +1,19 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: projectsunshine
+    database_user: root
+    database_password: null
+    mailer_transport: gmail
+    mailer_host: ~
+    mailer_user: pushparaj.g.89
+    mailer_password: 1012130613
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    sonata_user.google_authenticator.server: abc
+    sonata_admin.title: Agile Content
+    sonata_admin.logo_title: /bundles/sonataadmin/logo_title.png
+    sonata_media.cdn.host: http://ps.staged.io/uploads/media
+

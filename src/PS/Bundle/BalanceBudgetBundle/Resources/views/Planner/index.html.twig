@@ -1,0 +1,455 @@
+{% extends '::base.html.twig' %}
+ {% block stylesheets %}
+ <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/normalize.min.css') }}" type="text/css" media="all"  />
+  <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/cssreset.css') }}" type="text/css" media="all"  />
+   <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/bootstrap/bootstrap.min.css') }}" type="text/css" media="all"  />
+    <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/bootstrap/bootstrap-responsive.min.css') }}" type="text/css" media="all"  />
+  <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/font-awesome/css/font-awesome.css') }}" type="text/css" media="all"  />
+   <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/iconmoon/iconmoon.css') }}" type="text/css" media="all"  />
+    <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/jquery-ui.css') }}" type="text/css" media="all"  />
+  <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/jquery.switchButton.css') }}" type="text/css" media="all"  />
+   <link rel="stylesheet" href="{{ asset('bundles/psbalancebudget/css/main.css') }}" type="text/css" media="all"  />
+   <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+
+  {% endblock %}
+     {% block javascripts %}
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/modernizr-2.6.2.min.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/jquery-1.10.1.min.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/jquery-ui-1.10.1.min.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('bundles/psbalancebudget/js/vendor/jquery.switchButton.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/psbalancebudget/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('bundles/psbalancebudget/js/main.js') }}" type="text/javascript"></script>
+    {% endblock %}
+{% block body -%}
+  
+ <header class="topHeader">
+            <div class="container">
+                <div class="row">
+
+                    <div class="span12">
+                        <div class="row">
+                            <div class="span9">
+                                <a href="#" class="mainLogo">Queensland Goverment</a>
+                            </div>
+                            <div class="span3 visible-desktop">
+                                <ul class="subNav">
+                                    <li><a href="#">Search</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span12">
+                        <h1>Project Sunshine</h1>    
+                    </div>
+
+                    <div class="span12 mainNav">
+                        <div class="navbar">
+
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="iconmoon-menu2"></span>
+                            </a>                            
+                            <div class="nav-collapse collapse">
+                                <nav class="nav">
+                                    <ul class="clearfix">
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">About <i class="icon-angle-down"></i></a></li>
+                                        <li><a href="#">Budget Planner <i class="icon-angle-down"></i></a></li>
+                                    </ul>
+                                </nav>
+                            </div>   
+
+                        </div>                    
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <section class="leadSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span8">
+                            <h2>{{ budgetdata.title}}</h2>
+                            <p class="descriptionLead">{{ budgetdata.description}}</p>
+                        </div>
+                        <div class="span4">
+                            <img src="{{ asset('bundles/psbalancebudget/img/video-sample-1.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="primeSlider" id="fixedheader">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10">
+                                <ul class="totalSliderLabel topLabel">
+                                    <li>$0</li>
+                                    <li>$10b</li>
+                                    <li>$20b</li>
+                                    <li>$30b</li>
+                                    <li>$40b</li>
+                                    <li>$50b</li>
+                                    <li>$60b</li>
+                                    <li>$70b</li>
+                                    <li>$80b</li>
+                                </ul>                                
+                                <div id="totalSlider" data-total="{{budgetdata.debt}}"></div>
+                                <ul class="totalSliderLabel">
+                                    <li>$5b</li>
+                                    <li>$15b</li>
+                                    <li>$25b</li>
+                                    <li>$35b</li>
+                                    <li>$45b</li>
+                                    <li>$55b</li>
+                                    <li>$65b</li>
+                                    <li>$75b</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+              {% for category in categories%}
+            <section class="contentSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span8">
+                                <h2>{{ category.title}}</h2>
+                                <p>{{ category.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+
+            <!-- Start of First Row -->
+          {% for section in  category.sections%}
+            <section class="subSection promotSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ section.title}}</h3>
+                                        <p>{{ section.lead}}</p>
+                                        <a href="#promo-section" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
+                                        <div id="promo-section" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-header custom-modal-header clearfix">
+                                              <button type="button" class="close text-upper" data-dismiss="modal" aria-hidden="true">Close <i class="icon-remove"></i></button>
+                                            </div>
+                                            <div class="modal-body custom-modal-body">
+                                                <h3>This is the title</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation <a href="#" title="ullamco laboris">ullamco laboris</a> nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            </div>
+                                            <div class="modal-footer custom-modal-footer">
+                                                <ul>
+                                                    <li><sup>#</sup>SOURCE: <span>Government Department Report 2014</span></li>
+                                                    <li><sub>*</sub>SOURCE: <span><a href="#">http://www.google.com.au</a></span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll">
+                                        <img src="{{ asset('bundles/psbalancebudget/img/video-sample-2.jpg') }}" alt="" class="pull-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+           {% for issue in section.issues%}
+
+              {% if  issue.isparent != '1'%}
+            <section class="subSection subSection-row">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ issue.title}}</h3>
+                                        <p>{{ issue.lead}}</p>
+                                        <a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>
+                                        <a href="#subsection_{{loop.index}}" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
+                                        <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-header custom-modal-header clearfix">
+                                              <button type="button" class="close text-upper" data-dismiss="modal" aria-hidden="true">Close <i class="icon-remove"></i></button>
+                                            </div>
+                                            <div class="modal-body custom-modal-body">
+                                                <h3>This is the title</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation <a href="#" title="ullamco laboris">ullamco laboris</a> nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            </div>
+                                            <div class="modal-footer custom-modal-footer">
+                                                <ul>
+                                                    <li><sup>#</sup>SOURCE: <span>Government Department Report 2014</span></li>
+                                                    <li><sub>*</sub>SOURCE: <span><a href="#">http://www.google.com.au</a></span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if  issue.controltype.name == 'slider'%}
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
+                                       
+                                        <div id="slider_{{issue.id}}"class="slider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                        
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">${{ issue.optionvalues['min'] }}M</span>
+                                            <span class="pull-right">${{ issue.optionvalues['max'] }}M</span>
+                                        </div>
+
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0"></label>
+                                           <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                    </div>
+                                </div>
+                                 {% endif %} 
+                                 {% if  issue.controltype.name == 'switch'%}
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
+                                        
+                                        <div class="switchButtonWrapper">
+                                            <input class="switch" type="checkbox" value="1" id="switch_{{issue.id}}">
+                                        </div>
+                                        <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
+                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
+                                        <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                    </div>
+                                </div>
+                               {% endif %}
+                                <div class="span12 comment-wrapper">
+                                    <form action="#" method="post">
+                                        <div>
+                                            <div class="form-textarea">
+                                                <textarea rows="4" cols="50">Enter your response...</textarea>
+                                            </div>
+                                            <p>By adding your comments you will be required to complete a short registration at the end of the survery</p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>                      
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+              {% endif %} 
+            {#for the parent of the section#}
+         {% if  issue.isparent == '1'%}
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ issue.title}}</h3>
+                                        <p>{{ issue.lead}}</p>
+                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
+                                    </div>
+                                </div>
+                                {% if  issue.controltype.name == 'Total Slider'%}
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                       
+                                       
+                                        <div id="slider_{{issue.id}}"class="slider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                        
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">0%</span>
+                                            <span class="pull-right">100%</span>
+                                        </div>
+                                            <label class="redLabel">cutting <span>$</span><input type="text" readonly id="parent_value_{{issue.id}}" value="0">
+                                            (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
+                                            </label>
+                                        
+                                            <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">   
+                                    </div>
+                                </div>
+                                 {% endif %} 
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="subSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                   <div class="spacingAll">
+                                       <h3>TOTAL DEBT REDUCTION FROM {{ category.title}} - {{ section.title}}</h3>                                    
+                                   </div>    
+                                </div>
+                               <div class="span5 total-val-column">
+                                      <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0">M</label>
+                               </div>
+                            </div>   
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>    
+            {% endif %} 
+            {% endfor%}
+                   
+                {% endfor%}
+            {% endfor%}
+                            
+
+           {# <section class="contentSection finishedSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span8">
+                                <h4>Saving Options</h4>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                <a href="#" class="nextButton">Next Section</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>  #}            
+
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <nav>
+                            <ul>
+                                <li><a href="#">Copyright</a></li>
+                                <li><a href="#">Disclaimer</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Right to Information</a></li>
+                                <li><a href="#">Accessibility</a></li>
+                                <li><a href="#">Jobs in Queensland</a></li>
+                                <li><a href="#">Government</a></li>
+                                <li><a href="#">Deutsch (Other languages)</a></li>
+                            </ul>
+                        </nav>
+
+                        <p>© The State of Queensland 2002–2013 <span>Queensland Government</span></p>
+
+                        <h5>Great State. Great opportunity.</h5>
+                    </div>
+                </div>
+            </div>
+        </footer>
+<script type="text/javascript">
+// save the users values
+          
+          function saveIssue(id,value){
+         var debtValue = $('#debt_value_'+id).val();
+              $.ajax({
+  type: "POST",
+  url: "{{ path('save_issue')}}",
+  data:{id: id, value: value, debtvalue: debtValue},
+  success: function(results){
+
+        if(typeof results !== 'undefined')
+        {
+            updateDebt(results);
+        }
+        
+  }
+  
+})
+  }
+  
+  function updateDebt(results){
+    var childrenValues = {};
+    // var childrenDebtValues = {};
+        for (var i=0;i<results.children.length;i++)
+        { 
+            var $key = results.children[i];
+         //   childrenDebtValues[$key] = $('#debt_value_'+results.children[i]).val();
+             childrenValues[$key] = $('#value_'+results.children[i]).val();
+              
+        }
+         var childrenValuesJson = JSON.stringify(childrenValues);
+         // var childrenDebtValuesJson = JSON.stringify(childrenDebtValues);
+         var parentId = results.parentId;
+          var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
+      
+         {#this is a child issue#}
+        if(results.isChild === true)
+        {
+           
+           var parentDebt = $('#value_'+results.parentId).val(); 
+           var childDebt = $('#debt_value_'+results.issueId).val(); 
+            var parentPercentageDebt = $('#debt_value_'+results.parentId).val();   
+            var data = {parentId: results.parentId, childDebt: childDebt, isChild: 'true',  parentDebt: parentDebt,parentPercentageDebt: parentPercentageDebt, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
+        }
+        {#this is the parent issue#}
+        else if(typeof results.percentage !== 'undefined')
+        {
+         var parentPercentageDebt = $('#debt_value_'+results.parentId).val();   
+        var data = {parentId: results.parentId, parentPercentage: results.percentage, parentPercentageDebt: parentPercentageDebt, isParent: 'true', childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
+        }
+        {#this is an independent issue#}
+        else
+        {
+           var data = {independentId: results.issueId,isIndependent: 'true', independentValue:  results.value, siblingValues: childrenValuesJson, currentDebt:currentTotalSliderValue} 
+        }
+        
+        
+        $.ajax({
+        type: "POST",
+        url: "{{ path('update_debt')}}",
+        data: data,
+        success: function(result){
+
+              if(typeof result !== 'undefined')
+              {
+                 
+                // update the main debt slider
+               
+            
+                 console.log(result.currentDebt);
+                 $('#totalSlider').slider( "option", "value", result.currentDebt );
+                 var debtHeader =  (result.currentDebt/1000).toFixed(2)
+                 $('#totalSlider .sliderValue em').text(debtHeader);
+                 // update the section total
+                 $('#total_'+parentId).val(result.sectiontotal);  
+                 // update the parent slider value
+                 if(typeof result.newParentDebt !== 'undefined'){
+                      console.log(result.newParentDebt);
+                    $('#parent_value_'+parentId).val(result.newParentDebt);   
+                 }
+               
+              } 
+
+        }
+  
+})  
+    
+  }
+  
+ 
+      </script>
+         
+    {% endblock %}
+  

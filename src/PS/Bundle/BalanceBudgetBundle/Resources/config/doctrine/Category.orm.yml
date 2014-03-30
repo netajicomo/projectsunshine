@@ -1,0 +1,30 @@
+PS\Bundle\BalanceBudgetBundle\Entity\Category:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\CategoryRepository
+    table: ps_category
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255    
+        description:
+            type: text
+        is_active:
+            type: boolean
+            default: true
+        created_at:
+            type: datetime    
+    oneToMany:
+        sections:
+            targetEntity: Section
+            mappedBy: category       
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]
+        
+    

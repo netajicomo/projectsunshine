@@ -1,0 +1,49 @@
+PS\Bundle\BalanceBudgetBundle\Entity\Section:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\SectionRepository
+    table: ps_section
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+        lead:
+            type: text
+        description:
+            type: text
+        file:
+            type: string
+            lenght: 100
+            nullable: true
+        video:
+            type: text
+        is_active:
+            type: boolean
+            default: true
+        created_at:
+            type: datetime    
+        updated_at:
+            type: datetime
+            nullable: true
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: sections
+            joinColumn:
+              name: category_id
+              referencedColumnName: id
+    oneToMany:
+        issues:
+            targetEntity: Issue
+            mappedBy: sectionissue          
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue, lifecycleFileUpload]
+        preUpdate:    [ lifecycleFileUpload ]
+        
+    

@@ -1,0 +1,96 @@
+<?php
+
+namespace PS\Bundle\BalanceBudgetBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * WidgetType
+ */
+class WidgetType
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var array
+     */
+    private $properties;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return WidgetType
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set properties
+     *
+     * @param array $properties
+     * @return WidgetType
+     */
+    public function setProperties($properties)
+    {
+      
+        $properties = explode(',', $properties);
+        
+          $this->properties = $properties;
+
+        return $this;
+    }
+
+    /**
+     * Get properties
+     *
+     * @return array 
+     */
+    public function getProperties()
+    {
+       if(is_array($this->properties))
+        $this->properties = implode(',', $this->properties);
+        return $this->properties;
+    }
+    
+   public function getRawProperties()
+    {
+       
+        return $this->properties;
+    }
+    
+    
+}

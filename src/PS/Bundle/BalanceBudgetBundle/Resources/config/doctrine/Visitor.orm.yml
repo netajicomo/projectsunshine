@@ -1,0 +1,24 @@
+PS\Bundle\BalanceBudgetBundle\Entity\Visitor:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\VisitorRepository
+    table: ps_visitor
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        session_id:
+            type: string
+            length: 255    
+        ip:
+            type: string
+            length: 255   
+        user_agent:
+            type: text
+        created_at:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]        
+           
+        
+    

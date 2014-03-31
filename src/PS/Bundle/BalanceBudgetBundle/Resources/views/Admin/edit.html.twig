@@ -16,7 +16,7 @@ file that was distributed with this source code.
     <script type="text/javascript">
 
         $(document).ready(function(){
-          var options = $('select:eq(2)').parent().parent().next().find('div');
+          var options = $('select:eq(4)').parent().parent().next().find('div');
          var id = options.children().first().attr('id');
        var theId = id.replace("_option_values","");
      var savedValues = $('#'+id).val();
@@ -29,11 +29,11 @@ file that was distributed with this source code.
   else
    getSliderOptions()
         
-         $('select:eq(2)').change(function(){
+         $('select:eq(4)').change(function(){
              getSliderOptions()
          });
      
-     var checkbox =  $('input[type="checkbox"]');
+     var checkbox =  $('input[type="checkbox"]:eq(1)');
      var parentSelector = checkbox.parent().parent().next();    
     if(checkbox.is(':checked'))
      {
@@ -57,7 +57,7 @@ file that was distributed with this source code.
         
       function getSliderOptions(){
          
-           var widgetvalue = $('select:eq(2)').val();
+           var widgetvalue = $('select:eq(4)').val();
          var newUrl = "{{ admin.generateUrl('getControlTypeProperties') }}";
      
       console.log(widgetvalue)

@@ -27,7 +27,7 @@ class BudgetController extends Controller
         $service = $this->get('visitor_tracker_service');
        
        $service->createVisitor($request);
-     
+       
        $em = $this->getDoctrine()->getManager();
        
        
@@ -169,12 +169,13 @@ class BudgetController extends Controller
          {
               // save to the db
                  
-            
-                    
-                    $parentDebt = $childrenTotal;
+                         $parentDebt = $childrenTotal;
+                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);                
+                
+              
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
-                // echo $totalDebt.'<br>';
-                  $sliderValue = $currentDebt - ($totalDebt); 
+                
+                  $sliderValue = $currentDebt - ($totalDebt);   
                 $result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue);
                
                     

@@ -47,7 +47,17 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
             targetEntity: Section
             joinColumn:
                 name: section_id
-                referencedColumnName: id            
+                referencedColumnName: id   
+        dependency:
+            targetEntity: Dependency
+            joinColumn:
+                name: dependency_id
+                referencedColumnName: id   
+        issuegroup:
+            targetEntity: IssueGroup
+            joinColumn:
+                name: issuegroup_id
+                referencedColumnName: id
     lifecycleCallbacks:
         prePersist: [  setCreatedAtValue]
        

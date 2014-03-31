@@ -1,0 +1,14 @@
+PS\Bundle\BalanceBudgetBundle\Entity\Dependency:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\DependencyRepository
+    table: ps_dependency
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        
+    

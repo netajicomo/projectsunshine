@@ -224,7 +224,7 @@
                                              (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
                                              {% endif%}
                                         </label>
-                                           <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                           <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -239,7 +239,7 @@
                                         </div>
                                         <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
-                                        <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                        <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                {% endif %}
@@ -363,7 +363,7 @@
          var childrenValuesJson = JSON.stringify(childrenValues);
    
         
-         var currentTotalSliderValue =  $('#totalSlider').slider( "option", "value");
+         var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
          
         var debtValue = $('#debt_value_'+results.issueId).val(); 
       // has a reduction slider within
@@ -381,8 +381,8 @@
        
          var data = {parentId: results.parentId, debtValue: debtValue, value: results.value, childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
-       console.log(childrenValuesJson);
-       console.log(data);
+      // console.log(childrenValuesJson);
+      // console.log(data);
         
         $.ajax({
         type: "POST",

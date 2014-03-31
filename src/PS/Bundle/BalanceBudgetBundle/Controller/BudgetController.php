@@ -115,6 +115,7 @@ class BudgetController extends Controller
               $sessionId = $request->getSession()->get('id');  
               $currentDebt = $request->request->get('currentDebt');
               $debtValue = $request->request->get('debtValue');
+           //  $reducerDebtPercentage = $request->request->get('reducerDebtPercentage');
               $issueValue =  $request->request->get('value');
                $childrenValues = $request->request->get('childrenValues');
               $childrenValueArray = json_decode($childrenValues,TRUE);
@@ -127,7 +128,7 @@ class BudgetController extends Controller
          if($request->request->get('reducerId'))  
          {
             
-              //$reducerValue = $request->request->get('reducerValue');
+            
               $reducerPercentage = $request->request->get('reducerPercentage');
             
          
@@ -136,16 +137,20 @@ class BudgetController extends Controller
                        if($reducerPercentage == '0')
                        {
                            $parentDebt =   $childrenTotal;
+                         
                           
                        }
                        else
                       {
                            
                              $parentDebt = $childrenTotal + $newReducerValue;
+                      
                         
                        }
                      
-                      $sliderValue = $currentDebt - ($debtValue);  
+                      
+                           
+                       $sliderValue = $currentDebt - ($parentDebt);  
                    
                        
                     

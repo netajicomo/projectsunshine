@@ -90,7 +90,7 @@ class BudgetController extends Controller
                 else
                 {
                          $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $value);   
-                       $siblings = $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIssueIds($issue->getSection()->getId());  
+                       $siblings = $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIssueIds($issue->getSectionissue()->getId());  
                         $result = array('issueId' => $issueId, 'value' => $value, 'isIndependent' => true, 'children' => $siblings); 
                 }
                     
@@ -105,12 +105,15 @@ class BudgetController extends Controller
     
      public function updateDebtAction(Request $request){
               $em = $this->getDoctrine()->getManager();
+                 $parentId = $request->request->get('parentId');
+              $section_id =    $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getSectionissue()->getId();
+              $section_total = $em->getRepository('PSBalanceBudgetBundle:Section')->findOneById($section_id)->getTotal();
          // to check if it is a child issue
          if($request->request->get('isChild'))  
          {
             
             // echo 'is child<br>';
-             $parentId = $request->request->get('parentId');
+          
             $childDebt = $request->request->get('childDebt');
             
             $parentDebt = $request->request->get('parentDebt');

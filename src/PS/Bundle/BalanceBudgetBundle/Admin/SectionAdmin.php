@@ -62,8 +62,10 @@ class SectionAdmin extends Admin
             ->add('category','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:Category','property' => 'name'))            
             ->add('name')
             ->add('title')
+            ->add('total')      
             ->add('lead')
             ->add('description')
+              
             //->add('file','file')
            // ->add('is_active')
             //->add('created_at')

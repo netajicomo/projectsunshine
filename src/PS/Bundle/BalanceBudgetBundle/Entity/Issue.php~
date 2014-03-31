@@ -368,4 +368,32 @@ class Issue
     {
         return $this->parent;
     }
+    /**
+     * @var boolean
+     */
+    private $is_parent;
+
+
+    /**
+     * Set is_parent
+     *
+     * @param boolean $isParent
+     * @return Issue
+     */
+    public function setIsParent($isParent)
+    {
+        $this->is_parent = $isParent;
+
+        return $this;
+    }
+
+    /**
+     * Get is_parent
+     *
+     * @return boolean 
+     */
+    public function getIsParent()
+    {
+        return $this->is_parent;
+    }
 }

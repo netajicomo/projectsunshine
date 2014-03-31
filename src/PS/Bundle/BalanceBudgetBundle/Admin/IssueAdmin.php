@@ -63,8 +63,10 @@ class IssueAdmin extends Admin
             ->add('name')
             ->add('title')
             ->add('lead',null, array('required' => false))
+            ->add('is_reduceBy',null, array('required' => false))       
              ->add('is_parent',null, array('required' => false))    
-            ->add('parent','entity',array('class' => 'PSBalanceBudgetBundle:Issue','property' => 'name', 'empty_value' => 'Select an Issue'))        
+         
+            ->add('parent','entity',array('class' => 'PSBalanceBudgetBundle:Issue','property' => 'name', 'empty_value' => 'Select an Issue', 'required' =>false))        
             ->add('description')
             ->add('controltype','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:ControlType','property' => 'name'))                
             ->add('option_values')

@@ -21,6 +21,9 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
             type: text 
         is_parent:
             type: boolean
+            default: false
+        is_reduceBy:
+            type: boolean
             default: false    
         is_active:
             type: boolean

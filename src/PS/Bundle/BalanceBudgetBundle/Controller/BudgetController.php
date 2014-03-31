@@ -52,49 +52,55 @@ class BudgetController extends Controller
     
     // save the issue values
     
-    public function saveIssueAction(Request $request){
+    public function processIssueAction(Request $request){
         
-       $service = $this->get('visitor_tracker_service');
-       $service->createVisitor($request);
+     
        $em = $this->getDoctrine()->getManager();
        $issueId = $request->request->get('id');
        $value = $request->request->get('value');
-       $sessionId = $request->getSession()->get('id');
-       
-      
-       
-      
+     
             $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId);
-            // check to see if its a child 
-      
+          
+      // get the parent
                 $parentIssue =  $issue->getParent();
                 if($parentIssue)
                 {
-                //  echo 'is a child<br>';
-                    $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $value);     
+              
+                 
                     $parentId = $parentIssue->getId();
+                    // get the siblings
+                    $siblings = $parentIssue->getChildren();
+                    $siblingsIds =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIds($parentId);     
+                    // check to see if a reducer issue exists
+                    foreach($siblings as $sibling){
+                        if($sibling->getIsReduceBy())
+                        {
+                             $isReduceBy = true;
+                             $reducerId = $sibling->getid();
+                            if (($key = array_search($reducerId, $siblingsIds)) !== false) {
+                            unset($siblingsIds[$key]);}
+                             break;
+                        }
+                        else
+                        {
+                                $isReduceBy = false; 
+                                $reducerId  = false;
+                        }    
+                        
+                    }
+                   
+                   
                 
                     
-                   $children =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getChildrenIds($parentId);     
-                    $result = array('children' => $children, 'parentId' => $parentId,'isChild' => true, 'value' => $value,'issueId' => $issueId);
-                }
-             // else if it is a parent pass the percentage as the value
-                elseif($issue->getChildren())
-                {
-                 // echo 'is the parent<br>';
-                    $children =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getChildrenIds($issueId);     
-                     $result = array('children' => $children, 'percentage' => $value,'parentId' => $issueId, 'isParent' => true);
-                   
-                }
-               // else is an independent and does its own work but we need its siblings for the section total
-                else
-                {
-                         $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $value);   
-                       $siblings = $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIssueIds($issue->getSectionissue()->getId());  
-                        $result = array('issueId' => $issueId, 'value' => $value, 'isIndependent' => true, 'children' => $siblings); 
-                }
+                  
+                    $result = array('siblings' => $siblingsIds, 'parentId' => $parentId, 'value' => $value,'issueId' => $issueId, 'isReduceBy' => $isReduceBy, 'reducerId' => $reducerId);
+               
+                     return new JsonResponse($result); 
                     
-                 return new JsonResponse($result);
+                }
+             
+             
+               
      
    
        
@@ -105,98 +111,57 @@ class BudgetController extends Controller
     
      public function updateDebtAction(Request $request){
               $em = $this->getDoctrine()->getManager();
-                 $parentId = $request->request->get('parentId');
-              $section_id =    $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getSectionissue()->getId();
-              $section_total = $em->getRepository('PSBalanceBudgetBundle:Section')->findOneById($section_id)->getTotal();
-         // to check if it is a child issue
-         if($request->request->get('isChild'))  
+              $parentId = $request->request->get('parentId');
+              $sessionId = $request->getSession()->get('id');  
+              $currentDebt = $request->request->get('currentDebt');
+              $debtValue = $request->request->get('debtValue');
+              $issueValue =  $request->request->get('value');
+               $childrenValues = $request->request->get('childrenValues');
+              $childrenValueArray = json_decode($childrenValues,TRUE);
+              $childrenTotal = array_sum($childrenValueArray);
+               $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
+                $valuesArray = json_decode($values,TRUE);
+                $total = $valuesArray['total'];
+           
+         // to check if it has a reduction slider
+         if($request->request->get('reducerId'))  
          {
             
-            // echo 'is child<br>';
-          
-            $childDebt = $request->request->get('childDebt');
+              //$reducerValue = $request->request->get('reducerValue');
+              $reducerPercentage = $request->request->get('reducerPercentage');
             
-            $parentDebt = $request->request->get('parentDebt');
-              $childrenValues = $request->request->get('childrenValues');
-              $childrenValueArray = json_decode($childrenValues,TRUE);
-              $childTotal = array_sum($childrenValueArray);
-            $sessionId = $request->getSession()->get('id');  
-        
-        // if the the parent value is zero dont do anything but just return the total
-            if($parentDebt == '0'){
-             //   echo ' with parent untouched<br>';   
-             //   echo $childDebt;
-               // $totalDebt = $request->request->get('currentDebt') - ($childDebt);
-                 $totalDebt = $request->request->get('currentDebt') - ($childTotal);
-                $result = array('sectiontotal' => $childTotal, 'currentDebt' => $totalDebt );
-             return new JsonResponse($result);
-        }
-        
-          else
-        {
-           
-           //   echo ' with parent having value<br>'; 
-                 $parentPercentageDebt = $request->request->get('parentPercentageDebt');
-              $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
-            $valuesArray = json_decode($values,TRUE);
-            $total = $valuesArray['total'];
-            
-             $newParentDebt = ($total - $childTotal) * $parentDebt/100 ;
-          $sectionTotal = $newParentDebt + $childTotal;
-            $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
-        
-        // $totalDebt = $request->request->get('currentDebt') - ($childDebt);
-            $totalDebt = $request->request->get('currentDebt') - ($sectionTotal);
-       $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal, 'currentDebt' => $totalDebt);
-                    return new JsonResponse($result);
-        }  
-        
+         
+                    
+                        $newReducerValue = ($total - $childrenTotal) * $reducerPercentage/100 ;
+                       if($reducerPercentage == '0')
+                       {
+                           $parentDebt =   $childrenTotal;
+                           $sliderValue = $currentDebt - ($debtValue);
+                       }
+                       else
+                      {
+                           
+                             $parentDebt = $childrenTotal + $newReducerValue;
+                       }
+                     
+                       
+                   
+                       
+                    
+                           
+                      $result = array('newReducerValue' => $newReducerValue, 'parentDebt' => $parentDebt, 'sliderValue' => $sliderValue);
+                     return new JsonResponse($result);
          }
-       elseif($request->request->get('isParent'))
-       {
-         // echo 'is parent<br>'.$parentPercentage.'<br>';   
-           $parentPercentage = $request->request->get('parentPercentage');
-             $parentPercentageDebt = $request->request->get('parentPercentageDebt');
-            $childrenValues = $request->request->get('childrenValues');
-               $parentId = $request->request->get('parentId');
-                  $sessionId = $request->getSession()->get('id');  
-              $childrenValueArray = json_decode($childrenValues,TRUE);
-              $childTotal = array_sum($childrenValueArray);
-          
-          $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
-        $valuesArray = json_decode($values,TRUE);
-        $total = $valuesArray['total'];  
-       
- 
-        $newParentDebt = ($total - $childTotal) * $parentPercentage/100 ;
-        $sectionTotal = $newParentDebt + $childTotal;
- $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
-        // $totalDebt = $request->request->get('currentDebt') - ($total - $childTotal) * $parentPercentageDebt/100 ;
-         $totalDebt = $request->request->get('currentDebt') - $sectionTotal;
-        $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $newParentDebt); 
-         $result = array('newParentDebt' => $newParentDebt, 'sectiontotal' => $sectionTotal, 'currentDebt' => $totalDebt);
-                    return new JsonResponse($result);
-       } 
-       
-       else
-       {  
-             //   echo 'is an independent<br>';  
-            $siblingValues = $request->request->get('siblingValues');
-             $siblingValueArray = json_decode($siblingValues,TRUE);
-              $siblingTotal = array_sum($siblingValueArray);
-              // $totalDebt = $request->request->get('currentDebt') - $request->request->get('independentValue');
-              $totalDebt = $request->request->get('currentDebt') - $sectionTotal;
-              $result = array('sectiontotal' => $siblingTotal, 'currentDebt' => $totalDebt);
-
-              
-       }   
-       
-      
+         else
+         {
+              $parentDebt = $total - $childrenTotal;
+               $result = array('parentDebt' => $parentDebt);
+                     return new JsonResponse($result);
+         }    
         
-    }
+
     
-    
-   
+     }
     
     
     

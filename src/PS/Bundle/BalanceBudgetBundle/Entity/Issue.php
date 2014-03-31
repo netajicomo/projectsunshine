@@ -396,4 +396,32 @@ class Issue
     {
         return $this->is_parent;
     }
+    /**
+     * @var boolean
+     */
+    private $is_reduceBy;
+
+
+    /**
+     * Set is_reduceBy
+     *
+     * @param boolean $isReduceBy
+     * @return Issue
+     */
+    public function setIsReduceBy($isReduceBy)
+    {
+        $this->is_reduceBy = $isReduceBy;
+
+        return $this;
+    }
+
+    /**
+     * Get is_reduceBy
+     *
+     * @return boolean 
+     */
+    public function getIsReduceBy()
+    {
+        return $this->is_reduceBy;
+    }
 }

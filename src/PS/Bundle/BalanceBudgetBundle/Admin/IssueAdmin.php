@@ -59,11 +59,11 @@ class IssueAdmin extends Admin
     {
         $formMapper
            // ->add('id')
-            ->add('sectionissue','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))                
+            ->add('sectionissue','entity',array('attr' => array('class' => 'for_display'), 'label' => 'Section','class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))                
             ->add('name')
             ->add('title')
             ->add('lead',null, array('required' => false))
-            ->add('is_reduceBy',null, array('required' => false))       
+            ->add('is_reduceBy',null, array('required' => false, 'label' => 'Is a reduction slider'))       
              ->add('is_parent',null, array('required' => false))    
          
             ->add('parent','entity',array('class' => 'PSBalanceBudgetBundle:Issue','property' => 'name', 'empty_value' => 'Select an Issue', 'required' =>false))        

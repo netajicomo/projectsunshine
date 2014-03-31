@@ -224,7 +224,7 @@
                                              (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
                                              {% endif%}
                                         </label>
-                                           <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                           <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -239,7 +239,7 @@
                                         </div>
                                         <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
-                                        <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                        <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                {% endif %}
@@ -363,7 +363,8 @@
          var childrenValuesJson = JSON.stringify(childrenValues);
    
         
-         var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
+         var currentTotalSliderValue =  $('#totalSlider').slider( "option", "value");
+         
         var debtValue = $('#debt_value_'+results.issueId).val(); 
       // has a reduction slider within
         if(results.isReduceBy === true)
@@ -380,8 +381,8 @@
        
          var data = {parentId: results.parentId, debtValue: debtValue, value: results.value, childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
-      // console.log(childrenValuesJson);
-      // console.log(data);
+       console.log(childrenValuesJson);
+       console.log(data);
         
         $.ajax({
         type: "POST",
@@ -391,25 +392,18 @@
 
               if(typeof result !== 'undefined')
               {
-                 
-                // update the main debt slider
-               
-            
-                {# console.log(result.currentDebt);
-                 $('#totalSlider').slider( "option", "value", result.currentDebt );
-                 var debtHeader =  (result.currentDebt/1000).toFixed(2)
-                 $('#totalSlider .sliderValue em').text(debtHeader);
-                 // update the section total
-                 $('#total_'+parentId).val(result.sectiontotal);  #}
-                 // update the parent slider value
-                 if(typeof result.newReducerValue !== 'undefined'){
-                    //  console.log(result.newReducerValue);
-                        console.log(result.sliderValue);
-                    $('#reducer_value_'+results.reducerId).val(result.newReducerValue);   
-                    $('#total_'+results.parentId).val(result.parentDebt);
-                     $('#totalSlider').slider( "option", "value", result.sliderValue );
+                        console.log(result.parentDebt);
+                        console.log(result.sliderValue);   
+                $('#total_'+results.parentId).val(result.parentDebt);
+                    $('#totalSlider').slider( "option", "value", result.sliderValue );
                  var debtHeader =  (result.sliderValue/1000).toFixed(2)
                  $('#totalSlider .sliderValue em').text(debtHeader);
+                     // update the reduction slider value
+                 if(typeof result.newReducerValue !== 'undefined'){
+                     
+                    $('#reducer_value_'+results.reducerId).val(result.newReducerValue);   
+                  
+                    
                  
                  }
                

@@ -136,15 +136,16 @@ class BudgetController extends Controller
                        if($reducerPercentage == '0')
                        {
                            $parentDebt =   $childrenTotal;
-                           $sliderValue = $currentDebt - ($debtValue);
+                          
                        }
                        else
                       {
                            
                              $parentDebt = $childrenTotal + $newReducerValue;
+                        
                        }
                      
-                       
+                      $sliderValue = $currentDebt - ($debtValue);  
                    
                        
                     
@@ -154,8 +155,11 @@ class BudgetController extends Controller
          }
          else
          {
-              $parentDebt = $total - $childrenTotal;
-               $result = array('parentDebt' => $parentDebt);
+              
+                $parentDebt = $childrenTotal;
+                 $sliderValue = $currentDebt - ($debtValue);  
+                $result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue);
+               
                      return new JsonResponse($result);
          }    
         

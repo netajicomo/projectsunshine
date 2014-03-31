@@ -25,5 +25,14 @@ class IssueRepository extends EntityRepository
        return $childrenIdArray; 
     }
     
+    
+   public function getParentIssues(){
+       
+        $q = $this->createQueryBuilder('i')
+            ->where('i.is_parent = 1')
+            ->getQuery();
+ 
+        return $q->getResult();
+   }
   
 }

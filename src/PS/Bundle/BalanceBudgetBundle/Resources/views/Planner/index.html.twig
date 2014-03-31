@@ -224,7 +224,7 @@
                                              (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
                                              {% endif%}
                                         </label>
-                                           <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                           <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                  {% endif %} 
@@ -239,7 +239,7 @@
                                         </div>
                                         <input type="hidden" id="options_{{issue.id}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
                                         <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
-                                        <input type="text" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                        <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
                                {% endif %}
@@ -373,13 +373,13 @@
            var reducerPercentage = $('#value_'+results.reducerId).val(); 
            var reducerDebtPercentage = $('#debt_value_'+results.reducerId).val(); 
       
-            var data = {parentId: results.parentId, value: results.value,debtValue: debtValue, reducerId: results.reducerId, reducerPercentage: reducerPercentage, reducerDebtPercentage:reducerDebtPercentage, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
+            var data = {issueId: results.issueId, parentId: results.parentId, value: results.value,debtValue: debtValue, reducerId: results.reducerId, reducerPercentage: reducerPercentage, reducerDebtPercentage:reducerDebtPercentage, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
         }
     // doesnt have a reduction slider
         else 
         {
        
-         var data = {parentId: results.parentId, debtValue: debtValue, value: results.value, childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
+         var data = {issueId: results.issueId, parentId: results.parentId, debtValue: debtValue, value: results.value, childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
       // console.log(childrenValuesJson);
       // console.log(data);

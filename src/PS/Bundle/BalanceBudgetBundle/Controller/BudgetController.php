@@ -116,7 +116,8 @@ class BudgetController extends Controller
               $sessionId = $request->getSession()->get('id');  
               $currentDebt = $request->request->get('currentDebt');
               $debtValue = $request->request->get('debtValue');
-           //  $reducerDebtPercentage = $request->request->get('reducerDebtPercentage');
+             $reducerId = $request->request->get('reducerId');
+                $issueId =  $request->request->get('issueId');
               $issueValue =  $request->request->get('value');
                $childrenValues = $request->request->get('childrenValues');
               $childrenValueArray = json_decode($childrenValues,TRUE);
@@ -124,12 +125,13 @@ class BudgetController extends Controller
                $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
                 $valuesArray = json_decode($values,TRUE);
                 $total = $valuesArray['total'];
-           
+          
+            $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $issueValue);              
          // to check if it has a reduction slider
          if($request->request->get('reducerId'))  
          {
             
-            
+           
               $reducerPercentage = $request->request->get('reducerPercentage');
             
          
@@ -150,27 +152,38 @@ class BudgetController extends Controller
                        }
                      
                       
-                           
-                       $sliderValue = $currentDebt - ($parentDebt);  
+                 
                    
-                       
-                    
-                           
+                // savereducer slider in DB
+                
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, $newReducerValue);               
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);             
+                  
+                  $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
+                // echo $totalDebt.'<br>';
+                  $sliderValue = $currentDebt - ($totalDebt);           
                       $result = array('newReducerValue' => $newReducerValue, 'parentDebt' => $parentDebt, 'sliderValue' => $sliderValue);
-                     return new JsonResponse($result);
+                    
          }
          else
          {
-              
-                $parentDebt = $childrenTotal;
-                 $sliderValue = $currentDebt - ($debtValue);  
+              // save to the db
+                 
+            
+                    
+                    $parentDebt = $childrenTotal;
+                  $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
+                // echo $totalDebt.'<br>';
+                  $sliderValue = $currentDebt - ($totalDebt); 
                 $result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue);
                
-                     return new JsonResponse($result);
+                    
          }    
         
-
+       
     
+         
+          return new JsonResponse($result);
      }
     
     

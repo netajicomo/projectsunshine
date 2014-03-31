@@ -35,4 +35,19 @@ class VisitorActivityRepository extends EntityRepository
         
     }
     
+    public function getTheSetParentValues($session_id)
+    {
+        $totalDebt = 0;
+       $parentIssues = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Issue')->getParentIssues(); 
+        foreach($parentIssues as $parent){
+           $parentIssue = $this->findOneBy(array('issue_id' => $parent->getId(), 'session_id' => $session_id));
+           if(isset($parentIssue))
+           {
+               $totalDebt += $parentIssue->getIssueValue();
+           }
+           
+        }
+        return $totalDebt;
+    }       
+    
 }

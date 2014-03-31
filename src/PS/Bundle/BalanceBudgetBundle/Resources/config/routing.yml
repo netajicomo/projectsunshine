@@ -2,9 +2,9 @@ planner:
     pattern:  /planner
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:index" }
     
-save_issue:
-    pattern: /saveissue
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:saveIssue" }
+process_issue:
+    pattern: /processissue
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:processIssue" }
 
 
 update_debt:

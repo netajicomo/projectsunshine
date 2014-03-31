@@ -54,7 +54,8 @@ class BudgetController extends Controller
     
     public function processIssueAction(Request $request){
         
-     
+       $service = $this->get('visitor_tracker_service');
+       $service->createVisitor($request);
        $em = $this->getDoctrine()->getManager();
        $issueId = $request->request->get('id');
        $value = $request->request->get('value');

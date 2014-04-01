@@ -215,7 +215,14 @@
                                             <span class="pull-right">${{ issue.optionvalues['max'] }}M</span>
                                         </div>
 
-                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0"></label>
+                                        <label class="redLabel">cutting <span>$</span>
+                                             {% if  issue.isreduceby != '1'%}
+                                            <input type="text" readonly id="value_{{issue.id}}" value="0">
+                                            {% else%}
+                                              <input type="text" readonly id="reducer_value_{{issue.id}}" value="0">
+                                             (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
+                                             {% endif%}
+                                        </label>
                                            <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
@@ -260,47 +267,9 @@
                         <div class="span12">
                             <div class="row">
                                 <div class="span7">
-                                    <div class="spacingAll">
-                                        <h3>{{ issue.title}}</h3>
-                                        <p>{{ issue.lead}}</p>
-                                        <a href="#" class="moreInfo"><i class="icon-info-sign"></i> more info</a>
-                                    </div>
-                                </div>
-                                {% if  issue.controltype.name == 'Total Slider'%}
-                                <div class="span5">
-                                    <div class="spacingAll costSlider">
-
-                                       
-                                       
-                                        <div id="slider_{{issue.id}}"class="slider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
-                                        
-                                        <div class="sliderLabel clearfix">
-                                            <span class="pull-left">0%</span>
-                                            <span class="pull-right">100%</span>
-                                        </div>
-                                            <label class="redLabel">cutting <span>$</span><input type="text" readonly id="parent_value_{{issue.id}}" value="0">
-                                            (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
-                                            </label>
-                                        
-                                            <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">   
-                                    </div>
-                                </div>
-                                 {% endif %} 
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="subSection">
-                <div class="container">
-                    <div class="row">
-                        <div class="span12">
-                            <div class="row">
-                                <div class="span7">
                                    <div class="spacingAll">
-                                       <h3>TOTAL DEBT REDUCTION FROM {{ category.title}} - {{ section.title}}</h3>                                    
-                                   </div>    
+                                       <h3>{{ issue.title}}</h3>
+                                   </div>
                                 </div>
                                <div class="span5 total-val-column">
                                       <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="0">M</label>
@@ -362,11 +331,11 @@
 // save the users values
           
           function saveIssue(id,value){
-         var debtValue = $('#debt_value_'+id).val();
+
               $.ajax({
   type: "POST",
-  url: "{{ path('save_issue')}}",
-  data:{id: id, value: value, debtvalue: debtValue},
+  url: "{{ path('process_issue')}}",
+  data:{id: id, value: value},
   success: function(results){
 
         if(typeof results !== 'undefined')
@@ -381,41 +350,38 @@
   
   function updateDebt(results){
     var childrenValues = {};
-    // var childrenDebtValues = {};
-        for (var i=0;i<results.children.length;i++)
+
+        for (var i=0;i<results.siblings.length;i++)
         { 
-            var $key = results.children[i];
-         //   childrenDebtValues[$key] = $('#debt_value_'+results.children[i]).val();
-             childrenValues[$key] = $('#value_'+results.children[i]).val();
+            var $key = results.siblings[i];
+      
+             childrenValues[$key] = $('#value_'+results.siblings[i]).val();
               
         }
          var childrenValuesJson = JSON.stringify(childrenValues);
-         // var childrenDebtValuesJson = JSON.stringify(childrenDebtValues);
-         var parentId = results.parentId;
-          var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
-      
-         {#this is a child issue#}
-        if(results.isChild === true)
+   
+        
+         var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
+         
+        var debtValue = $('#debt_value_'+results.issueId).val(); 
+      // has a reduction slider within
+        if(results.isReduceBy === true)
         {
            
-           var parentDebt = $('#value_'+results.parentId).val(); 
-           var childDebt = $('#debt_value_'+results.issueId).val(); 
-            var parentPercentageDebt = $('#debt_value_'+results.parentId).val();   
-            var data = {parentId: results.parentId, childDebt: childDebt, isChild: 'true',  parentDebt: parentDebt,parentPercentageDebt: parentPercentageDebt, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
+           var reducerPercentage = $('#value_'+results.reducerId).val(); 
+           var reducerDebtPercentage = $('#debt_value_'+results.reducerId).val(); 
+      
+            var data = {issueId: results.issueId, parentId: results.parentId, value: results.value,debtValue: debtValue, reducerId: results.reducerId, reducerPercentage: reducerPercentage, reducerDebtPercentage:reducerDebtPercentage, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
         }
-        {#this is the parent issue#}
-        else if(typeof results.percentage !== 'undefined')
+    // doesnt have a reduction slider
+        else 
         {
-         var parentPercentageDebt = $('#debt_value_'+results.parentId).val();   
-        var data = {parentId: results.parentId, parentPercentage: results.percentage, parentPercentageDebt: parentPercentageDebt, isParent: 'true', childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
+       
+         var data = {issueId: results.issueId, parentId: results.parentId, debtValue: debtValue, value: results.value, childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
-        {#this is an independent issue#}
-        else
-        {
-           var data = {independentId: results.issueId,isIndependent: 'true', independentValue:  results.value, siblingValues: childrenValuesJson, currentDebt:currentTotalSliderValue} 
-        }
-        
-        
+      // console.log(childrenValuesJson);
+      // console.log(data);
+
         $.ajax({
         type: "POST",
         url: "{{ path('update_debt')}}",
@@ -424,20 +390,19 @@
 
               if(typeof result !== 'undefined')
               {
-                 
-                // update the main debt slider
-               
-            
-                 console.log(result.currentDebt);
-                 $('#totalSlider').slider( "option", "value", result.currentDebt );
-                 var debtHeader =  (result.currentDebt/1000).toFixed(2)
+                        console.log(result.parentDebt);
+                        console.log(result.sliderValue);   
+                $('#total_'+results.parentId).val(result.parentDebt);
+                    $('#totalSlider').slider( "option", "value", result.sliderValue );
+                 var debtHeader =  (result.sliderValue/1000).toFixed(2)
                  $('#totalSlider .sliderValue em').text(debtHeader);
-                 // update the section total
-                 $('#total_'+parentId).val(result.sectiontotal);  
-                 // update the parent slider value
-                 if(typeof result.newParentDebt !== 'undefined'){
-                      console.log(result.newParentDebt);
-                    $('#parent_value_'+parentId).val(result.newParentDebt);   
+                     // update the reduction slider value
+                 if(typeof result.newReducerValue !== 'undefined'){
+                     
+                    $('#reducer_value_'+results.reducerId).val(result.newReducerValue);   
+                  
+                    
+                 
                  }
                
               } 

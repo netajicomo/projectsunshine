@@ -368,4 +368,91 @@ class Issue
     {
         return $this->parent;
     }
+<<<<<<< HEAD
+=======
+    /**
+     * @var boolean
+     */
+    private $is_parent;
+
+
+    /**
+     * Set is_parent
+     *
+     * @param boolean $isParent
+     * @return Issue
+     */
+    public function setIsParent($isParent)
+    {
+        $this->is_parent = $isParent;
+
+        return $this;
+    }
+
+    /**
+     * Get is_parent
+     *
+     * @return boolean 
+     */
+    public function getIsParent()
+    {
+        return $this->is_parent;
+    }
+    /**
+     * @var boolean
+     */
+    private $is_reduceBy;
+
+
+    /**
+     * Set is_reduceBy
+     *
+     * @param boolean $isReduceBy
+     * @return Issue
+     */
+    public function setIsReduceBy($isReduceBy)
+    {
+        $this->is_reduceBy = $isReduceBy;
+
+        return $this;
+    }
+
+    /**
+     * Get is_reduceBy
+     *
+     * @return boolean 
+     */
+    public function getIsReduceBy()
+    {
+        return $this->is_reduceBy;
+    }
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Dependency
+     */
+    private $dependency;
+
+
+    /**
+     * Set dependency
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Dependency $dependency
+     * @return Issue
+     */
+    public function setDependency(\PS\Bundle\BalanceBudgetBundle\Entity\Dependency $dependency = null)
+    {
+        $this->dependency = $dependency;
+
+        return $this;
+    }
+
+    /**
+     * Get dependency
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Dependency 
+     */
+    public function getDependency()
+    {
+        return $this->dependency;
+    }
+>>>>>>> 6f28d292ac6b1135eefda48a0f635c3da5585b42
 }

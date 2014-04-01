@@ -38,6 +38,7 @@ security:
                 path:           /admin/logout
                 target:         /admin/dashboard
                 handlers: ['sonata.page.cms_manager_selector']
+
                 
             anonymous:          true
 

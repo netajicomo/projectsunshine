@@ -396,4 +396,89 @@ class Issue
     {
         return $this->is_parent;
     }
+
+    /**
+     * @var boolean
+     */
+    private $is_reduceBy;
+
+
+    /**
+     * Set is_reduceBy
+     *
+     * @param boolean $isReduceBy
+     * @return Issue
+     */
+    public function setIsReduceBy($isReduceBy)
+    {
+        $this->is_reduceBy = $isReduceBy;
+
+        return $this;
+    }
+
+    /**
+     * Get is_reduceBy
+     *
+     * @return boolean 
+     */
+    public function getIsReduceBy()
+    {
+        return $this->is_reduceBy;
+    }
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Dependency
+     */
+    private $dependency;
+
+
+    /**
+     * Set dependency
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Dependency $dependency
+     * @return Issue
+     */
+    public function setDependency(\PS\Bundle\BalanceBudgetBundle\Entity\Dependency $dependency = null)
+    {
+        $this->dependency = $dependency;
+
+        return $this;
+    }
+
+    /**
+     * Get dependency
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Dependency 
+     */
+    public function getDependency()
+    {
+        return $this->dependency;
+    }
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup
+     */
+    private $issuegroup;
+
+
+    /**
+     * Set issuegroup
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup
+     * @return Issue
+     */
+    public function setIssuegroup(\PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup = null)
+    {
+        $this->issuegroup = $issuegroup;
+
+        return $this;
+    }
+
+    /**
+     * Get issuegroup
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup 
+     */
+    public function getIssuegroup()
+    {
+        return $this->issuegroup;
+    }
 }

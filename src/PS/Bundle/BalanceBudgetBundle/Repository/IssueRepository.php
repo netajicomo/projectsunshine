@@ -12,8 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class IssueRepository extends EntityRepository
 {
-    public function getChildrenIds($issueId){
-       
+    public function getSiblingIds($issueId){
+
         $parentIssue = $this->findOneById($issueId);
         $children = $parentIssue->getChildren();
         $childrenIdArray = array();
@@ -21,18 +21,18 @@ class IssueRepository extends EntityRepository
         {
             $childrenIdArray[] = $child->getId();
         }
-     
-       return $childrenIdArray; 
+
+        return $childrenIdArray;
     }
-    
-    public function getSiblingIssueIds($sectionId){
-        
-        $siblings = $this->findBy('section_id', $sectionId);
-        $siblingsArray = array();
-        foreach($siblings as $sibling){
-            
-            $siblingsArray[] = $sibling->getId();
-        }
-        return $siblingsArray;
+
+
+    public function getParentIssues(){
+
+        $q = $this->createQueryBuilder('i')
+            ->where('i.is_parent = 1')
+            ->getQuery();
+
+        return $q->getResult();
     }
+
 }

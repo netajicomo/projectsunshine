@@ -23,6 +23,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Section:
             nullable: true
         video:
             type: text
+            nullable: true
         is_active:
             type: boolean
             default: true

@@ -1,0 +1,14 @@
+PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\IssueGroupRepository
+    table: ps_issuegroup
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        
+    

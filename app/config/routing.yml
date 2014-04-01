@@ -9,7 +9,7 @@ sonata_page_cache:
 sonata_cache_cache:
     resource: '@SonataCacheBundle/Resources/config/routing/cache.xml'
     prefix: /
-    
+
 ps_balance_budget:
     resource: "@PSBalanceBudgetBundle/Resources/config/routing.yml"
     prefix:   /

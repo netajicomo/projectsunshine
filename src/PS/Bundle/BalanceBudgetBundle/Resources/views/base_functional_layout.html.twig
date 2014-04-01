@@ -54,7 +54,14 @@ file that was distributed with this source code.
         //        alert(environment);
         var baseurl = ( environment== "1")?'/app_dev.php':'/app.php';
     </script>
-
+    <script type='text/javascript'>
+        (function (d, t) {
+            var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            bh.type = 'text/javascript';
+            bh.src = '//www.bugherd.com/sidebarv2.js?apikey=9uq3exqazwsxbdbkosltxw';
+            s.parentNode.insertBefore(bh, s);
+        })(document, 'script');
+    </script>
 {% endblock %}
 
 

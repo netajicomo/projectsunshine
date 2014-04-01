@@ -51,8 +51,9 @@ file that was distributed with this source code.
    
         
     <script type="text/javascript">
-        var environment = "{{ app.environment }}";
-        var baseurl = (environment == "dev")?'/app_dev.php':'';
+        var environment = "{{ app.debug }}";
+        alert(environment);
+        var baseurl = ( environment== "1")?'/app_dev.php':'/app.php';
     </script>
 
     {% if sonata_page.isEditor or app.security and app.security.isGranted('ROLE_PREVIOUS_ADMIN') %}

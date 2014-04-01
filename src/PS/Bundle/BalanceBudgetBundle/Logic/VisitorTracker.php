@@ -54,9 +54,9 @@ class VisitorTracker
      
         
     }
-    
-   
-    
+
+
+
     public function createVisitorObject($sessionId){
         
         $visitor = new Visitor();

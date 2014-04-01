@@ -368,8 +368,6 @@ class Issue
     {
         return $this->parent;
     }
-<<<<<<< HEAD
-=======
     /**
      * @var boolean
      */
@@ -398,6 +396,7 @@ class Issue
     {
         return $this->is_parent;
     }
+
     /**
      * @var boolean
      */
@@ -454,5 +453,32 @@ class Issue
     {
         return $this->dependency;
     }
->>>>>>> 6f28d292ac6b1135eefda48a0f635c3da5585b42
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup
+     */
+    private $issuegroup;
+
+
+    /**
+     * Set issuegroup
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup
+     * @return Issue
+     */
+    public function setIssuegroup(\PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup = null)
+    {
+        $this->issuegroup = $issuegroup;
+
+        return $this;
+    }
+
+    /**
+     * Get issuegroup
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup 
+     */
+    public function getIssuegroup()
+    {
+        return $this->issuegroup;
+    }
 }

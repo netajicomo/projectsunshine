@@ -47,11 +47,8 @@ class Section
     /**
      * @var boolean
      */
-<<<<<<< HEAD
-    private $is_active;
-=======
+
     private $is_active = true;
->>>>>>> 6f28d292ac6b1135eefda48a0f635c3da5585b42
 
     /**
      * @var \DateTime
@@ -375,8 +372,5 @@ class Section
     {
           return $this->name;
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 6f28d292ac6b1135eefda48a0f635c3da5585b42
+
 }

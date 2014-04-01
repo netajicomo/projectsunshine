@@ -2,11 +2,13 @@
 
 namespace PS\Bundle\BalanceBudgetBundle\Controller;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use PS\Bundle\BalanceBudgetBundle\Entity\Category;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use PS\Bundle\BalanceBudgetBundle\Entity\PlannerPostCode;
 
 /**
  * Issue controller.
@@ -206,7 +208,44 @@ class BudgetController extends Controller
           return new JsonResponse($result);
      }
 
-    
-    
+    public function plannerPostcodeAction()
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $host = $this->getRequest()->getHost();
+        $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Planner:start_plan_postcode.html.twig';
+//        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
+
+        return $this->render($template);
+    }
+
+    public function updatePostCodeAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        //$issueId = $request->request->get('id');
+        $value = $request->request->get('postcode');
+        $session = $request->getSession();
+        $sessionId = $session->get('id');
+        try{
+            $plannerPostCode = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
+        }
+        catch(\Exception $exception)
+        {
+            echo $exception->getMessage();
+        }
+
+        if(!$plannerPostCode instanceof PlannerPostCode )
+        {
+            $plannerPostCode = new PlannerPostCode();
+            $plannerPostCode->setSessionId($sessionId);
+        }
+        $plannerPostCode->setPostCode($value);
+        $em->persist($plannerPostCode);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('planner'));
+
+    }
+
+
 }   
 

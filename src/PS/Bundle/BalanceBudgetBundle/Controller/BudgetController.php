@@ -233,8 +233,9 @@ class BudgetController extends Controller
             echo $exception->getMessage();
         }
 
-        if(!$plannerPostCode instanceof PlannerPostCode )
+        if(!isset($sessionId) || !$plannerPostCode instanceof PlannerPostCode )
         {
+            $session->set('id', $session->getId());
             $plannerPostCode = new PlannerPostCode();
             $plannerPostCode->setSessionId($sessionId);
         }

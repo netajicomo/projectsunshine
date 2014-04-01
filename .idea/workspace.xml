@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="121da1ac-d0c5-4c40-a817-ee30a67136f1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/views/main_base_layout_sonata_page.html.twig" afterPath="$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/views/main_base_layout_sonata_page.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/sonata/sonata_page.yml" afterPath="$PROJECT_DIR$/app/config/sonata/sonata_page.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="projectsunshine.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,21 +61,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_base_layout_sonata_page.html.twig" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main_base_layout_sonata_page.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/views/main_base_layout_sonata_page.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="67" selection-start="3758" selection-end="3766" vertical-scroll-proportion="-15.625" vertical-offset="450" max-vertical-offset="3345">
+            <state line="54" column="29" selection-start="3700" selection-end="3700" vertical-scroll-proportion="0.5834684" vertical-offset="450" max-vertical-offset="3345">
               <folding>
-                <marker date="1396342402070" expanded="false" signature="5442:5461" placeholder="..." />
+                <marker date="1396342772567" expanded="false" signature="5444:5463" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sonata_page.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sonata_page.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/sonata/sonata_page.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="24" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.28237128" vertical-offset="359" max-vertical-offset="1065">
+            <state line="36" column="24" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0" vertical-offset="359" max-vertical-offset="1065">
               <folding />
             </state>
           </provider>
@@ -1583,13 +1581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/public/js/ckeditor-custome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="32" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="795">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="654">
@@ -1618,19 +1609,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/views/main_base_layout_sonata_page.html.twig">
+    <entry file="file://$PROJECT_DIR$/app/config/sonata/sonata_page.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="67" selection-start="3758" selection-end="3766" vertical-scroll-proportion="-15.625" vertical-offset="450" max-vertical-offset="3345">
-          <folding>
-            <marker date="1396342402070" expanded="false" signature="5442:5461" placeholder="..." />
-          </folding>
+        <state line="36" column="24" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0" vertical-offset="359" max-vertical-offset="1065">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/sonata/sonata_page.yml">
+    <entry file="file://$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/public/js/ckeditor-custome.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="24" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.28237128" vertical-offset="359" max-vertical-offset="1065">
+        <state line="11" column="32" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="795">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Application/Sonata/PageBundle/Resources/views/main_base_layout_sonata_page.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="29" selection-start="3700" selection-end="3700" vertical-scroll-proportion="0.5834684" vertical-offset="450" max-vertical-offset="3345">
+          <folding>
+            <marker date="1396342772567" expanded="false" signature="5444:5463" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

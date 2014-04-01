@@ -115,7 +115,7 @@ class BudgetController extends Controller
               $parentId = $request->request->get('parentId');
               $sessionId = $request->getSession()->get('id');  
               $currentDebt = $request->request->get('currentDebt');
-              $debtValue = $request->request->get('debtValue');
+              //$debtValue = $request->request->get('debtValue');
              $reducerId = $request->request->get('reducerId');
                 $issueId =  $request->request->get('issueId');
               $issueValue =  $request->request->get('value');

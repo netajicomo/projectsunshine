@@ -24,6 +24,9 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
             default: false
         is_reduceBy:
             type: boolean
+            default: false  
+        is_cumulative:
+            type: boolean
             default: false    
         is_active:
             type: boolean

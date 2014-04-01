@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  
+  // for the sliders
    $('.slider').each(function(){
         var max = parseInt($(this).attr('data-max'), 10);
         var min = parseInt($(this).attr('data-min'), 10);
@@ -25,7 +25,74 @@ $(document).ready(function(){
       	}
 	});
    }) 
+   // for the select boxes
+   $('.selectType').each(function(){
+      var id = $(this).attr('id').replace('select_','');
+      $(this).on('change', function() {
+    $('#value_'+id).val( this.value ); 
+     saveIssue(id, this.value);    
+    });
+       
+   });
+   
+   // for the radio buttons in the issue group
+   $('.issuegroupradio').click(function(){
+        var name = $(this).attr('name');
+        var theId = $(this).attr('id').replace('radio_','');
+        $('#value_'+theId).val( this.value ); 
+         saveIssue(theId, this.value);    
+       $('input:radio[name="'+name+'"]').each(function(){
+              var id = $(this).attr('id').replace('radio_','');
+              
+          if(id != theId)    
+          {
+               saveIssue(id, '0');    
+               $('#value_'+id).val('0'); 
+          }
+       })
+      
+   })
+    var sliderIds = {}; 
+   $('.issuegroupslider').each(function(){
+         var max = parseInt($(this).attr('data-max'), 10);
+        var min = parseInt($(this).attr('data-min'), 10);
+        var step = parseInt($(this).attr('data-step'), 10);
+        var value = parseInt($(this).attr('data-start'), 10);
+      
+       var $id = $(this).attr('id').replace('issuegroupslider_','');
+        sliderIds[$id] = min;
+         $(this).slider({
+                value: value,
+                step: step,
+		min: min,
+		max: max,
+		range: "min",
+		change: function( event, ui ) {
+                              
+                        var theId = $(this).attr('id').replace('issuegroupslider_',''); 
+                         $('#value_'+theId).val(ui.value); 
+                    saveIssue(theId, ui.value);  
+                   for(var key in sliderIds)
+                    {
+                        if(theId != key)
+                           {
+                            console.log(key);
+                            console.log(sliderIds[key]);
+                              $('#value_'+key).val(sliderIds[key]); 
+                             if(ui.value != 0) 
+                             $('#issuegroupslider_'+key).slider({ disabled: true }); 
+                             else
+                             $('#issuegroupslider_'+key).slider({ disabled: false });     
+                                saveIssue(key, sliderIds[key]);  
+                           } 
+                    }
 
+      	}
+	});
+       
+   })
+   
+// for the switches
 	$(".switch").each(function(){
            var id = $(this).attr('id').replace('switch_', '');
            var dataMax = $('#options_'+id).attr('data-max');

@@ -202,7 +202,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% if  issue.controltype.name == 'slider'%}
+                                {% if  'slider' in issue.controltype.name %}
+                                
+                                  
+                                        {% if  issue.issuegroup is not null %}
+                                       <div class="span5">
+                                           <div class="spacingAll costSlider">
+
+                                               <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
+
+                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+
+                                               <div class="sliderLabel clearfix">
+
+                                                   <span class="pull-left">${{ issue.optionvalues['min'] }}M</span>
+                                                   <span class="pull-right">${{ issue.optionvalues['max'] }}M</span>
+                                               </div>
+
+                                               <label class="redLabel">cutting <span>$</span>
+                                                    {% if  issue.isreduceby != '1'%}
+                                                   <input type="text" readonly id="value_{{issue.id}}" value="0">
+                                                   {% else%}
+                                                     <input type="text" readonly id="reducer_value_{{issue.id}}" value="0">
+                                                    (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
+                                                    {% endif%}
+                                               </label>
+                                                  <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                           </div>
+                                       </div>
+                                   {% else %}
                                 <div class="span5">
                                     <div class="spacingAll costSlider">
 
@@ -227,6 +255,7 @@
                                            <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                     </div>
                                 </div>
+                                     {% endif %} 
                                  {% endif %} 
                                  {% if  issue.controltype.name == 'switch'%}
                                 <div class="span5">
@@ -243,6 +272,37 @@
                                     </div>
                                 </div>
                                {% endif %}
+                                {% if  'Select' in issue.controltype.name %}
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+
+                                     
+                                       
+                                        <select id="select_{{issue.id}}" class="selectType">
+                                           <option value="0">Select a Value</option>     
+                                           {% for key,value in issue.optionvalues %}
+                                          <option value="{{ value }}">{{ key }}</option>    
+                                        {% endfor %} 
+                                        </select>
+                                      <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0">M</label>  
+                                    </div>
+                                </div>
+                               {% endif %}
+                                 {% if  'Radio' in issue.controltype.name %}
+                                      {% if  issue.issuegroup is not null %} 
+                                       <div class="span5">
+                                           <div class="spacingAll costSlider">
+
+
+
+                                               <input type="radio" class="issuegroupradio" name="{{ issue.issuegroup.name}}" id="radio_{{ issue.id }}" value="{{issue.optionvalues['max']}}">{{issue.optionvalues['max']}}
+                                             <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{issue.optionvalues['min']}}">M</label>  
+                                           </div>
+                                       </div>
+                                      {% endif %}
+                            
+                                     
+                             {% endif %}   
                                 <div class="span12 comment-wrapper">
                                     <form action="#" method="post">
                                         <div>

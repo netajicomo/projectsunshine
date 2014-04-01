@@ -1,11 +1,15 @@
 sonata_block:
     default_contexts: [cms]
-    context_manager: sonata.page.block.context_manager 
+    context_manager: sonata.page.block.context_manager
     blocks:
         sonata.admin.block.admin_list:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)  
             contexts:   [admin]
+        sonata_admin_doctrine_phpcr.tree_block:
+                    settings:
+                        id: '/cms'
+                    contexts:   [admin]
 
 #        sonata.admin_doctrine_orm.block.audit:
 #            contexts:   [admin]
@@ -13,11 +17,3 @@ sonata_block:
         sonata.block.service.text:
         sonata.page.block.container:
         sonata.page.block.children_pages:
-        sonata.block.service.rss:
-        sonata.media.block.media:
-        sonata.media.block.gallery:
-        sonata.media.block.feature_media:
-        sonata.block.service.taggedmedia:
-        sonata.block.service.menu:
-        sonata.block.service.linkedmedia:
-        sonata.block.service.image:

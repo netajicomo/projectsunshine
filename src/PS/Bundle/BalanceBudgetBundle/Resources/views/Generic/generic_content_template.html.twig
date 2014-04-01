@@ -1,0 +1,26 @@
+{% extends 'ApplicationSonataPageBundle::main_base_layout_sonata_page.html.twig' %}
+{% block page_stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+    {% if page.id is defined %}
+                 {{ page.javascript|raw }}
+    {% endif %}
+{% endblock %}
+
+{% block bodyMain %}
+<body class="general static">   {% endblock %}
+
+{% block page_container %}
+{% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+<div id="main">
+    <section class="generic-content-wrapper">
+          {{ sonata_page_render_container('home-page-generic-content', page)  | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
+    </section>
+</div>
+<!--- SEARCH LISTING CONTENT ENDS HERE --->
+{% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+
+{% endblock %}

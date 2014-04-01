@@ -28,6 +28,7 @@ sonata_page:
         - sonata_cache_js_sync
         - sonata_cache_apc
         - planner
+        - ckeditorsave
         
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'
@@ -38,12 +39,13 @@ sonata_page:
         service:  sonata.page.cache.invalidation.simple
         recorder: sonata.page.cache.recorder
         classes:
-            "Application\Sonata\PageBundle\Entity\Block": getId
+#            "Application\Sonata\PageBundle\Entity\Block": getId
 
     default_template: default
     templates:
-        default: { path: 'ApplicationSonataPageBundle::layout.html.twig', name: 'default' }
-        home: { path: 'ApplicationSonataPageBundle::home_layout.html.twig', name: 'Home Template' }
+#        default: { path: 'ApplicationSonataPageBundle::layout.html.twig', name: 'default' }
+        home-page: { path: 'PSBalanceBudgetBundle:Home:home_layout.html.twig', name: 'Home Template' }
+        generic-content-template: { path: 'PSBalanceBudgetBundle:Generic:generic_content_template.html.twig', name: 'PS Generic Content Template' }
 
     page_defaults:
         homepage: {decorate: true, enabled: true}

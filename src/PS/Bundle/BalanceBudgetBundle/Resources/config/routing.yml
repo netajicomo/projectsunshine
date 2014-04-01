@@ -9,4 +9,8 @@ save_issue:
 
 update_debt:
     pattern: /updatedebt
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updateDebt" }       
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updateDebt" }
+
+ckeditorsave:
+    pattern:  /ckeditorsave
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:CKEditorSave" }

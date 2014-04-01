@@ -13,6 +13,7 @@ imports:
     - { resource: sonata/sonata_notification.yml }
 #    - { resource: '@ApplicationSonataPageBundle/Resources/config/services.yml' }
     - { resource: '@PSBalanceBudgetBundle/Resources/config/services.yml' }
+    - { resource: '@ApplicationSonataBlockBundle/Resources/config/block.yml' }
 #    - { resource: sonata/sonata_user.yml }
 #    - { resource: sonata/sonata_intl.yml }
 
@@ -131,4 +132,22 @@ knp_menu:
         template: knp_menu.html.twig
     templating: false # if true, enables the helper for PHP templates
     default_renderer: twig # The renderer to use, list is also available by default
+    
+services:
+    como.twig.custom_extension:
+        class: Application\Sonata\PageBundle\Twig\Extension\CustomPageExtension
+        arguments: 
+          blockManager:  "@sonata.page.manager.block"
+        tags:
+            - { name: twig.extension }
+#    geoip:
+#        class:      Maxmind\Bundle\GeoipBundle\Service\GeoipManager
+#        arguments:  [@kernel]
+        
+#    gedmo.listener.softdeleteable:
+#        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+#        tags:
+#            - { name: doctrine.event_subscriber, connection: default }
+#        calls:
+#            - [ setAnnotationReader, [ @annotation_reader ] ]    
 

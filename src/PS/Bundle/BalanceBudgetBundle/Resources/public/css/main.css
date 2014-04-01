@@ -69,9 +69,19 @@ body{
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-
     line-height: 1.5;
-}   
+}
+
+@font-face {
+    font-family: 'sketch_blockbold';
+    src: url('fonts/sketch_block-webfont.eot');
+    src: url('fonts/sketch_block-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/sketch_block-webfont.woff') format('woff'),
+         url('fonts/sketch_block-webfont.ttf') format('truetype'),
+         url('fonts/sketch_block-webfont.svg#sketch_blockbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 input, textarea, select{
     font-size: 16px;
@@ -107,18 +117,30 @@ h1, h2, h3, h4, h5, h6, ul{
 }
 
 .subNav li{ 
-    display: inline; 
+    display: inline-block;
+    padding: 0 3px 0 6px;
+    position: relative
 }
+
 .subNav li a{ 
     color: #959595;
     font-size: 13px;
     line-height: 1.5em;
     display: inline-block;
-    padding: 0 6px;
 }
 
-.subNav li:last-child a{
-    border-left: 1px solid #959595;
+.subNav li:before {
+    background-color: #aeaeae;
+    content: "";
+    height: 11px;
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 1px
+}
+
+.subNav li:first-child:before {
+    background-color: transparent
 }
 
 .mainLogo{
@@ -479,10 +501,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .primeSlider .ui-slider-handle:before{
-    content: '';
-}
-
-.primeSlider .ui-slider-handle span{
     font-size: 32px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
@@ -490,17 +508,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     color: white;
     background-color: #8b2331;
 
+    content: '$0B DEBT';
+
     min-width: 200px;
     height: 58px;
     right: 0;
 
     line-height: 58px;
-    position: absolute;
-    display: block;
-    text-align: center;    
 }
-
-.primeSlider .ui-slider-handle span em{ font-style: normal; }
 
 .totalSliderLabel{
     display: table;
@@ -537,7 +552,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 .totalSliderLabel.topLabel{
     margin: 0;
     margin-bottom: 24px;
-    margin-left: -25px;
+
+    margin-left: -63px;
 }
 
 .totalSliderLabel.topLabel li:after{
@@ -596,72 +612,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     position: relative;
     top: 3px;    
     padding-left: 0;
-}
-
-a.add-comment {
-    background-color: #0d4058;
-    color: #fff;
-    display: inline-block;
-    font-size: 14px;
-    padding: 6px 18px;
-    text-transform: uppercase
-}
-
-.add-comment i {
-    background-color: #fff;
-    border-radius: 8px;
-    color: #0d4058;
-    display: inline-block;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
-    width: 16px;
-}
-
-.add-comment i:before {
-    font-size: 10px;
-    position: relative;
-    top: 1px;
-    vertical-align: middle
-}
-
-.add-comment-open i:before {
-    content: "\f068" 
-}
-
-.row div.comment-wrapper {
-    border: none;
-    display: none;
-}
-
-.comment-wrapper form {
-    padding: 0 30px 16px;
-}
-
-.comment-wrapper textarea {
-    border-color: #d7d7d7;
-    border-radius: 0;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    color: #a2a2a2;
-    display: block;
-    min-width: 100%;
-    max-width: 100%;
-    padding: 15px 18px;
-    width: 100%;
-}
-
-.comment-wrapper p {
-    margin-bottom: 0;
-    padding-top: 10px
-}
-
-.total-val-column {
-    padding-top: 35px
-}
-
-.total-val-column span {
-    margin-left: 10px
 }
 
 /**
@@ -725,19 +675,246 @@ a.add-comment {
     background-color: #fafafa;
     border-top: none;
     font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
     padding: 15px 15px 35px 30px;
     text-align: left
 }
 
-.custom-modal-footer span {
+.source-wrapper {
+    font-style: italic;
+    font-weight: 700;    
+}
+
+.source-wrapper span {
     font-weight: normal
 }
 
 /**
 * Modal Popup Styles Ends Here
 */
+
+/**
+* Home Page Styles Starts Here
+*/
+
+.banner-wrapper {
+    background: url(../img/img_home_banner.jpg) no-repeat;
+    background-size: cover;
+    height: 324px;
+    padding: 86px 0 92px;
+    width: 100%;
+}
+
+.banner-wrapper h1 {
+    color: #fff;
+    font-family: 'sketch_blockbold';
+    font-size: 40px;
+}
+
+.banner-wrapper span.span-block {
+    margin-bottom: 10px
+}
+
+.span-block {
+    display: block;
+    float: none
+}
+
+.span-block span {
+    background-color: #731d28;
+    display: inline-block;
+    padding: 18px 34px 12px
+}
+
+.link > a {
+    background-color: #0d4058;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 70px;
+    padding-right: 27px;
+    position: relative;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.link > a i {
+    background-color: #0a2f40;
+    display: inline-block;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px
+}
+
+.link > a i:before {
+    line-height: 50px
+}
+
+.get-involved-wrapper {
+    background-color: #731d28;
+    margin-top: 0;
+    padding: 20px 0
+}
+
+.get-involved-wrapper h2 {
+    color: #fff;
+    display: inline-block;
+    font-family: 'sketch_blockbold';
+    margin-right: 27px;
+    position: relative;
+    text-transform: uppercase;
+    top: 4px;
+}
+
+.get-involved-wrapper h2 + a {
+    margin-right: 15px
+}
+
+.get-involved-wrapper .link > a {
+    background-color: #fff;
+    color: #300c12
+}
+
+.get-involved-wrapper a i {
+    background-color: #300c12;
+    color: #fff
+}
+
+/**
+* Home Page Styles Ends Here
+*/
+
+/**
+* Generic Content Page Styles Starts Here
+*/
+
+.generic-content-wrapper {
+    margin-bottom: 85px;
+    padding-top: 70px;
+}
+
+.generic-content-wrapper h1 {
+    font-size: 40px;
+    line-height: 52px;
+    margin-bottom: 60px
+}
+
+.generic-content-wrapper p {
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 30px
+}
+
+.generic-content-wrapper a {
+    color: #8b2331;
+    font-weight: 500
+}
+
+.top-content p {
+    font-size: 21px
+}
+
+.generic-content-wrapper .source-wrapper {
+    padding-top: 15px
+}
+
+.generic-content-wrapper .source-wrapper p {
+    color: #636363;
+    font-size: 16px;
+    margin-bottom: 0
+}
+
+.margin-t60 {
+    margin-top: 60px
+}
+
+.img-wrapper {
+    border: 6px solid #ebebeb
+}
+
+.bottom-row {
+    margin-top: 50px
+}
+
+.generic-content-wrapper h3 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 40px
+}
+
+.generic-content-wrapper ul {
+    font-size: 18px;
+    line-height: 26px;
+    margin-left: 56px;
+    text-align: left
+}
+
+.generic-content-wrapper ul li {
+    margin-top: 20px;
+    padding-left: 32px;
+    position: relative;
+}
+
+.generic-content-wrapper ul li:first-child {
+    margin-top: 0
+}
+
+.generic-content-wrapper ul li:before {
+    background-color: #8b2331;
+    content: "";
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 6px;
+    width: 8px;
+}
+
+blockquote {
+    border-color: #e3e3e3;
+    margin-top: 60px;
+    padding-left: 35px;
+    text-align: left
+}
+
+.generic-content-wrapper blockquote p {
+    color: #8b2331;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+    margin-bottom: 12px;
+    position: relative;
+    top: -10px
+}
+
+cite {
+    color: #a6a6a6;
+    text-transform: uppercase
+}
+
+.iframe-wrapper {
+    margin-top: 65px;
+    /*position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;*/
+}
+
+/*.iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}*/
+
+/**
+* Generic Content Page Styles Ends Here
+*/
+
 
 /* ==========================================================================
    Footer Styles
@@ -969,6 +1146,12 @@ footer h5{
     .iconmoon-menu2 {
         color: #BE461D
     }
+    
+    /** Home Page Styles Starts Here **/
+    
+    .banner-wrapper h1 {
+        font-size: 20px
+    }
 }
 
 /**
@@ -1078,6 +1261,102 @@ footer h5{
     footer h5 {
         margin-bottom: 0
     }
+    
+    /** Home Page Styles Starts Here **/
+    
+    .banner-wrapper {
+        height: 214px;
+        padding-bottom: 58px
+    }
+    
+    .get-involved-wrapper {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    
+    .get-involved-wrapper .link > a {
+        background-color: #4b131b;
+        color: #fff;
+        display: block
+    }
+    
+    .get-involved-wrapper .link  h2 + a {
+        background-color: #8b2331;
+        margin-right: 0
+    }
+    
+    .get-involved-wrapper a i {
+        background-color: rgba(48, 12, 18, .6);
+    }
+    
+    .get-involved-wrapper .link  h2 + a i {
+        background-color: rgba(115, 29, 40, .6);
+    }
+    
+    /** Generic Content Page Styles Starts Here **/
+
+    .generic-content-wrapper {
+        margin-bottom: 0;
+        padding: 20px 10px 12px;
+    }
+    
+    .generic-content-wrapper h1 {
+        font-size: 30px;
+        line-height: 36px;
+        margin-bottom: 22px
+    }
+    
+    .generic-content-wrapper p {
+        font-size: 17px;
+        line-height: 24px;
+        margin-bottom: 20px
+    }
+    
+    .generic-content-wrapper .source-wrapper p {
+        font-size: 15px
+    }
+    
+    .margin-t60 {
+        margin-top: 25px
+    }
+    
+    .bottom-row {
+        margin-top: 30px
+    }
+    
+    .generic-content-wrapper h3 {
+        margin-bottom: 28px
+    }
+    
+    .generic-content-wrapper ul {
+        font-size: 15px;
+        line-height: 22px;
+        margin-left: 0
+    }
+    
+    .generic-content-wrapper ul li {
+        margin-top: 16px
+    }
+    
+    blockquote {
+        margin-top: 28px;
+        padding-left: 8px;
+    }
+    
+    .generic-content-wrapper blockquote p {
+        font-size: 18px;
+        line-height: 27px;
+        margin-bottom: 6px;
+        top: -5px
+    }
+    
+    cite {
+        margin-left: 15px
+    }
+    
+    .iframe-wrapper {
+        margin-top: 25px
+    }
 }
 
 /**
@@ -1097,6 +1376,23 @@ footer h5{
     .subSection-row .span5 {
         margin-left: 0
     }
+    
+    /** Home Page Styles Starts Here **/
+    
+    .get-involved-wrapper h2 {
+        font-size: 20px;
+        margin-right: 17px
+    }
+    
+    .link > a {
+        font-size: 14px;
+        padding-left: 60px;
+        padding-right: 20px;
+    }
+    
+    .get-involved-wrapper h2 + a {
+        margin-right: 8px
+    }
 }
 
 /**
@@ -1115,6 +1411,12 @@ footer h5{
     footer nav li a {
         padding-left: 13px;
         padding-right: 13px
+    }
+    
+    /** Home Page Styles Starts Here **/
+    
+    .banner-wrapper h1 {
+        font-size: 30px
     }
 }
 

@@ -1,0 +1,2 @@
+parameters:
+    sonata.block.service.text.class: Application\Sonata\BlockBundle\Block\Service\TextBlockService

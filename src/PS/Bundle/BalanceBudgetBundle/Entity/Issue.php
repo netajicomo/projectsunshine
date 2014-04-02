@@ -480,4 +480,32 @@ class Issue
     {
         return $this->issuegroup;
     }
+    /**
+     * @var boolean
+     */
+    private $is_cumulative;
+
+
+    /**
+     * Set is_cumulative
+     *
+     * @param boolean $isCumulative
+     * @return Issue
+     */
+    public function setIsCumulative($isCumulative)
+    {
+        $this->is_cumulative = $isCumulative;
+
+        return $this;
+    }
+
+    /**
+     * Get is_cumulative
+     *
+     * @return boolean 
+     */
+    public function getIsCumulative()
+    {
+        return $this->is_cumulative;
+    }
 }

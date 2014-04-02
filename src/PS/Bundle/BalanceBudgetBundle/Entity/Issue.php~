@@ -452,4 +452,60 @@ class Issue
     {
         return $this->dependency;
     }
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup
+     */
+    private $issuegroup;
+
+
+    /**
+     * Set issuegroup
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup
+     * @return Issue
+     */
+    public function setIssuegroup(\PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup = null)
+    {
+        $this->issuegroup = $issuegroup;
+
+        return $this;
+    }
+
+    /**
+     * Get issuegroup
+     *
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup 
+     */
+    public function getIssuegroup()
+    {
+        return $this->issuegroup;
+    }
+    /**
+     * @var boolean
+     */
+    private $is_cumulative;
+
+
+    /**
+     * Set is_cumulative
+     *
+     * @param boolean $isCumulative
+     * @return Issue
+     */
+    public function setIsCumulative($isCumulative)
+    {
+        $this->is_cumulative = $isCumulative;
+
+        return $this;
+    }
+
+    /**
+     * Get is_cumulative
+     *
+     * @return boolean 
+     */
+    public function getIsCumulative()
+    {
+        return $this->is_cumulative;
+    }
 }

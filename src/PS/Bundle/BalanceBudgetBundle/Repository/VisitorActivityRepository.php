@@ -48,6 +48,24 @@ class VisitorActivityRepository extends EntityRepository
            
         }
         return $totalDebt;
-    }       
+    } 
+    
+    public function getCumulativeValue($session_id, $issueId, $depId)
+    {
+        $dep = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Dependency')->find($depId);
+        $depIssues = $dep->getDependantissues();
+        $debMax = 0;
+        foreach($depIssues as $issue){
+            if($issue->getId() != $issueId)
+            {
+                $debIssue = $this->findOneBy(array('issue_id' => $issue->getId(), 'session_id' => $session_id));
+                if($debIssue)
+                $debMax += $debIssue->getIssueValue();
+            }
+            
+        } 
+        
+       return $debMax; 
+    }
     
 }

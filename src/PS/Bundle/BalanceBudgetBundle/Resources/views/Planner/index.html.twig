@@ -230,6 +230,31 @@
                                                   <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                            </div>
                                        </div>
+                                 {% elseif  'WOG' in issue.controltype.name %}
+                                       <div class="span5">
+                                           <div class="spacingAll costSlider">
+
+                                        
+
+                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-max="{{ issue.optionvalues['max']}}" data-total="{{ issue.optionvalues['total']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+
+                                               <div class="sliderLabel clearfix">
+
+                                                   <span class="pull-left">0</span>
+                                                   <span class="pull-right">100%</span>
+                                               </div>
+
+                                               <label class="redLabel">cutting <span>$</span>
+                                                    {% if  issue.isreduceby != '1'%}
+                                                   <input type="text" readonly id="value_{{issue.id}}" value="0">
+                                                   {% else%}
+                                                     <input type="text" readonly id="reducer_value_{{issue.id}}" value="0">
+                                                    (<input type="text" readonly id="value_{{issue.id}}" value="0" style="width:30px">%)
+                                                    {% endif%}
+                                               </label>
+                                                  <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
+                                           </div>
+                                       </div>
                                    {% else %}
                                 <div class="span5">
                                     <div class="spacingAll costSlider">
@@ -402,6 +427,7 @@
 
         if(typeof results !== 'undefined')
         {
+           // console.log(results);
             updateDebt(results);
         }
         
@@ -435,12 +461,22 @@
       
             var data = {issueId: results.issueId, parentId: results.parentId, value: results.value,debtValue: debtValue, reducerId: results.reducerId, reducerPercentage: reducerPercentage, reducerDebtPercentage:reducerDebtPercentage, childrenValues: childrenValuesJson,  currentDebt:currentTotalSliderValue };
         }
+        
+        
     // doesnt have a reduction slider
         else 
         {
        
          var data = {issueId: results.issueId, parentId: results.parentId, debtValue: debtValue, value: results.value, childrenValues: childrenValuesJson, currentDebt:currentTotalSliderValue};  
         }
+        
+        if(results.isWog === true)
+        {
+           var wogPercentage = $('#value_'+results.wogId).val(); 
+          
+            data.wogId = results.wogId;
+            data.wogPercentage = wogPercentage;
+        }    
       // console.log(childrenValuesJson);
       // console.log(data);
         
@@ -452,8 +488,8 @@
 
               if(typeof result !== 'undefined')
               {
-                        console.log(result.parentDebt);
-                        console.log(result.sliderValue);   
+                      //  console.log(result.parentDebt);
+                        
                 $('#total_'+results.parentId).val(result.parentDebt);
                     $('#totalSlider').slider( "option", "value", result.sliderValue );
                  var debtHeader =  (result.sliderValue/1000).toFixed(2)
@@ -462,8 +498,14 @@
                  if(typeof result.newReducerValue !== 'undefined'){
                      
                     $('#reducer_value_'+results.reducerId).val(result.newReducerValue);   
-                  
-                    
+                            
+                 
+                 }
+                 
+                  if(typeof result.wogValue != 'false'){
+                       console.log(result.wogValue); 
+                    $('#reducer_value_'+results.wogId).val(result.wogValue);   
+                            
                  
                  }
                

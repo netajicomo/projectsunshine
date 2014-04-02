@@ -712,9 +712,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .banner-wrapper h1 {
-    color: #fff;
-    font-family: 'sketch_blockbold';
-    font-size: 40px;
+    color: #343434;
+    font-size: 48px;
 }
 
 .banner-wrapper span.span-block {
@@ -727,7 +726,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .span-block span {
-    background-color: #731d28;
+    background-color: #fff;
     display: inline-block;
     padding: 18px 34px 12px
 }
@@ -736,19 +735,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     background-color: #0d4058;
     color: #fff;
     display: inline-block;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
     height: 50px;
     line-height: 50px;
-    padding-left: 70px;
+    padding-left: 50px;
     padding-right: 27px;
     position: relative;
     text-transform: uppercase;
     vertical-align: middle;
+    border-radius: 24px;
 }
 
 .link > a i {
-    background-color: #0a2f40;
+    font-size: 15px;
     display: inline-block;
     height: 50px;
     left: 0;
@@ -762,18 +763,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .get-involved-wrapper {
-    background-color: #731d28;
+    background-color: #fff;
     margin-top: 0;
     padding: 20px 0
 }
 
 .get-involved-wrapper h2 {
-    color: #fff;
+    color: #731d28;
     display: inline-block;
-    font-family: 'sketch_blockbold';
-    margin-right: 27px;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
+    margin-right: 24px;
     position: relative;
-    text-transform: uppercase;
+    text-transform: capitalize;
     top: 4px;
 }
 
@@ -782,8 +784,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .get-involved-wrapper .link > a {
-    background-color: #fff;
-    color: #300c12
+    background-color: #731d28;
+    color: #fff
 }
 
 .get-involved-wrapper a i {

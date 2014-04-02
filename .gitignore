@@ -1,4 +1,5 @@
 .idea
+.idea/*
 .vagrant
 composer.phar
 web/bundles

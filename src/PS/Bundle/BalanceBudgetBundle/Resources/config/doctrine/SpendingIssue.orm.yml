@@ -1,0 +1,33 @@
+PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\SpendingIssueRepository
+    table: ps_issue
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        section:
+            type: string
+            length: 255
+        category:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+        option_values:
+            type: text
+        created_at:
+            type: datetime
+    manyToOne:
+        controltype:
+            targetEntity: ControlType
+            joinColumn:
+                name: control_type_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]
+

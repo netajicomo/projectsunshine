@@ -5,7 +5,7 @@ imports:
 #    - { resource: sonata/sonata_admin.yml }
     - { resource: sonata/sonata_page.yml }
     - { resource: sonata/sonata_block.yml }
-#    - { resource: sonata/sonata_media.yml }
+    - { resource: sonata/sonata_media.yml }
 #    - { resource: sonata/sonata_formatter.yml }
 #    - { resource: sonata/sonata_news.yml }
     - { resource: sonata/sonata_cache.yml }
@@ -80,8 +80,10 @@ doctrine:
                 mappings:
                     ApplicationSonataPageBundle: ~
                     ApplicationSonataUserBundle: ~
+                    ApplicationSonataMediaBundle: ~
                     SonataUserBundle: ~
                     SonataPageBundle: ~
+                    SonataMediaBundle: ~
 
                     FOSUserBundle: ~
                     PSBalanceBudgetBundle: ~

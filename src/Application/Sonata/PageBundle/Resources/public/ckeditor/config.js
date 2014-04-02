@@ -12,8 +12,9 @@ CKEDITOR.editorConfig = function( config ) {
         config.removePlugins = 'iframe,sourcearea,forms,editing,tools';
         config.format_tags = 'p;h1;h2;h3;h4;h5;h6';
         config.font_names = 'din_mediumregular;din_lightregular';
-       
- 
+        config.enterMode = 2;
+//    config.filebrowserImageBrowseUrl = '/uploads/media/';
+//    config.filebrowserImageUploadUrl = '/uploads/media/';
 
         
         

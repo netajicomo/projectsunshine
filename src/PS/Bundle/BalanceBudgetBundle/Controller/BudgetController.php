@@ -58,168 +58,214 @@ class BudgetController extends Controller
     
     
     
-    // save the issue values
-    
-    public function processIssueAction(Request $request){
-        
-       $service = $this->get('visitor_tracker_service');
-       $service->createVisitor($request);
-       $em = $this->getDoctrine()->getManager();
-       $issueId = $request->request->get('id');
-       $value = $request->request->get('value');
-     
-            $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId);
-          
-      // get the parent
-                $parentIssue =  $issue->getParent();
-                if($parentIssue)
-                {
-              
-                 
-                    $parentId = $parentIssue->getId();
-                    // get the siblings
-                    $siblings = $parentIssue->getChildren();
-                    $siblingsIds =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIds($parentId);     
-                    // check to see if a reducer issue exists
-                    foreach($siblings as $sibling){
-                        if($sibling->getIsReduceBy())
-                        {
-                             $isReduceBy = true;
-                             $reducerId = $sibling->getid();
-                            if (($key = array_search($reducerId, $siblingsIds)) !== false) {
-                            unset($siblingsIds[$key]);}
-                             break;
-                        }
-                        else
-                        {
-                                $isReduceBy = false; 
-                                $reducerId  = false;
-                        } 
-                        // get the dependents from the db
-                       
-                        
-                    }
-                   
-                  // to cater to the WOG section
-                    $isWog = false;
-                    $wogId = false;
-                  if($issue->getDependency())   
-                  {
-                       $wogIssue = $em->getRepository('PSBalanceBudgetBundle:Issue')->getTheCumulativeId($issue->getDependency()->getId()); 
-                  
-                       $wogId = $wogIssue->getId();
-                        $isWog = true;
-                    
-                  }   
-                
-                    
-                  
-                    $result = array('siblings' => $siblingsIds, 'parentId' => $parentId, 'value' => $value,'issueId' => $issueId, 'isReduceBy' => $isReduceBy, 'reducerId' => $reducerId,'isWog' => $isWog, 'wogId' => $wogId);
-               
-                     return new JsonResponse($result); 
-                    
-                }
-             
-             
-               
-     
-   
-       
-        
-    }
+//    // save the issue values
+//    
+//    public function processIssueAction(Request $request){
+//        
+//       $service = $this->get('visitor_tracker_service');
+//       $service->createVisitor($request);
+//       $em = $this->getDoctrine()->getManager();
+//       $issueId = $request->request->get('id');
+//       $value = $request->request->get('value');
+//     
+//            $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId);
+//          
+//      // get the parent
+//                $parentIssue =  $issue->getParent();
+//                if($parentIssue)
+//                {
+//              
+//                 
+//                    $parentId = $parentIssue->getId();
+//                    // get the siblings
+//                    $siblings = $parentIssue->getChildren();
+//                    $siblingsIds =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIds($parentId);     
+//                    // check to see if a reducer issue exists
+//                    foreach($siblings as $sibling){
+//                        if($sibling->getIsReduceBy())
+//                        {
+//                             $isReduceBy = true;
+//                             $reducerId = $sibling->getid();
+//                            if (($key = array_search($reducerId, $siblingsIds)) !== false) {
+//                            unset($siblingsIds[$key]);}
+//                             break;
+//                        }
+//                        else
+//                        {
+//                                $isReduceBy = false; 
+//                                $reducerId  = false;
+//                        } 
+//                        // get the dependents from the db
+//                       
+//                        
+//                    }
+//                   
+//                  // to cater to the WOG section
+//                    $isWog = false;
+//                    $wogId = false;
+//                  if($issue->getDependency())   
+//                  {
+//                       $wogIssue = $em->getRepository('PSBalanceBudgetBundle:Issue')->getTheCumulativeId($issue->getDependency()->getId()); 
+//                  
+//                       $wogId = $wogIssue->getId();
+//                        $isWog = true;
+//                    
+//                  }   
+//                
+//                    
+//                  
+//                    $result = array('siblings' => $siblingsIds, 'parentId' => $parentId, 'value' => $value,'issueId' => $issueId, 'isReduceBy' => $isReduceBy, 'reducerId' => $reducerId,'isWog' => $isWog, 'wogId' => $wogId);
+//               
+//                     return new JsonResponse($result); 
+//                    
+//                }
+//             
+//             
+//               
+//     
+//   
+//       
+//        
+//    }
     
    
     
      public function updateDebtAction(Request $request){
-              $em = $this->getDoctrine()->getManager();
-              $parentId = $request->request->get('parentId');
-              $sessionId = $request->getSession()->get('id');  
-              $currentDebt = $request->request->get('currentDebt');
-              $wogId = $request->request->get('wogId');
-              $wogPercentage = $request->request->get('wogPercentage');
-             $reducerId = $request->request->get('reducerId');
-                $issueId =  $request->request->get('issueId');
-              $issueValue =  $request->request->get('value');
-               $childrenValues = $request->request->get('childrenValues');
-              $childrenValueArray = json_decode($childrenValues,TRUE);
-              $childrenTotal = array_sum($childrenValueArray);
-               $values = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($parentId)->getOptionValues();
-                $valuesArray = json_decode($values,TRUE);
-                $total = $valuesArray['total'];
          
+                // visitor tracking
+              $service = $this->get('visitor_tracker_service');
+              $service->createVisitor($request);
+              
+              
+              
+              // essential parameters from the request
+             
+              $currentDebt = $request->request->get('currentDebt');
+              $issueId =  $request->request->get('issueId');
+              $issueValue =  $request->request->get('value');
+             
+              // essential parameters for the work
+              $sessionId = $request->getSession()->get('id');  
+              $parentId = $this->getParentId($issueId);
+              
+              
+              //instantiate other variables
+                $newReducerValue = false;
+                $newWogValue = 0;
+                $newWogTotal = 0;
+                $wogParentId = false;
+                $wogId = $this->hasWog($issueId);
+                $reducerId = $this->hasReducer($issueId);
+               
+              
+              $em = $this->getDoctrine()->getManager();
+ 
+              
+            // save the issue value to the db  
             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $issueValue);              
-         $newWogValue = false;
-         // to check if it has a reduction slider   
-         if($request->request->get('reducerId'))  
-         {
+           
+            // return the section / parent total
+          
+            $total = $this->getParentTotal($issueId);
+             $childrenTotal = $this->getSectionTotal($issueId, $sessionId)  ;
+          
+         
             
            
-              $reducerPercentage = $request->request->get('reducerPercentage');
             
-         
+          
+              // for the whole of the govt logic
+            
+         if($wogId)
+         {
+             // if its the wog slider itself save  the percentage value it in the db
+               if($wogId == $issueId)
+               {
+               
+                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId,'0',$issueValue);
+             
+               }
+             // retreive it from the db  
+             $wogPercentage = $this->getWOGPercentage($wogId, $sessionId);  
+             $newWogValue = $this->calculateWOG($wogId, $wogPercentage, $sessionId);
+             
+             // save the wog value
+             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogId, $newWogValue, $wogPercentage);               
+            // now get the total wog
+             $newWogTotal = $this->getWOGSectionTotal($wogId, $sessionId);
+             $wogParentId = $this->getWogParent($wogId);
+             // update the parent id
+             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogParentId, $newWogTotal);             
+           
+         }     
+         // to check if it has a reduction slider 
+        
+         if($reducerId)  
+         {
+            if($reducerId == $issueId)
+            {
+                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId,'0',$issueValue); 
+            }   
+           
+              $reducerPercentage = $this->getReducerPercentage($reducerId, $sessionId);
+             
+//                        echo $total.'<br>';
+//                        echo $childrenTotal.'<br>';
+//                        echo $reducerPercentage.'<br>';
                     
-                        $newReducerValue = ($total - $childrenTotal) * $reducerPercentage/100 ;
-                       if($reducerPercentage == '0')
-                       {
-                           $parentDebt =   $childrenTotal;
-                         
-                          
-                       }
-                       else
-                      {
+                        $newReducerValue = (intval($total) - intval($childrenTotal)) * intval($reducerPercentage)/100 ;
+                      
                            
-                             $parentDebt = $childrenTotal + $newReducerValue;
+                             $parentDebt = intval($childrenTotal) + intval($newReducerValue);
                       
                         
-                       }
+                   
                        
                  
                    
                 // savereducer slider in DB
                 
-                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, $newReducerValue);               
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, $newReducerValue, $reducerPercentage);               
                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);             
                   
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
                 // echo $totalDebt.'<br>';
-                  $sliderValue = $currentDebt - ($totalDebt); 
+                  $sliderValue = intval($currentDebt) - intval($totalDebt) - intval($newWogTotal); 
                   
                   
-                  // for the whole of the govt logic
-         if($wogId)
-         {
-             $newWogValue = $this->calculateWOG($wogId, $wogPercentage, $sessionId);
-            
-         }
+                      
                   
-                  
-                      $result = array('newReducerValue' => $newReducerValue, 'parentDebt' => $parentDebt, 'sliderValue' => $sliderValue, 'wogValue' => $newWogValue);
+                    
                     
          }
          else
          {
               // save to the db
                  
-                         $parentDebt = $childrenTotal;
-                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);                
+                  $parentDebt = intval($childrenTotal);
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);                
                 
               
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
                 
-                  $sliderValue = $currentDebt - ($totalDebt);  
-           // for the whole of the govt logic
-         if($wogId)
-         {
-            //if($wogId != $issueId)
-             $newWogValue = $this->calculateWOG($wogId, $wogPercentage, $sessionId);
-            
-         }       
+                  $sliderValue = intval($currentDebt) - intval($totalDebt) - intval($newWogTotal);  
+           
                   
-                $result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue,'wogValue' => $newWogValue);
+                //$result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue,'wogValue' => $newWogValue,'wogTotal' => $newWogTotal, 'wogParentId' => $wogParentId);
                
                     
          }    
-        
+          $result = array(  
+                                        'reducerId'  => $reducerId,
+                                        'newReducerValue' => $newReducerValue, 
+                                        'parentId' => $parentId,
+                                        'parentDebt' => $parentDebt, 
+                                        'sliderValue' => $sliderValue, 
+                                        'wogId' => $wogId,
+                                        'wogValue' => $newWogValue, 
+                                        'wogTotal' => $newWogTotal, 
+                                        'wogParentId' => $wogParentId
+                              );
        
     
          
@@ -235,16 +281,106 @@ class BudgetController extends Controller
                       $optionValues = json_decode($wogIssue->getOptionValues(), TRUE);
                         $totalValue = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getCumulativeValue($sessionId, $wogId, $wogIssue->getDependency()->getId());
                       $total = $optionValues['total'] - $totalValue;
-                      echo $optionValues['total'].'<br>';
-                       echo $totalValue.'<br>';
-                         echo $wogPercentage.'<br>';
-                     $newWogValue = ($total) * $wogPercentage/100 ;
+                      $newWogValue = ($total) * $wogPercentage/100 ;
                      return $newWogValue;
+     
+  }  
+  
+  public function getWOGPercentage($wogId, $session_id){
+      $em = $this->getDoctrine()->getManager();
+      $wog = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->findOneBy(array('issue_id' => $wogId, 'session_id' => $session_id));
+     if(isset($wog)){
+         $wogPercentage = $wog->getIssuePercentage();
+     }
+      
+      $result = isset($wogPercentage)?$wogPercentage:0;
+      return $result;
+      
+      
+  }
+  
+  public function getWOGSectionTotal($sessionId, $issueId){
+        $em = $this->getDoctrine()->getManager();
+      $wogTotal = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getWOGsectionTotal($sessionId, $issueId);
+      $result = isset($wogTotal)?$wogTotal:0;
+      return $result;
+  }
+  
+  public function getWogParent($wogId){
+         $em = $this->getDoctrine()->getManager();
+         $wogIssue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($wogId);
+         return $wogIssue->getParent()->getId();
+      
+  }
+  
+  public function getParentTotal($issueId){
+      $em = $this->getDoctrine()->getManager();
+       $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId); 
+       $parentIssue =  $issue->getParent();
+         $values = $parentIssue->getOptionValues();
+         $valuesArray = json_decode($values,TRUE);
+          $total = $valuesArray['total'];
+          return $total;
+          
+  }
+  
+  public function getParentId($issueId){
+      $em = $this->getDoctrine()->getManager();
+       $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId); 
+       $parentIssue =  $issue->getParent(); 
+       return $parentIssue->getId();
+  }
+  
+  public function getSectionTotal($issueId,$sessionId){
+      $result = $this->hasReducer($issueId);
+      $reducerId = $result?$result:0;
+       $em = $this->getDoctrine()->getManager();
+      $total = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getSectionTotal( $issueId, $sessionId, $reducerId);
+      return $total;
+  }
+  
+  public function getReducerPercentage($reducerId, $sessionId){
+      $em = $this->getDoctrine()->getManager();
+      $reducer = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->findOneBy(array('issue_id' => $reducerId,'session_id' => $sessionId));
+      if(isset($reducer))
+      {
+          $percentage = $reducer->getIssuePercentage();
+      }
+      $result = isset($percentage)?$percentage:0;
+      return $result;
+  }
+
+  public function hasReducer($issueId){
+       $em = $this->getDoctrine()->getManager();
+       $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId); 
+       $parentIssue =  $issue->getParent();
+       $children = $parentIssue->getChildren();
+       foreach($children as $child){
+          if($child->getIsReduceBy())
+         {
+            $reducerId = $child->getid(); 
+                     
+          }
+           
+       }
+       $result = isset($reducerId)?$reducerId:false;
+       return $result;
+      
+  }
+  
+  public function hasWog($issueId){
+         $em = $this->getDoctrine()->getManager();
+         $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId);      
+        if($issue->getDependency())   
+        {
+             $wogIssue = $em->getRepository('PSBalanceBudgetBundle:Issue')->getTheCumulativeId($issue->getDependency()->getId()); 
+             $wogId = $wogIssue->getId();
                        
-    
-      
-      
-  }   
+        }
+        
+        $result = isset($wogId)?$wogId:false;
+        return $result;
+  }
     
 }   
 

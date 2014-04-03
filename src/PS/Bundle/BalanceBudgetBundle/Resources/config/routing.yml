@@ -21,3 +21,7 @@ postcode:
 postcode_update:
     pattern: /update_postcode
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:updatePostcode" }
+    
+registration:
+    pattern: /registration
+    defaults: { _controller: "PSBalanceBudgetBundle:Registration:registration" }    

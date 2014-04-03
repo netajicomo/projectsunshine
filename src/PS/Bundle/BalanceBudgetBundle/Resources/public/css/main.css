@@ -873,7 +873,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     font-weight: 500
 }
 
-.top-content p {
+.generic-content-wrapper h1 + p {
     font-size: 21px
 }
 
@@ -887,21 +887,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     margin-bottom: 0
 }
 
-.margin-t60 {
+.generic-content-wrapper img {
+    border: 6px solid #ebebeb;
     margin-top: 60px
 }
 
-.img-wrapper {
-    border: 6px solid #ebebeb
-}
-
-.bottom-row {
-    margin-top: 50px
-}
-
 .generic-content-wrapper h3 {
-    font: 500 30px 'Architects Daughter', sans-serif;
-    margin-bottom: 40px
+    font: 500 36px 'Architects Daughter', sans-serif;
+    margin-bottom: 40px;
+    margin-top: 50px;
 }
 
 .generic-content-wrapper ul {
@@ -944,7 +938,7 @@ blockquote {
     line-height: 36px;
     margin-bottom: 12px;
     position: relative;
-    top: -10px
+    top: -8px
 }
 
 cite {
@@ -1059,6 +1053,7 @@ cite {
 
 .sectionHeader h2{
     font-size: 42px;
+    font-weight: 500;
     line-height: 1em;
 }
 
@@ -1077,6 +1072,10 @@ cite {
     margin-bottom: 24px;
 }
 
+.widgetContent h3.title {
+    font-family: 'Architects Daughter', sans-serif;
+}
+
 .widgetContent h3 + p{
     margin-bottom: 42px;
 }
@@ -1092,10 +1091,11 @@ cite {
     color: white;
     font-family: 'Architects Daughter', sans-serif;
     font-size: 18px;
+    text-transform: uppercase;
 
     background: none;    
     background-color: #8b2331;
-    border-radius: 24px;
+    border-radius: 10px;
     border: none;
 
     display: block;
@@ -1500,6 +1500,13 @@ footer h5{
         width: 227px
     }
     
+    .pincodeForm input[type="text"] {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        height: 44px;
+        width: 100%
+    }
+    
     footer {
         padding: 30px 20px;
     }
@@ -1573,16 +1580,14 @@ footer h5{
         font-size: 15px
     }
     
-    .margin-t60 {
-        margin-top: 25px
-    }
-    
-    .bottom-row {
-        margin-top: 30px
+    .generic-content-wrapper img {
+        margin-top: 25px;
+        max-width: 97%;
     }
     
     .generic-content-wrapper h3 {
-        margin-bottom: 28px
+        margin-bottom: 28px;
+        margin-top: 30px
     }
     
     .generic-content-wrapper ul {

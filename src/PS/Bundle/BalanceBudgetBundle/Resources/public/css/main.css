@@ -29,6 +29,8 @@ a:hover{
     text-shadow: none;
 }
 
+:focus{ outline: none !important; }
+
 hr {
     display: block;
     height: 1px;
@@ -162,17 +164,28 @@ h1, h2, h3, h4, h5, h6, ul{
     float: none
 }
 
-.mainNav .nav>ul>li {
-    float: left
+.mainNav .navbar {
+    margin-bottom: 0;
 }
 
-.mainNav .nav>ul>li>a{
+.mainNav .nav>li>a{
     color: #003c69;
     font-size: 14px;
     padding-left: 0;
     padding-right: 0;
-    margin-right: 30px;
+    margin-right: 42px;
     font-weight: 500;
+    text-shadow: none;
+}
+.mainNav .nav>li.dropdown>a{
+    padding-left: 12px;
+    padding-right: 12px;
+     margin-right: 30px;
+}
+
+.mainNav .nav>li.open>a{
+    color: white;
+    background-color: #002d4f;
 }
 
 .mainNav .nav i {
@@ -184,6 +197,35 @@ h1, h2, h3, h4, h5, h6, ul{
     content: "\f107";
     position: relative;
     top: 1px;
+}
+
+.mainNav .nav>li>.dropdown-menu:after,
+.mainNav .nav>li>.dropdown-menu:before{
+    display: none;
+}
+
+.mainNav .nav>li>.dropdown-menu{
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: #002d4f;
+}
+
+.mainNav .nav>li>.dropdown-menu a{
+    color: white;
+    padding: 18px 24px;
+}
+
+.mainNav .nav>li>.dropdown-menu a:hover,
+.mainNav .nav>li>.dropdown-menu a:focus{
+    background-image: none;
+    filter: -;
+    background-color: #003b69;
+}
+
+.mainNav .submission-close{
+    font-size: 14px;
+    line-height: 40px;
 }
 
 /* ==========================================================================
@@ -709,6 +751,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     height: 324px;
     padding: 86px 0 92px;
     width: 100%;
+    display: table;
+}
+
+.banner-wrapper > .container-wrapper{
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .banner-wrapper h1 {
@@ -728,7 +776,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 .span-block span {
     background-color: #fff;
     display: inline-block;
-    padding: 18px 34px 12px
+    padding: 18px 34px 18px
 }
 
 .link > a {
@@ -763,13 +811,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .get-involved-wrapper {
-    background-color: #fff;
+    background-color: #731d28;
     margin-top: 0;
     padding: 20px 0
 }
 
 .get-involved-wrapper h2 {
-    color: #731d28;
+    color: #fff;
     display: inline-block;
     font-weight: normal;
     font-family: 'Architects Daughter', cursive;
@@ -784,8 +832,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .get-involved-wrapper .link > a {
-    background-color: #731d28;
-    color: #fff
+    background-color: #fff;
+    color: #731d28;
+    border-radius: 15px;
+    padding-left: 27px;
 }
 
 .get-involved-wrapper a i {
@@ -1330,7 +1380,7 @@ footer h5{
     /** Home Page Styles Starts Here **/
     
     .banner-wrapper h1 {
-        font-size: 20px
+        font-size: 26px
     }
 }
 
@@ -1354,6 +1404,31 @@ footer h5{
         background-size: 100%;
         height: 36px;
         width: 210px
+    }
+    
+/* ==========================================================================
+   Mobile Menu styles
+   ========================================================================== */    
+    .mainNav .submission-close{ display: none; }
+    .mainNav .nav-collapse{
+        color: white;
+        background-color: #002d4f;
+        min-width: 200px;
+    }
+    
+    .mainNav .nav-collapse li a,
+    .mainNav .nav>li.dropdown>a{
+        color: white;
+        font-size: 14px;
+        display: block;
+        padding: 9px 18px;
+        margin: 0;
+    }
+    
+    .mainNav .nav-collapse li a:hover,
+    .mainNav .nav-collapse li a:focus{
+        color: white;
+        background-color: #003b69;
     }
     
     .iconmoon-menu2 {
@@ -1619,11 +1694,11 @@ footer h5{
         margin-right: 17px
     }
     
-    .link > a {
+/*    .link > a {
         font-size: 14px;
         padding-left: 60px;
         padding-right: 20px;
-    }
+    }*/
     
     .get-involved-wrapper h2 + a {
         margin-right: 8px
@@ -1676,7 +1751,7 @@ footer h5{
     /** Home Page Styles Starts Here **/
     
     .banner-wrapper h1 {
-        font-size: 30px
+        font-size: 36px
     }
 }
 

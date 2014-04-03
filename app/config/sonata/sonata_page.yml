@@ -32,7 +32,8 @@ sonata_page:
         - postcode_update
         - offline_submission
         - update_debt
-
+        - registration
+        
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'
         - /booking/*

@@ -14,6 +14,7 @@ class RegistrationController extends Controller
 {
 
     public function registrationAction(Request $request){
+        
         $em = $this->getDoctrine()->getManager(); 
         $form = $this->createForm(new PlannerUserType(), new PlannerUser());
             if ($request->request->count() > 0) { 
@@ -22,6 +23,7 @@ class RegistrationController extends Controller
                     $em->flush();
                     return new Response('Successfully Registered');
             } else {
+                
                 return $this->render('PSBalanceBudgetBundle:Registration:RegistrationForm.html.twig', array(
                     'form' => $form->createView(),
                 ));

@@ -728,6 +728,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     text-align: left
 }
 
+#watch-video .custom-modal-body,
+#watch-video .custom-modal-footer{
+    padding: 0;
+}
+
 .source-wrapper {
     font-style: italic;
     font-weight: 700;    

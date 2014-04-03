@@ -41,7 +41,6 @@
                                     <li>$50b</li>
                                     <li>$60b</li>
                                     <li>$70b</li>
-                                    <li>$80b</li>
                                 </ul>                                
                                 <div id="totalSlider" data-total="{{budgetdata.debt}}" data-value="{{ slidervalue }}"></div>
                                 <ul class="totalSliderLabel">
@@ -75,7 +74,7 @@
 
             <!-- Start of First Row -->
           {% for section in  category.sections%}
-            <section class="subSection promotSection">
+            <!--<section class="subSection promotSection">
                 <div class="container">
                     <div class="row">
                         <div class="span12">
@@ -112,7 +111,18 @@
                         </div>
                     </div>
                 </div>
-            </section>            
+            </section>-->     
+            
+            <section class="subSection titleSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <h2><span>{{ section.title}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </section> 
+            
            {% for issue in section.issues%}
 
               {% if  issue.isparent != '1'%}
@@ -126,7 +136,7 @@
                                     <div class="spacingAll">
                                         <h3>{{ issue.title}}  </h3>
                                         <p>{{ issue.lead}}</p>
-                                        <a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>
+                                        <!--<a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>-->
                                         <a href="#subsection_{{loop.index}}" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
                                         <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header custom-modal-header clearfix">
@@ -281,7 +291,8 @@
                             <div class="span8">
                                 <h4>{{ category.title}}</h4>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                <a href='{{path('planner',{'id': next })}}' class="nextButton">Next Category</a>
+                                <a href='{{path('planner',{'id': next })}}' class="prevButton">Previous Section</a>
+                                <a href='{{path('planner',{'id': next })}}' class="nextButton">Next Section</a>
                             </div>
                         </div>
                     </div>

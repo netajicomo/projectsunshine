@@ -27,7 +27,7 @@ class BudgetController extends Controller
         $service = $this->get('visitor_tracker_service');
        
        $service->createVisitor($request);
-          $sessionId = $request->getSession()->get('id');  
+       $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
        
        
@@ -35,12 +35,41 @@ class BudgetController extends Controller
         
         $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->findOneById(1);
         
+        $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);   
+        $sliderValue = intval($budgetData->getDebt()) - intval($currentdebt);
+        
         // json decode the issue option values string 
         foreach($categories as $category)
         {  foreach($category->getSections() as $section){
                 foreach($section->getIssues() as $issue){
                     $optionValues = json_decode($issue->getOptionValues(), TRUE);
-                      $issue->setOptionValues($optionValues);
+                  if($sessionId)
+                  {
+                      $savedIssue = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->findOneBy(array('issue_id' => $issue->getId(),'session_id' => $sessionId));
+                      if(isset($savedIssue))
+                      {
+                         if($savedIssue->getIssuePercentage())
+                         {   
+                           $value = $savedIssue->getIssuePercentage();
+                           $cost = $savedIssue->getIssueValue();
+                         }
+                         else
+                         {
+                             $value =  $savedIssue->getIssueValue(); 
+                             $cost = $savedIssue->getIssueValue(); 
+                         }
+                      }
+                      else
+                      {    
+                      $value = 0;    
+                       $cost = 0;    
+                      }
+                      
+                  }  
+                    
+                    $optionValues['value'] = $value;
+                     $optionValues['cost'] = $cost;
+                    $issue->setOptionValues($optionValues);
                                        
                   
                     
@@ -51,82 +80,13 @@ class BudgetController extends Controller
         return $this->render('PSBalanceBudgetBundle:Planner:index.html.twig', array(
             'categories' => $categories,
             'budgetdata' => $budgetData,
+            'slidervalue' => $sliderValue,
             
         ));
     }
     
     
-    
-    
-//    // save the issue values
-//    
-//    public function processIssueAction(Request $request){
-//        
-//       $service = $this->get('visitor_tracker_service');
-//       $service->createVisitor($request);
-//       $em = $this->getDoctrine()->getManager();
-//       $issueId = $request->request->get('id');
-//       $value = $request->request->get('value');
-//     
-//            $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId);
-//          
-//      // get the parent
-//                $parentIssue =  $issue->getParent();
-//                if($parentIssue)
-//                {
-//              
-//                 
-//                    $parentId = $parentIssue->getId();
-//                    // get the siblings
-//                    $siblings = $parentIssue->getChildren();
-//                    $siblingsIds =   $em->getRepository('PSBalanceBudgetBundle:Issue')->getSiblingIds($parentId);     
-//                    // check to see if a reducer issue exists
-//                    foreach($siblings as $sibling){
-//                        if($sibling->getIsReduceBy())
-//                        {
-//                             $isReduceBy = true;
-//                             $reducerId = $sibling->getid();
-//                            if (($key = array_search($reducerId, $siblingsIds)) !== false) {
-//                            unset($siblingsIds[$key]);}
-//                             break;
-//                        }
-//                        else
-//                        {
-//                                $isReduceBy = false; 
-//                                $reducerId  = false;
-//                        } 
-//                        // get the dependents from the db
-//                       
-//                        
-//                    }
-//                   
-//                  // to cater to the WOG section
-//                    $isWog = false;
-//                    $wogId = false;
-//                  if($issue->getDependency())   
-//                  {
-//                       $wogIssue = $em->getRepository('PSBalanceBudgetBundle:Issue')->getTheCumulativeId($issue->getDependency()->getId()); 
-//                  
-//                       $wogId = $wogIssue->getId();
-//                        $isWog = true;
-//                    
-//                  }   
-//                
-//                    
-//                  
-//                    $result = array('siblings' => $siblingsIds, 'parentId' => $parentId, 'value' => $value,'issueId' => $issueId, 'isReduceBy' => $isReduceBy, 'reducerId' => $reducerId,'isWog' => $isWog, 'wogId' => $wogId);
-//               
-//                     return new JsonResponse($result); 
-//                    
-//                }
-//             
-//             
-//               
-//     
-//   
-//       
-//        
-//    }
+ 
     
    
     
@@ -238,6 +198,7 @@ class BudgetController extends Controller
                     
                     
          }
+         
          else
          {
               // save to the db

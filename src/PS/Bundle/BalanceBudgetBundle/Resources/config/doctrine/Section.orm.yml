@@ -42,6 +42,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Section:
               referencedColumnName: id
     oneToMany:
         issues:
+            orderBy: { 'is_parent': 'ASC' }
             targetEntity: Issue
             mappedBy: sectionissue          
     lifecycleCallbacks:

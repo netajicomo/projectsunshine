@@ -220,7 +220,7 @@
                                             {% endif %}
                                             {% endfor %} 
                                         </select>
-                                      <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="0">M</label>  
+                                      <label class="redLabel">cutting <span>$</span> <input type="text" readonly id="value_{{issue.id}}" value="0"> M</label>  
                                     </div>
                                 </div>
                                {% endif %}
@@ -269,7 +269,7 @@
                                    </div>
                                 </div>
                                <div class="span5 total-val-column">
-                                      <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="{{ issue.optionvalues['value']}}">M</label>
+                                      <label class="redLabel" style="font-weight: 600;">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="{{ issue.optionvalues['value']}}" style="border-radius: 0; margin-left: 4px; margin-right: 4px;">M</label>
                                </div>
                             </div>   
                             

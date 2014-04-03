@@ -61,6 +61,23 @@ textarea {
     padding: 0.2em 0;
 }
 
+.video {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+
+.video iframe,  
+.video object,  
+.video embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 
 /* ==========================================================================
    Author's custom styles
@@ -727,10 +744,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     padding: 15px 15px 35px 30px;
     text-align: left
 }
-
+#watch-video{ width: 640px; }
 #watch-video .custom-modal-body,
 #watch-video .custom-modal-footer{
     padding: 0;
+}
+
+#watch-video .get-involved-wrapper h2{
+    font-size: 26px;
 }
 
 .source-wrapper {

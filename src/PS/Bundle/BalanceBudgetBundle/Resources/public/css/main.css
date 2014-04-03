@@ -819,7 +819,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     position: relative;
     text-transform: uppercase;
     vertical-align: middle;
-    border-radius: 24px;
+    border-radius: 14px;
 }
 
 .link > a i {

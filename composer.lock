@@ -2030,7 +2030,9 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2014-04-02 10:05:06"
+
+           "time": "2014-04-02 10:05:06"
+
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2398,6 +2400,7 @@
                 "generator",
                 "sonata"
             ],
+
             "time": "2014-04-02 10:04:16"
         },
         {
@@ -2620,12 +2623,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "9099885ea908bf0e81c30d72f7ddf71d6111b6a3"
+                "reference": "3d9ece25715013f711e8c99c9a7f3ebdc834f8a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/9099885ea908bf0e81c30d72f7ddf71d6111b6a3",
-                "reference": "9099885ea908bf0e81c30d72f7ddf71d6111b6a3",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/3d9ece25715013f711e8c99c9a7f3ebdc834f8a6",
+                "reference": "3d9ece25715013f711e8c99c9a7f3ebdc834f8a6",
                 "shasum": ""
             },
             "require": {
@@ -2695,7 +2698,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2014-03-19 17:06:44"
+            "time": "2014-04-02 17:20:46"
         },
         {
             "name": "sonata-project/notification-bundle",

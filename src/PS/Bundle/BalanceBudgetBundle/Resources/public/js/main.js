@@ -201,6 +201,11 @@ $(document).ready(function(){
             $(this).toggleClass( "add-comment-open" );
             $(this).parents('.subSection').find(".comment-wrapper" ).slideToggle( "slow" );
         });
+        
+	$('.notificationSection .last a').click(function(){
+		$('.notificationSection').hide();
+		return false;
+	});        
 
 });
 

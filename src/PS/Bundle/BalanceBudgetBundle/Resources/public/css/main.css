@@ -78,10 +78,6 @@ textarea {
 	height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6{
-    text-rendering: auto;
-}
-
 
 /* ==========================================================================
    Author's custom styles
@@ -285,7 +281,7 @@ section + section{
     height: 4px;
     left: -1px;
     right: -1px;
-    background-color: #4b131b;
+    background-color: #235F8C;
 }
 
 .promotSection .span12:after {
@@ -310,12 +306,15 @@ section + section{
 
 .subSection .moreInfo{
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    background-color: #4b131b;
+    font-family: 'Architects Daughter', cursive;
+    
+    background-color: #464646;
     display: inline-block;
     padding: 6px 18px;
-    text-transform:  uppercase;;
+    text-transform:  uppercase;
+    border-radius: 12px;
 }
 
 .subSection .moreInfo i{
@@ -335,23 +334,46 @@ section + section{
     background-color: #8b2331;
 }
 
+/* ==========================================================================
+   Title Styles
+   ========================================================================== */
+.titleSection .span12:after{
+    display: none;
+}
+
+.titleSection h2{
+    color: white;
+    font-size: 36px;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
+    background: url(../img/sectiontitle-bg.jpg) no-repeat 0 0;
+    background-size: cover;
+}
+
+.titleSection h2 span{
+    display: inline-block;
+    padding: 30px;
+    background-color: #235f8c;
+}
+
 .contentSection .span12{
     padding: 42px 0;
-    border-top: 1px solid #4b131b;
-    border-bottom: 1px solid #4b131b;
+    border: 1px solid #EBEBEB;
 
     text-align: center;
 }
 .contentSection h2, .contentSection h4{
-    color: #8b2331;
+    color: #235F8C;
     font-size: 48px;
-    font-weight: 300;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
 
     margin-bottom: 36px;
 }
 
 .contentSection h4{
-    font-size: 30px;
+    color: #8B2331;
+    font-size: 36px;
     font-weight: 500;
 
     margin-bottom: 24px;
@@ -362,14 +384,23 @@ section + section{
     float: none;
 }
 
+.contentSection .prevButton,
 .contentSection .nextButton{
     color: white;
-    font-size: 18px;
-    background-color: #53984c;
+    font-size: 17px;
+    font-family: 'Architects Daughter', cursive;
+    background-color: #235F8C;
     display: inline-block;
-    width: 300px;
 
-    padding: 12px 0;
+    padding: 9px 30px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.contentSection .nextButton{
+    margin-left: 18px;
+    background-color: #8B2331;
 }
 
 .finishedSection .span12{
@@ -571,6 +602,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .primeSlider .ui-slider-handle:before{
+    content: '';
+}
+
+.primeSlider .ui-slider-handle span{
     font-size: 32px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
@@ -578,20 +613,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     color: white;
     background-color: #8b2331;
 
-    content: '$0B DEBT';
-
     min-width: 200px;
     height: 58px;
     right: 0;
+    padding-left: 12px;
+    padding-right: 12px;
 
     line-height: 58px;
+    position: absolute;
+    display: block;
+    text-align: center;    
 }
+
+.primeSlider .ui-slider-handle span em{ font-style: normal; }
 
 .totalSliderLabel{
     display: table;
     width: 100%;
 
     margin-top: 24px;
+    table-layout: fixed;
 }
 
 .totalSliderLabel li{
@@ -623,7 +664,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     margin: 0;
     margin-bottom: 24px;
 
-    margin-left: -63px;
+    margin-left: -60px;
 }
 
 .totalSliderLabel.topLabel li:after{
@@ -682,6 +723,72 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     position: relative;
     top: 3px;    
     padding-left: 0;
+}
+
+a.add-comment {
+    background-color: #0d4058;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 18px;
+    text-transform: uppercase
+}
+
+.add-comment i {
+    background-color: #fff;
+    border-radius: 8px;
+    color: #0d4058;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    width: 16px;
+}
+
+.add-comment i:before {
+    font-size: 10px;
+    position: relative;
+    top: 1px;
+    vertical-align: middle
+}
+
+.add-comment-open i:before {
+    content: "\f068" 
+}
+
+.row div.comment-wrapper {
+    border: none;
+    display: none;
+}
+
+.comment-wrapper form {
+    padding: 0 30px 16px;
+}
+
+.comment-wrapper textarea {
+    border-color: #d7d7d7;
+    border-radius: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: #a2a2a2;
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 15px 18px;
+    width: 100%;
+}
+
+.comment-wrapper p {
+    margin-bottom: 0;
+    padding-top: 10px
+}
+
+.total-val-column {
+    padding-top: 35px
+}
+
+.total-val-column span {
+    margin-left: 10px
 }
 
 /**
@@ -745,6 +852,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     background-color: #fafafa;
     border-top: none;
     font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
     padding: 15px 15px 35px 30px;
     text-align: left
 }
@@ -1097,7 +1206,9 @@ cite {
 
 .widgetContent h3{
     color: #8b2331;
-    font-size: 42px;
+    font-size: 30px;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: normal;
     line-height: 1em;
     margin-bottom: 24px;
 }
@@ -1174,6 +1285,122 @@ cite {
     .socialBtn li.google-btn a{ background-color: #dd4b39; }
     .socialBtn li.twitter-btn a{ background-color: #55acee; }
     .socialBtn li.linkedin-btn a{ background-color: #0977b5; }
+    
+/* ==========================================================================
+   Register Form Styles Starts
+   ========================================================================== */
+
+    .register-form {
+        text-align: left
+    }
+    
+    .form-item-wrapper {
+        margin-bottom: 25px
+    }
+    
+    .register-form label {
+        cursor: default;
+        font-size: 18px;
+        margin-bottom: 9px
+    }
+    
+    .register-form label.checkbox {
+        padding-top: 10px
+    }
+    
+    .register-form input {
+        margin-bottom: 0
+    }
+    
+    .register-form input[type="checkbox"]{
+        margin-right: 6px;
+        vertical-align: top;
+    }
+    
+    .register-form input[type="text"],
+    .register-form input[type="email"]{
+        border-radius: 0;
+        color: #464646;
+        font-size: 16px;
+        height: 47px;
+        opacity: .5;
+        filter: alpha(opacity=50);
+        padding: 0 16px;
+    }
+    
+    .form-submit {
+        position: relative
+    }
+    
+    .form-submit input {
+        background-color: #8b2331;
+        border: 0;
+        color: #fff;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 38px 0 50px
+    }
+    
+    .form-submit:before {
+        color: #fff;
+        content: "\f00c";
+        font-family: 'FontAwesome';
+        margin-left: 15px;
+        position: absolute;
+        top: 11px
+    }    
+    
+/* ==========================================================================
+   Offline Submission Page Styles
+   ========================================================================== */
+    
+    .download-link a {
+        background-color: #8b2331;
+        color: #fff;
+        display: inline-block;
+        font-size: 21px;
+        font-family: 'Architects Daughter', cursive;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 28px;
+        border-radius: 14px;
+    }
+    
+    .download-link i {
+        margin-right: 10px
+    }
+    
+    .offline-form-submit input {
+        width: 250px
+    }
+   
+    .offline-form-submit:before {
+        margin-left: 80px
+    }
+    
+/* ==========================================================================
+   Notification Styles
+   ========================================================================== */    
+   .notificationSection{
+    color: white;
+    background-color: #235F8C;
+    padding: 18px;
+   }
+
+   .notificationSection li{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+   }
+
+   .notificationSection h5{ font-size: 17px; font-weight: 500; margin-bottom: 9px; }
+   .notificationSection span{ font-size: 15px; }
+
+   .notificationSection .icon-exclamation-sign{ font-size: 36px; }
+   .notificationSection li:first-child + li{ width: 800px; margin-left: 18px; }
+   .notificationSection li:first-child + li > a{ font-weight: 500; color: white; }
+   .notificationSection li.last a{ display: inline-block; font-size: 30px; background-color: #1A4566; padding: 10px 15px; color: white; }    
 
 
 /* ==========================================================================
@@ -1700,6 +1927,18 @@ footer h5{
     .socialBtn li + li{
         margin-left: 0;
     }
+    
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+
+   .register-form {
+        padding: 0 15px
+    }
+    
+    .form-item:first-child {
+        margin-bottom: 25px
+    }    
 
 }
 
@@ -1762,6 +2001,14 @@ footer h5{
         font-size: 30px;
         font-weight: 500;
    }
+   
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+
+   .register-form-wrapper {
+        width: 600px
+    }   
 }
 
 /**

@@ -1373,8 +1373,33 @@ footer h5{
         float: none
     }
     
+/* ==========================================================================
+   Mobile Menu styles
+   ========================================================================== */    
+    .mainNav .submission-close{ display: none; }
+    .mainNav .nav-collapse{
+        color: white;
+        background-color: #002d4f;
+        min-width: 200px;
+    }
+    
+    .mainNav .nav-collapse li a,
+    .mainNav .nav>li.dropdown>a{
+        color: white;
+        font-size: 14px;
+        display: block;
+        padding: 9px 18px;
+        margin: 0;
+    }
+    
+    .mainNav .nav-collapse li a:hover,
+    .mainNav .nav-collapse li a:focus{
+        color: white;
+        background-color: #003b69;
+    }    
+    
     .iconmoon-menu2 {
-        color: #BE461D
+         color: #002d4f;
     }
     
     /** Home Page Styles Starts Here **/
@@ -1406,33 +1431,8 @@ footer h5{
         width: 210px
     }
     
-/* ==========================================================================
-   Mobile Menu styles
-   ========================================================================== */    
-    .mainNav .submission-close{ display: none; }
-    .mainNav .nav-collapse{
-        color: white;
-        background-color: #002d4f;
-        min-width: 200px;
-    }
-    
-    .mainNav .nav-collapse li a,
-    .mainNav .nav>li.dropdown>a{
-        color: white;
-        font-size: 14px;
-        display: block;
-        padding: 9px 18px;
-        margin: 0;
-    }
-    
-    .mainNav .nav-collapse li a:hover,
-    .mainNav .nav-collapse li a:focus{
-        color: white;
-        background-color: #003b69;
-    }
-    
     .iconmoon-menu2 {
-        color: #003c69
+        color: #002d4f
     }
     
     .content {
@@ -1524,19 +1524,21 @@ footer h5{
         padding-bottom: 58px
     }
     
-    .get-involved-wrapper {
+/*    .get-involved-wrapper {
         padding-bottom: 0;
         padding-top: 0;
+    }*/
+    
+    .get-involved-wrapper h2{
+        font-size: 24px;
+        display: block;
     }
     
     .get-involved-wrapper .link > a {
-        background-color: #4b131b;
-        color: #fff;
-        display: block
+        margin-top: 18px;
     }
     
     .get-involved-wrapper .link  h2 + a {
-        background-color: #8b2331;
         margin-right: 0
     }
     

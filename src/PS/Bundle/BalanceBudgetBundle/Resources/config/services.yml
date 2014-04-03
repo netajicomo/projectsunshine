@@ -10,6 +10,13 @@ services:
 
    
     
+    ps_balance_budget.admin.header_menu:
+            class: PS\Bundle\BalanceBudgetBundle\Admin\HeaderMenuAdmin
+            arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu, PSBalanceBudgetBundle:HeaderMenuAdmin]
+            tags:
+                - {name: sonata.admin, manager_type: orm, group: Issues, label: HeaderMenu}
+            calls:
+                - [ setTranslationDomain, [PSBalanceBudgetBundle]]
 
     ps_balance_budget.admin.category:
         class: PS\Bundle\BalanceBudgetBundle\Admin\CategoryAdmin

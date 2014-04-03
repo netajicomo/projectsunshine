@@ -30,6 +30,7 @@ sonata_page:
         - planner
         - ckeditorsave
         - postcode_update
+        - update_debt
         
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'

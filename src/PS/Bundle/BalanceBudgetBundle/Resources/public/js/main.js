@@ -3,6 +3,7 @@ $(document).ready(function(){
    $('.slider').each(function(){
         var max = parseInt($(this).attr('data-max'), 10);
         var min = parseInt($(this).attr('data-min'), 10);
+      
         var step = parseInt($(this).attr('data-step'), 10);
         var value = Math.floor(parseInt($(this).attr('data-value'), 10));
        
@@ -14,12 +15,9 @@ $(document).ready(function(){
 		range: "min",
 		change: function( event, ui ) {
                     var id = $(this).attr('id').replace('slider_','');
-			var value = $('#value_'+id).val();
-                       
-                            var debtValue = value - ui.value
-                          $('#debt_value_'+id).val(-debtValue);
+			//var value = total*ui.value/100;
                          
-                          
+                      //    $('#value_'+id).val(value);
                          $('#value_'+id).val(ui.value); 
                     saveIssue(id, ui.value);    
       	}

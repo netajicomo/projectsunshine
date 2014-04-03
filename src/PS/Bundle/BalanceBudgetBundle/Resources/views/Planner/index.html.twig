@@ -151,33 +151,29 @@
                                        <div class="span5">
                                            <div class="spacingAll costSlider">
                                                 {% if (issue.isreduceby != '1') %}
-                                               <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
+                                               <label class="blueLabel">current cost <span>${{ issue.optionvalues['total']|number_format}}M</span></label>
                                                {% endif%}
                                                 {% if  issue.issuegroup %}
-                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-value="{{ issue.optionvalues['value']}}" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-value="{{ issue.optionvalues['value']}}" data-total="{{ issue.optionvalues['total']}}" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
                                                {% else %}
-                                               <div id="slider_{{issue.id}}"class="slider" data-value="{{ issue.optionvalues['value']}}" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                               <div id="slider_{{issue.id}}"class="slider" data-value="{{ issue.optionvalues['value']}}" data-total="{{ issue.optionvalues['total']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
                                                 {% endif %}  
                                                <div class="sliderLabel clearfix">
-                                                       {% if ('wog' in issue.controltype.name|lower)  or (issue.isreduceby == '1') %}
-                                                   <span class="pull-left">0 %</span>
-                                                   <span class="pull-right">100%</span>
-                                                    {% else %}
-                                                   <span class="pull-left">${{ issue.optionvalues['min'] }}M</span>
-                                                   <span class="pull-right">${{ issue.optionvalues['max'] }}M</span> 
+                                                     
+                                                  
+                                                   <span class="pull-left">{{ issue.optionvalues['min'] }}%</span>
+                                                   <span class="pull-right">{{ issue.optionvalues['max'] }}%</span> 
                                                    
-                                                   {% endif%}
+                                                 
                                                </div>
 
 
                                                <label class="redLabel">cutting <span>$</span>
                                                    
-                                                   {% if ('wog' in issue.controltype.name|lower)  or (issue.isreduceby == '1') %}
+                                                   
                                                      <input type="text" readonly id="reducer_value_{{issue.id}}" value="{{ issue.optionvalues['cost']}}">
                                                     (<input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['value']}}" style="width:30px">%)
-                                                    {% else %}
-                                                     <input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['cost']}}">
-                                                    {% endif%}
+                                                   
                                                </label>
                                                   <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
                                            </div>
@@ -315,8 +311,17 @@
                 $('#totalSlider').slider( "option", "value", result.sliderValue );
                  var debtHeader =  (result.sliderValue/1000).toFixed(2)
                  $('#totalSlider .sliderValue em').text(debtHeader);
+                
+                    // update the regular slider value
+                 if(typeof result.isSlider != 'false'){
+                     
+                    $('#reducer_value_'+id).val(result.isSlider);   
+                            
+                 
+                 }
+                
                      // update the reduction slider value
-                 if(typeof result.newReducerValue !== 'undefined'){
+                 if(typeof result.newReducerValue != 'false'){
                      
                     $('#reducer_value_'+result.reducerId).val(result.newReducerValue);   
                             

@@ -12,12 +12,12 @@ update_debt:
 
 ckeditorsave:
     pattern:  /ckeditorsave
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:CKEditorSave" }
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:CKEditorSave" }
 
 postcode:
     pattern: /planner_postcode
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:plannerPostcode" }
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:plannerPostcode" }
 
 postcode_update:
     pattern: /update_postcode
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updatePostcode" }
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:updatePostcode" }

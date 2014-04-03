@@ -1,0 +1,48 @@
+{% extends 'PSBalanceBudgetBundle::base_functional_layout.html.twig' %}
+{% block page_stylesheets %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+    {% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+    <div id="main">
+        <section>
+            <div class="sectionHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10 clearMargin">
+                                <h2>Start Planning your budget</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="span10 clearMargin">
+                            <div class="widgetContent text-center">
+                                <h3 class="title">What is your post code?</h3>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                <form action="{{ path('postcode_update') }}" method="post" class="pincodeForm">
+                                    <input type="text" name="postcode" placeholder="Enter your post code" required maxlength="4">
+                                    <button type="submit" name="submit" value="submit" class="btn btn-submit">Start Planning</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+
+{% endblock %}

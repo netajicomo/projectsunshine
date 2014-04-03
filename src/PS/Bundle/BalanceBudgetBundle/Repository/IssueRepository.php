@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class IssueRepository extends EntityRepository
 {
     public function getSiblingIds($issueId){
-       
+
         $parentIssue = $this->findOneById($issueId);
         $children = $parentIssue->getChildren();
         $childrenIdArray = array();
@@ -21,18 +21,19 @@ class IssueRepository extends EntityRepository
         {
             $childrenIdArray[] = $child->getId();
         }
-     
-       return $childrenIdArray; 
+
+        return $childrenIdArray;
     }
-    
-    
-   public function getParentIssues(){
-       
+
+
+    public function getParentIssues(){
+
         $q = $this->createQueryBuilder('i')
             ->where('i.is_parent = 1')
             ->getQuery();
- 
+
         return $q->getResult();
+
    }
    
    public function getTheCumulativeId($depId){

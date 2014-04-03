@@ -1,0 +1,21 @@
+PS\Bundle\BalanceBudgetBundle\Entity\PlannerPostCode:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\PlannerPostCodeRepository
+    table: ps_planner_post_code
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        session_id:
+            type: string
+            length: 255    
+        post_code:
+            type: text
+        created_at:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]
+
+        
+    

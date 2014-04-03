@@ -203,9 +203,7 @@
                                     </div>
                                 </div>
                                 {% if  'slider' in issue.controltype.name %}
-                                
-                                  
-                                        
+
                                        <div class="span5">
                                            <div class="spacingAll costSlider">
                                                 {% if (issue.isreduceby != '1') %}
@@ -226,6 +224,7 @@
                                                    
                                                    {% endif%}
                                                </div>
+
 
                                                <label class="redLabel">cutting <span>$</span>
                                                    
@@ -305,7 +304,6 @@
               {% endif %} 
             {#for the parent of the section#}
          {% if  issue.isparent == '1'%}
-            
             <section class="subSection">
                 <div class="container">
                     <div class="row">
@@ -313,8 +311,8 @@
                             <div class="row">
                                 <div class="span7">
                                    <div class="spacingAll">
-                                       <h3>{{ issue.title}}</h3>                                    
-                                   </div>    
+                                       <h3>{{ issue.title}}</h3>
+                                   </div>
                                 </div>
                                <div class="span5 total-val-column">
                                       <label class="redLabel">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="{{ issue.optionvalues['value']}}">M</label>
@@ -376,14 +374,18 @@
 // save the users values
           
           function saveIssue(id,value){
+
           var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max"); 
+
               $.ajax({
   type: "POST",
   url: "{{ path('update_debt')}}",
   data:{issueId: id, value: value,currentDebt:currentTotalSliderValue},
   success: function(result){
 
+
         if(typeof result !== 'undefined')
+
               {
                       //  console.log(result.parentDebt);
                         

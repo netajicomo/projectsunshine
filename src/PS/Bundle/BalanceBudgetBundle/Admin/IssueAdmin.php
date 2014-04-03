@@ -61,7 +61,7 @@ class IssueAdmin extends Admin
     {
         $formMapper
            // ->add('id')
-            ->add('sectionissue','entity',array('attr' => array('class' => 'for_display'), 'label' => 'Section','class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))                
+            ->add('sectionissue','entity',array('attr' => array('class' => 'for_display'), 'label' => 'Section','class' => 'PSBalanceBudgetBundle:Section','property' => 'name'))
             ->add('name')
             ->add('title')
             ->add('lead',null, array('required' => false))
@@ -73,7 +73,7 @@ class IssueAdmin extends Admin
                 ->add('dependency','entity',array('class' => 'PSBalanceBudgetBundle:Dependency','property' => 'name', 'empty_value' => 'Select a Dependency', 'required' =>false))        
                 ->add('issuegroup','entity',array('class' => 'PSBalanceBudgetBundle:IssueGroup','property' => 'name', 'empty_value' => 'Select an Issue Group', 'required' =>false))        
                 ->add('description')
-            ->add('controltype','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:ControlType','property' => 'name'))                
+            ->add('controltype','entity',array('attr' => array('class' => 'for_display'),'class' => 'PSBalanceBudgetBundle:ControlType','property' => 'name'))
             ->add('option_values')
            // ->add('is_active')
            // ->add('created_at')

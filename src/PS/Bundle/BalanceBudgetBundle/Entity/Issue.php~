@@ -396,6 +396,7 @@ class Issue
     {
         return $this->is_parent;
     }
+
     /**
      * @var boolean
      */
@@ -480,6 +481,7 @@ class Issue
     {
         return $this->issuegroup;
     }
+<<<<<<< HEAD
     /**
      * @var boolean
      */
@@ -508,4 +510,6 @@ class Issue
     {
         return $this->is_cumulative;
     }
+=======
+>>>>>>> d7645c544dcba00fb5519b4e4b67e54896dc9408
 }

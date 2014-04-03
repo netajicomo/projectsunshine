@@ -53,6 +53,7 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: Settings, label: VisitorActivity}
 
+
     ps_balance_budget.admin.dependency:
         class: PS\Bundle\BalanceBudgetBundle\Admin\DependencyAdmin
         arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Dependency, PSBalanceBudgetBundle:DependencyAdmin]

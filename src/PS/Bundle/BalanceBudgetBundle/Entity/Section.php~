@@ -47,6 +47,7 @@ class Section
     /**
      * @var boolean
      */
+
     private $is_active = true;
 
     /**
@@ -371,5 +372,5 @@ class Section
     {
           return $this->name;
     }
-    
+
 }

@@ -6,7 +6,18 @@ process_issue:
     pattern: /processissue
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:processIssue" }
 
-
 update_debt:
     pattern: /updatedebt
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updateDebt" }       
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updateDebt" }
+
+ckeditorsave:
+    pattern:  /ckeditorsave
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:CKEditorSave" }
+
+postcode:
+    pattern: /planner_postcode
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:plannerPostcode" }
+
+postcode_update:
+    pattern: /update_postcode
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updatePostcode" }

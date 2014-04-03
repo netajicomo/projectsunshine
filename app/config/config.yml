@@ -1,6 +1,22 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+     # Sonata Bundles
+#    - { resource: sonata/sonata_admin.yml }
+    - { resource: sonata/sonata_page.yml }
+    - { resource: sonata/sonata_block.yml }
+    - { resource: sonata/sonata_media.yml }
+#    - { resource: sonata/sonata_formatter.yml }
+#    - { resource: sonata/sonata_news.yml }
+    - { resource: sonata/sonata_cache.yml }
+    - { resource: sonata/sonata_seo.yml }
+    - { resource: sonata/sonata_notification.yml }
+#    - { resource: '@ApplicationSonataPageBundle/Resources/config/services.yml' }
+    - { resource: '@PSBalanceBudgetBundle/Resources/config/services.yml' }
+    - { resource: '@ApplicationSonataBlockBundle/Resources/config/block.yml' }
+#    - { resource: sonata/sonata_user.yml }
+#    - { resource: sonata/sonata_intl.yml }
+
 
 framework:
     #esi:             ~
@@ -62,8 +78,13 @@ doctrine:
         entity_managers:
             default:
                 mappings:
+                    ApplicationSonataPageBundle: ~
                     ApplicationSonataUserBundle: ~
+                    ApplicationSonataMediaBundle: ~
                     SonataUserBundle: ~
+                    SonataPageBundle: ~
+                    SonataMediaBundle: ~
+
                     FOSUserBundle: ~
                     PSBalanceBudgetBundle: ~
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -77,15 +98,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 # config for the sonata admin
-sonata_block:
-    default_contexts: [cms]
-    
-    blocks:
-        # Enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-        sonata.user.block.menu:    # used to display the menu in profile pages
-        sonata.user.block.account: # used to display menu option (login option)
-            contexts:   [admin]   
+
 # config for sonata user bundle
 sonata_user:
     security_acl: true
@@ -118,4 +131,29 @@ sonata_admin:
     templates:
             # default global templates
             layout:  SonataAdminBundle::standard_layout.html.twig
-#            list_block: ::block_admin_list.html.twig
+
+knp_menu:
+    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
+        template: knp_menu.html.twig
+    templating: false # if true, enables the helper for PHP templates
+    default_renderer: twig # The renderer to use, list is also available by default
+    
+services:
+    como.twig.custom_extension:
+        class: Application\Sonata\PageBundle\Twig\Extension\CustomPageExtension
+        arguments: 
+          blockManager:  "@sonata.page.manager.block"
+        tags:
+            - { name: twig.extension }
+#    geoip:
+#        class:      Maxmind\Bundle\GeoipBundle\Service\GeoipManager
+#        arguments:  [@kernel]
+        
+#    gedmo.listener.softdeleteable:
+#        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+#        tags:
+#            - { name: doctrine.event_subscriber, connection: default }
+#        calls:
+#            - [ setAnnotationReader, [ @annotation_reader ] ]    
+
+

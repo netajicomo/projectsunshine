@@ -21,7 +21,11 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
-        "sonata-project/user-bundle": "dev-master"
+        "sonata-project/user-bundle": "dev-master",
+        "symfony-cmf/routing-bundle": "~1.1",
+        "sonata-project/page-bundle": "dev-master",
+        "sonata-project/block-bundle": "2.2.*@dev",
+        "sonata-project/media-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

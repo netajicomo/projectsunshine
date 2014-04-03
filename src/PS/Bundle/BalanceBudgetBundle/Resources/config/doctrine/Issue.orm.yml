@@ -50,7 +50,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Issue:
             targetEntity: Section
             joinColumn:
                 name: section_id
-                referencedColumnName: id   
+                referencedColumnName: id
         dependency:
             targetEntity: Dependency
             joinColumn:

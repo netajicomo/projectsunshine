@@ -396,6 +396,7 @@ class Issue
     {
         return $this->is_parent;
     }
+
     /**
      * @var boolean
      */

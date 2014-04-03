@@ -1,0 +1,66 @@
+{% extends 'ApplicationSonataPageBundle::main_base_layout_sonata_page.html.twig' %}
+{% block page_stylesheets %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block bodyMain %}
+<body class="general static">   
+{% endblock %}
+        
+{% block page_container %}
+{% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+        <div id="main">
+            <section class="banner-wrapper">
+                <div class="container-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span1 hidden-phone"></div>
+                            <div class="span12 text-center">
+                                <h1 class="text-upper">
+                                            {{ sonata_page_render_container('home-page-generic-content', page)  | sonata_page_render_custome_block([{'service':'sonata.block.service.text'}]) }}
+                                </h1>
+                                <div class="link">
+                                    <a href="#watch-video" data-toggle="modal"><i class="icon-play"></i> Watch Video</a>
+                                    <div id="watch-video" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-header custom-modal-header clearfix">
+                                          <button type="button" class="close text-upper" data-dismiss="modal" aria-hidden="true">Close <i class="icon-remove"></i></button>
+                                        </div>
+                                        <div class="modal-body custom-modal-body">
+                                            <div class="video">
+                                                <iframe width="560" height="315" src="//www.youtube.com/embed/e3Mj0VpxnpY" frameborder="0" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer custom-modal-footer">
+                                            <section class="get-involved-wrapper text-center">
+                                                <div class="link">
+                                                    <h2>Join the conversation</h2>
+                                                    <a href="{{ path('postcode') }}">Have your say today</a>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="get-involved-wrapper text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="span2 hidden-phone"></div>
+                        <div class="span10 link">
+                            <h2>Join the conversation</h2>
+                            <a href="{{ path('postcode') }}">Have your say today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+{% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+{% endblock %}

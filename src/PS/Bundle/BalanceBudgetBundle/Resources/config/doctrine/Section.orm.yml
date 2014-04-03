@@ -17,7 +17,6 @@ PS\Bundle\BalanceBudgetBundle\Entity\Section:
             type: text
         description:
             type: text
-        
         file:
             type: string
             lenght: 100

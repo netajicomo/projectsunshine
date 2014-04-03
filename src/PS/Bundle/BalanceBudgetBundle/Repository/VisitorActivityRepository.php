@@ -39,6 +39,7 @@ class VisitorActivityRepository extends EntityRepository
         
     }
     
+
     public function getTheSetParentValues($session_id)
     {
         $totalDebt = 0;

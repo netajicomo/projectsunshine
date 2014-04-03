@@ -25,8 +25,20 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle()
-,
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            
+            new Sonata\PageBundle\SonataPageBundle(),
+            new Application\Sonata\BlockBundle\ApplicationSonataBlockBundle(),
+            new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            
+            
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
+
             new PS\Bundle\BalanceBudgetBundle\PSBalanceBudgetBundle(),
         );
 

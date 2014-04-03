@@ -38,10 +38,7 @@ class DefaultController extends Controller
 
     public function plannerPostcodeAction()
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $host = $this->getRequest()->getHost();
         $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Planner:start_plan_postcode.html.twig';
-//        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
 
         return $this->render($template);
     }
@@ -73,16 +70,12 @@ class DefaultController extends Controller
         $em->persist($plannerPostCode);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('planner'));
+        return $this->redirect($this->generateUrl('planner', array('id' => 1)));
 
     }
     public function offlineSubmissionAction()
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $host = $this->getRequest()->getHost();
         $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Default:offline_submission.html.twig';
-//        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
-
         return $this->render($template);
     }
 

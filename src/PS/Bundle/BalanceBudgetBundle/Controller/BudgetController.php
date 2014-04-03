@@ -81,11 +81,14 @@ class BudgetController extends Controller
             }
        // }
         //exit;
+          $next = $id+1;
+          $prev = $id-1;
         return $this->render('PSBalanceBudgetBundle:Planner:index.html.twig', array(
             'category' => $category,
             'budgetdata' => $budgetData,
             'slidervalue' => $sliderValue,
-            'next' => $id+1
+            'next' => $next,
+            'prev' => $prev
             
         ));
     }

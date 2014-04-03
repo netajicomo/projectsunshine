@@ -164,9 +164,9 @@
                                                <label class="blueLabel">current cost <span>${{ issue.optionvalues['total']|number_format}}M</span></label>
                                                {% endif%}
                                                 {% if  issue.issuegroup %}
-                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-value="{{ issue.optionvalues['value']}}" data-total="{{ issue.optionvalues['total']}}" data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-value="{{ issue.optionvalues['value']}}"  data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
                                                {% else %}
-                                               <div id="slider_{{issue.id}}"class="slider" data-value="{{ issue.optionvalues['value']}}" data-total="{{ issue.optionvalues['total']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
+                                               <div id="slider_{{issue.id}}"class="slider" data-value="{{ issue.optionvalues['value']}}"  data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
                                                 {% endif %}  
                                                <div class="sliderLabel clearfix">
                                                      
@@ -181,7 +181,7 @@
                                                <label class="redLabel">cutting <span>$</span>
                                                    
                                                    
-                                                     <input type="text" readonly id="reducer_value_{{issue.id}}" value="{{ issue.optionvalues['cost']}}">
+                                                     <input type="text" readonly id="reducer_value_{{issue.id}}" value="{{ issue.optionvalues['cost']}}">M
                                                     (<input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['value']}}" style="width:30px">%)
                                                    
                                                </label>
@@ -287,7 +287,7 @@
                             <div class="span8">
                                 <h4>{{ category.title}}</h4>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                <a href='{{path('planner',{'id': next })}}' class="prevButton">Previous Section</a>
+                                <a href='{{path('planner',{'id': prev })}}' class="prevButton">Previous Section</a>
                                 <a href='{{path('planner',{'id': next })}}' class="nextButton">Next Section</a>
                             </div>
                         </div>

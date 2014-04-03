@@ -21,3 +21,7 @@ postcode:
 postcode_update:
     pattern: /update_postcode
     defaults: { _controller: "PSBalanceBudgetBundle:Default:updatePostcode" }
+
+offline_submission:
+    pattern: /offline_submission
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:OfflineSubmission" }

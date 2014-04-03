@@ -76,6 +76,15 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('planner'));
 
     }
+    public function offlineSubmissionAction()
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $host = $this->getRequest()->getHost();
+        $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Default:offline_submission.html.twig';
+//        $site = $em->getRepository('ApplicationSonataPageBundle:Site')->findOneBy(array('host' => $host));
+
+        return $this->render($template);
+    }
 
 
 }

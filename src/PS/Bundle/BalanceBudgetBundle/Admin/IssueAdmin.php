@@ -41,6 +41,8 @@ class IssueAdmin extends Admin
             ->add('sectionissue',null, array('label' => 'Section'))
             ->add('category','entity', array('code'=> 'getCategory'))    
             ->add('controltype',null, array('label' => 'Control Type'))
+            ->add('parent',null, array('label' => 'Parent Issue'))    
+            ->add('dependency',null, array('label' => 'Dependency'))        
             ->add('created_at')
             ->add('_action', 'actions', array(
                 'actions' => array(

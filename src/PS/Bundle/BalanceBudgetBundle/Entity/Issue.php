@@ -508,4 +508,9 @@ class Issue
     {
         return $this->is_cumulative;
     }
+    
+     public function __toString()
+    {
+          return $this->name;
+    }
 }

@@ -190,7 +190,7 @@ class BudgetController extends Controller
                   
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
                 // echo $totalDebt.'<br>';
-                  $sliderValue = intval($currentDebt) - intval($totalDebt) - intval($newWogTotal); 
+                  $sliderValue = intval($currentDebt) - intval($totalDebt); 
                   
                   
                       
@@ -201,15 +201,16 @@ class BudgetController extends Controller
          
          else
          {
-              // save to the db
-                 
+              // save the  to the db
+                    
                   $parentDebt = intval($childrenTotal);
+                   if($wogId != $issueId)
                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);                
                 
               
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
                 
-                  $sliderValue = intval($currentDebt) - intval($totalDebt) - intval($newWogTotal);  
+                  $sliderValue = intval($currentDebt) - intval($totalDebt);  
            
                   
                 //$result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue,'wogValue' => $newWogValue,'wogTotal' => $newWogTotal, 'wogParentId' => $wogParentId);
@@ -222,6 +223,7 @@ class BudgetController extends Controller
                                         'parentId' => $parentId,
                                         'parentDebt' => $parentDebt, 
                                         'sliderValue' => $sliderValue, 
+                                        'totalDebt' => $totalDebt,
                                         'wogId' => $wogId,
                                         'wogValue' => $newWogValue, 
                                         'wogTotal' => $newWogTotal, 

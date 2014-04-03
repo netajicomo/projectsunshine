@@ -2030,11 +2030,9 @@
                 "bootstrap",
                 "sonata"
             ],
-<<<<<<< HEAD
-            "time": "2014-04-02 17:16:46"
-=======
-            "time": "2014-04-02 10:05:06"
->>>>>>> d7645c544dcba00fb5519b4e4b67e54896dc9408
+
+           "time": "2014-04-02 10:05:06"
+
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2342,21 +2340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-<<<<<<< HEAD
-                "reference": "dc6ededfd6547dfc70d3e6022e7a2543eabd682e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/dc6ededfd6547dfc70d3e6022e7a2543eabd682e",
-                "reference": "dc6ededfd6547dfc70d3e6022e7a2543eabd682e",
-=======
                 "reference": "b4682890937674709f3aeff59c4faf53174e7083"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/b4682890937674709f3aeff59c4faf53174e7083",
                 "reference": "b4682890937674709f3aeff59c4faf53174e7083",
->>>>>>> d7645c544dcba00fb5519b4e4b67e54896dc9408
                 "shasum": ""
             },
             "require": {
@@ -2411,11 +2400,8 @@
                 "generator",
                 "sonata"
             ],
-<<<<<<< HEAD
-            "time": "2014-04-02 16:01:59"
-=======
+
             "time": "2014-04-02 10:04:16"
->>>>>>> d7645c544dcba00fb5519b4e4b67e54896dc9408
         },
         {
             "name": "sonata-project/easy-extends-bundle",

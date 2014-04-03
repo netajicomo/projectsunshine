@@ -1287,6 +1287,70 @@ cite {
     .socialBtn li.linkedin-btn a{ background-color: #0977b5; }
     
 /* ==========================================================================
+   Register Form Styles Starts
+   ========================================================================== */
+
+    .register-form {
+        text-align: left
+    }
+    
+    .form-item-wrapper {
+        margin-bottom: 25px
+    }
+    
+    .register-form label {
+        cursor: default;
+        font-size: 18px;
+        margin-bottom: 9px
+    }
+    
+    .register-form label.checkbox {
+        padding-top: 10px
+    }
+    
+    .register-form input {
+        margin-bottom: 0
+    }
+    
+    .register-form input[type="checkbox"]{
+        margin-right: 6px;
+        vertical-align: top;
+    }
+    
+    .register-form input[type="text"],
+    .register-form input[type="email"]{
+        border-radius: 0;
+        color: #464646;
+        font-size: 16px;
+        height: 47px;
+        opacity: .5;
+        filter: alpha(opacity=50);
+        padding: 0 16px;
+    }
+    
+    .form-submit {
+        position: relative
+    }
+    
+    .form-submit input {
+        background-color: #8b2331;
+        border: 0;
+        color: #fff;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 38px 0 50px
+    }
+    
+    .form-submit:before {
+        color: #fff;
+        content: "\f00c";
+        font-family: 'FontAwesome';
+        margin-left: 15px;
+        position: absolute;
+        top: 11px
+    }    
+    
+/* ==========================================================================
    Offline Submission Page Styles
    ========================================================================== */
     
@@ -1863,6 +1927,18 @@ footer h5{
     .socialBtn li + li{
         margin-left: 0;
     }
+    
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+
+   .register-form {
+        padding: 0 15px
+    }
+    
+    .form-item:first-child {
+        margin-bottom: 25px
+    }    
 
 }
 
@@ -1925,6 +2001,14 @@ footer h5{
         font-size: 30px;
         font-weight: 500;
    }
+   
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+
+   .register-form-wrapper {
+        width: 600px
+    }   
 }
 
 /**

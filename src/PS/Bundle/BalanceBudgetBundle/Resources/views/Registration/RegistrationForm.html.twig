@@ -38,36 +38,36 @@
                                             <div class="form-item-wrapper row clearfix">
                                                 <div class="form-item span4">
                                                    {{ form_label(form.firstname ,'First Name *') }} 
-                                                   {{ form_widget(form.firstname , {'attr': {'placeholder': 'Enter your first name'} }) }}
+                                                   {{ form_widget(form.firstname , {'attr': {'placeholder': 'Enter your first name', 'class': 'input-block-level'} }) }}
                                                 </div>
                                                 <div class="form-item span4">
                                                    {{ form_label(form.lastname ,'Last Name *') }} 
-                                                   {{ form_widget(form.lastname , {'attr': {'placeholder': 'Enter your last name'} }) }}  
+                                                   {{ form_widget(form.lastname , {'attr': {'placeholder': 'Enter your last name', 'class': 'input-block-level'} }) }}  
                                                 </div>
                                             </div>
                                             <div class="form-item-wrapper row clearfix">
                                                 <div class="form-item span4">
                                                    {{ form_label(form.email ,'Email *') }} 
-                                                   {{ form_widget(form.email , {'attr': {'placeholder': 'Enter your email address'} }) }}
+                                                   {{ form_widget(form.email , {'attr': {'placeholder': 'Enter your email address', 'class': 'input-block-level'} }) }}
                                                 </div>
                                                 <div class="form-item span4">
                                                    {{ form_label(form.confirmemail ,'Confirm Email *') }} 
-                                                   {{ form_widget(form.confirmemail , {'attr': {'placeholder': 'Confirm your email address'} }) }}
+                                                   {{ form_widget(form.confirmemail , {'attr': {'placeholder': 'Confirm your email address', 'class': 'input-block-level'} }) }}
                                                 </div>
                                             </div>
                                             <div class="form-item-wrapper row clearfix">
                                                 <div class="form-item span4">
                                                    {{ form_label(form.mobilenumber ,'Mobile Number (optional)') }} 
-                                                   {{ form_widget(form.mobilenumber , {'attr': {'placeholder': 'Enter your mobile number'} }) }}
+                                                   {{ form_widget(form.mobilenumber , {'attr': {'placeholder': 'Enter your mobile number', 'class': 'input-block-level'} }) }}
                                                 </div>
                                                 <div class="form-item span4">
                                                    {{ form_label(form.phonenumber ,'Phone Number (optional)') }} 
-                                                   {{ form_widget(form.phonenumber , {'attr': {'placeholder': 'Enter your phone number'} }) }}
+                                                   {{ form_widget(form.phonenumber , {'attr': {'placeholder': 'Enter your phone number', 'class': 'input-block-level'} }) }}
                                                 </div>
                                             </div>
                                             <div class="form-item-wrapper row clearfix">
                                                 <div class="form-item span4">
-                                                 {{ form_widget(form.agreestatus) }}<label>I agree to be contacted by XXXX</label>
+                                                 <label>{{ form_widget(form.agreestatus) }}I agree to be contacted by XXXX</label>
                                                 </div>
                                                 <div style="display: none;">{{ form_widget(form.sessionid , {'attr': {'value': app.session.id} }) }}</div>    
                                                 <div class="form-item form-submit span4">

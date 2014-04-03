@@ -19,7 +19,7 @@ class BudgetController extends Controller
      * Lists all Issue entities.
      *
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $id)
     {
         
        
@@ -31,16 +31,17 @@ class BudgetController extends Controller
        $em = $this->getDoctrine()->getManager();
        
        
-        $categories = $em->getRepository('PSBalanceBudgetBundle:Category')->findAll();
+        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->find($id);
         
-        $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->findOneById(1);
+        $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
         
         $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);   
         $sliderValue = intval($budgetData->getDebt()) - intval($currentdebt);
         
         // json decode the issue option values string 
-        foreach($categories as $category)
-        {  foreach($category->getSections() as $section){
+       // foreach($categories as $category)
+       // {
+            foreach($category->getSections() as $section){
                 foreach($section->getIssues() as $issue){
                     $optionValues = json_decode($issue->getOptionValues(), TRUE);
                   if($sessionId)
@@ -75,12 +76,13 @@ class BudgetController extends Controller
                     
                 }
             }
-        }
+       // }
         //exit;
         return $this->render('PSBalanceBudgetBundle:Planner:index.html.twig', array(
-            'categories' => $categories,
+            'category' => $category,
             'budgetdata' => $budgetData,
             'slidervalue' => $sliderValue,
+            'next' => $id+1
             
         ));
     }
@@ -127,7 +129,7 @@ class BudgetController extends Controller
             // return the section / parent total
           
             $total = $this->getParentTotal($issueId);
-             $childrenTotal = $this->getSectionTotal($issueId, $sessionId)  ;
+           
           
          
             
@@ -150,12 +152,12 @@ class BudgetController extends Controller
              $newWogValue = $this->calculateWOG($wogId, $wogPercentage, $sessionId);
              
              // save the wog value
-             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogId, $newWogValue, $wogPercentage);               
+             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogId, round($newWogValue), $wogPercentage);               
             // now get the total wog
              $newWogTotal = $this->getWOGSectionTotal($wogId, $sessionId);
              $wogParentId = $this->getWogParent($wogId);
              // update the parent id
-             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogParentId, $newWogTotal);             
+             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogParentId, round($newWogTotal));             
            
          }     
          // to check if it has a reduction slider 
@@ -169,10 +171,9 @@ class BudgetController extends Controller
            
               $reducerPercentage = $this->getReducerPercentage($reducerId, $sessionId);
              
-//                        echo $total.'<br>';
-//                        echo $childrenTotal.'<br>';
-//                        echo $reducerPercentage.'<br>';
-                    
+                $childrenTotal = $this->getSectionTotal($issueId, $sessionId)  ;
+                  //  echo $total.'<br>';
+                  //  echo $childrenTotal.'<br>';
                         $newReducerValue = (intval($total) - intval($childrenTotal)) * intval($reducerPercentage)/100 ;
                       
                            
@@ -185,8 +186,8 @@ class BudgetController extends Controller
                    
                 // savereducer slider in DB
                 
-                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, $newReducerValue, $reducerPercentage);               
-                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);             
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, round($newReducerValue), $reducerPercentage);               
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, round($parentDebt));             
                   
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
                 // echo $totalDebt.'<br>';
@@ -202,10 +203,10 @@ class BudgetController extends Controller
          else
          {
               // save the  to the db
-                    
+                    $childrenTotal = $this->getSectionTotal($issueId, $sessionId)  ;  
                   $parentDebt = intval($childrenTotal);
                    if($wogId != $issueId)
-                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);                
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, round($parentDebt));                
                 
               
                   $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
@@ -219,13 +220,13 @@ class BudgetController extends Controller
          }    
           $result = array(  
                                         'reducerId'  => $reducerId,
-                                        'newReducerValue' => $newReducerValue, 
+                                        'newReducerValue' => round($newReducerValue), 
                                         'parentId' => $parentId,
                                         'parentDebt' => $parentDebt, 
                                         'sliderValue' => $sliderValue, 
                                         'totalDebt' => $totalDebt,
                                         'wogId' => $wogId,
-                                        'wogValue' => $newWogValue, 
+                                        'wogValue' => round($newWogValue), 
                                         'wogTotal' => $newWogTotal, 
                                         'wogParentId' => $wogParentId
                               );

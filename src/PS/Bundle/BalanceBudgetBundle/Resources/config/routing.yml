@@ -1,5 +1,5 @@
 planner:
-    pattern:  /planner
+    pattern:  /planner/{id}
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:index" }
     
 process_issue:

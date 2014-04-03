@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </section>
-              {% for category in categories%}
+              {#{% for category in categories%}#}
             <section class="contentSection">
                 <div class="container">
                     <div class="row">
@@ -329,22 +329,22 @@
             {% endfor%}
                    
                 {% endfor%}
-            {% endfor%}
+     {#       {% endfor%}#}
                             
 
-           {# <section class="contentSection finishedSection">
+           <section class="contentSection finishedSection">
                 <div class="container">
                     <div class="row">
                         <div class="span12">
                             <div class="span8">
-                                <h4>Saving Options</h4>
+                                <h4>{{ category.title}}</h4>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                <a href="#" class="nextButton">Next Section</a>
+                                <a href='{{path('planner',{'id': next })}}' class="nextButton">Next Category</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>  #}            
+            </section>           
 
         </div>
 

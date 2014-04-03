@@ -83,14 +83,16 @@ class VisitorActivityRepository extends EntityRepository
              $childresult = $this->findOneBy(array('issue_id' => $child->getId(), 'session_id' => $sessionId)); 
              if(isset($childresult))
              {
-                if($reducerId != $childresult->getId())
-                 $sectionTotal += $childresult->getIssueValue();
+                if($reducerId != $child->getId())
+                {  $sectionTotal += $childresult->getIssueValue();
                 
-              //   echo $childresult->getIssueValue().'<br>';
+                }
+                
+                
              }
              
        }
-      //  echo $sectionTotal.'<br>';
+       
        return $sectionTotal; 
     }
     

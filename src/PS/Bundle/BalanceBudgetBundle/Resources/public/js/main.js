@@ -84,6 +84,7 @@ $(document).ready(function(){
 		change: function( event, ui ) {
                               
                         var theId = $(this).attr('id').replace('issuegroupslider_',''); 
+                        console.log(ui.value)
                          $('#value_'+theId).val(ui.value); 
                     saveIssue(theId, ui.value);  
                    for(var key in sliderIds)
@@ -94,7 +95,10 @@ $(document).ready(function(){
                            // console.log(sliderIds[key]);
                               $('#value_'+key).val(sliderIds[key]); 
                              if(ui.value != 0) 
-                             $('#issuegroupslider_'+key).slider({ disabled: true }); 
+                             {
+                                 //$('#issuegroupslider_'+key).slider( 'value',sliderIds[key] );
+                                $('#issuegroupslider_'+key).slider({ disabled: true });
+                             } 
                              else
                              $('#issuegroupslider_'+key).slider({ disabled: false });     
                                 saveIssue(key, sliderIds[key]);  
@@ -105,19 +109,20 @@ $(document).ready(function(){
 	});
        
    })
-    $('.issuegroupslider').each(function(){
-        var value = $(this).slider('option', 'value');
-          var id = $(this).attr('id').replace('issuegroupslider_','');
-        if(value == 0)
-        {
-              $('#issuegroupslider_'+id).slider({ disabled: true }); 
-        }
-        else
-        {
-              $('#issuegroupslider_'+id).slider({ disabled: false }); 
-        }    
-       
-    });
+//    $('.issuegroupslider').each(function(){
+//        var value = $(this).slider('option', 'value');
+//          var id = $(this).attr('id').replace('issuegroupslider_','');
+//           sliders[$id] = value;
+//        if(value == 0)
+//        {
+//              $('#issuegroupslider_'+id).slider({ disabled: true }); 
+//        }
+//        else
+//        {
+//              $('#issuegroupslider_'+id).slider({ disabled: false }); 
+//        }    
+//       
+//    });
 // for the switches
 	$(".switch").each(function(){
            var id = $(this).attr('id').replace('switch_', '');

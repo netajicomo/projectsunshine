@@ -61,16 +61,16 @@ textarea {
     padding: 0.2em 0;
 }
 
-.video {
+.psVideo {
 	position: relative;
 	padding-bottom: 56.25%;
 	height: 0;
 	overflow: hidden;
 }
 
-.video iframe,  
-.video object,  
-.video embed {
+.psVideo iframe,  
+.psVideo object,  
+.psVideo embed {
 	position: absolute;
 	top: 0;
 	left: 0;

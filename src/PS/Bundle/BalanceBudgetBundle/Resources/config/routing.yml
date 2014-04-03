@@ -25,8 +25,7 @@ postcode_update:
 offline_submission:
     pattern: /offline_submission
     defaults: { _controller: "PSBalanceBudgetBundle:Default:offlineSubmission" }
-    defaults: { _controller: "PSBalanceBudgetBundle:Budget:updatePostcode" }
-    
+
 registration:
     pattern: /registration
     defaults: { _controller: "PSBalanceBudgetBundle:Registration:registration" }    

@@ -387,13 +387,15 @@ section + section{
 .contentSection .prevButton,
 .contentSection .nextButton{
     color: white;
-    font-size: 20px;
+    font-size: 17px;
     font-family: 'Architects Daughter', cursive;
     background-color: #235F8C;
     display: inline-block;
 
-    padding: 9px 24px;
+    padding: 9px 30px;
     border-radius: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
 }
 
 .contentSection .nextButton{
@@ -1204,7 +1206,9 @@ cite {
 
 .widgetContent h3{
     color: #8b2331;
-    font-size: 42px;
+    font-size: 30px;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: normal;
     line-height: 1em;
     margin-bottom: 24px;
 }
@@ -1281,6 +1285,58 @@ cite {
     .socialBtn li.google-btn a{ background-color: #dd4b39; }
     .socialBtn li.twitter-btn a{ background-color: #55acee; }
     .socialBtn li.linkedin-btn a{ background-color: #0977b5; }
+    
+/* ==========================================================================
+   Offline Submission Page Styles
+   ========================================================================== */
+    
+    .download-link a {
+        background-color: #8b2331;
+        color: #fff;
+        display: inline-block;
+        font-size: 21px;
+        font-family: 'Architects Daughter', cursive;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 28px;
+        border-radius: 14px;
+    }
+    
+    .download-link i {
+        margin-right: 10px
+    }
+    
+    .offline-form-submit input {
+        width: 250px
+    }
+   
+    .offline-form-submit:before {
+        margin-left: 80px
+    }
+    
+/* ==========================================================================
+   Notification Styles
+   ========================================================================== */    
+   .notificationSection{
+    color: white;
+    background-color: #235F8C;
+    padding: 18px;
+   }
+
+   .notificationSection li{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+   }
+
+   .notificationSection h5{ font-size: 17px; font-weight: 500; margin-bottom: 9px; }
+   .notificationSection span{ font-size: 15px; }
+
+   .notificationSection .icon-exclamation-sign{ font-size: 36px; }
+   .notificationSection li:first-child + li{ width: 800px; margin-left: 18px; }
+   .notificationSection li:first-child + li > a{ font-weight: 500; color: white; }
+   .notificationSection li.last a{ display: inline-block; font-size: 30px; background-color: #1A4566; padding: 10px 15px; color: white; }    
 
 
 /* ==========================================================================

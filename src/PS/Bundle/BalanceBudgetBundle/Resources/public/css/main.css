@@ -61,21 +61,25 @@ textarea {
     padding: 0.2em 0;
 }
 
-.video {
+.psVideo {
 	position: relative;
 	padding-bottom: 56.25%;
 	height: 0;
 	overflow: hidden;
 }
 
-.video iframe,  
-.video object,  
-.video embed {
+.psVideo iframe,  
+.psVideo object,  
+.psVideo embed {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6{
+    text-rendering: auto;
 }
 
 
@@ -177,15 +181,15 @@ h1, h2, h3, h4, h5, h6, ul{
     margin-bottom: 30px;
 }
 
-.mainNav .nav {
+.mainNavi .nav {
     float: none
 }
 
-.mainNav .navbar {
+.mainNavi .navbar {
     margin-bottom: 0;
 }
 
-.mainNav .nav>li>a{
+.mainNavi .nav>li>a{
     color: #003c69;
     font-size: 14px;
     padding-left: 0;
@@ -194,53 +198,53 @@ h1, h2, h3, h4, h5, h6, ul{
     font-weight: 500;
     text-shadow: none;
 }
-.mainNav .nav>li.dropdown>a{
+.mainNavi .nav>li.dropdown>a{
     padding-left: 12px;
     padding-right: 12px;
      margin-right: 30px;
 }
 
-.mainNav .nav>li.open>a{
+.mainNavi .nav>li.open>a{
     color: white;
     background-color: #002d4f;
 }
 
-.mainNav .nav i {
+.mainNavi .nav i {
     font-weight: bold;
     margin-left: 4px
 }
 
-.mainNav .nav i:before {
+.mainNavi .nav i:before {
     content: "\f107";
     position: relative;
     top: 1px;
 }
 
-.mainNav .nav>li>.dropdown-menu:after,
-.mainNav .nav>li>.dropdown-menu:before{
+.mainNavi .nav>li>.dropdown-menu:after,
+.mainNavi .nav>li>.dropdown-menu:before{
     display: none;
 }
 
-.mainNav .nav>li>.dropdown-menu{
+.mainNavi .nav>li>.dropdown-menu{
     margin: 0;
     border-radius: 0;
     border: none;
     background-color: #002d4f;
 }
 
-.mainNav .nav>li>.dropdown-menu a{
+.mainNavi .nav>li>.dropdown-menu a{
     color: white;
     padding: 18px 24px;
 }
 
-.mainNav .nav>li>.dropdown-menu a:hover,
-.mainNav .nav>li>.dropdown-menu a:focus{
+.mainNavi .nav>li>.dropdown-menu a:hover,
+.mainNavi .nav>li>.dropdown-menu a:focus{
     background-image: none;
     filter: -;
     background-color: #003b69;
 }
 
-.mainNav .submission-close{
+.mainNavi .submission-close{
     font-size: 14px;
     line-height: 40px;
 }
@@ -819,7 +823,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     position: relative;
     text-transform: uppercase;
     vertical-align: middle;
-    border-radius: 24px;
+    border-radius: 14px;
 }
 
 .link > a i {
@@ -1380,13 +1384,13 @@ footer h5{
         position: relative
     }
     
-    .mainNav .navbar {
+    .mainNavi .navbar {
         position: absolute;
         top: 0;
         right: 0;
     }
     
-    .mainNav .navbar .btn-navbar {
+    .mainNavi .navbar .btn-navbar {
         background: none;
         border: none;
         font-size: 34px;
@@ -1395,22 +1399,24 @@ footer h5{
         text-shadow: none;
     }
     
-    .mainNav .nav>ul>li {
+    .mainNavi .nav>ul>li {
         float: none
     }
+    
+    #watch-video{ width: auto; }
     
 /* ==========================================================================
    Mobile Menu styles
    ========================================================================== */    
-    .mainNav .submission-close{ display: none; }
-    .mainNav .nav-collapse{
+    .mainNavi .submission-close{ display: none; }
+    .mainNavi .nav-collapse{
         color: white;
         background-color: #002d4f;
         min-width: 200px;
     }
     
-    .mainNav .nav-collapse li a,
-    .mainNav .nav>li.dropdown>a{
+    .mainNavi .nav-collapse li a,
+    .mainNavi .nav>li.dropdown>a{
         color: white;
         font-size: 14px;
         display: block;
@@ -1418,8 +1424,8 @@ footer h5{
         margin: 0;
     }
     
-    .mainNav .nav-collapse li a:hover,
-    .mainNav .nav-collapse li a:focus{
+    .mainNavi .nav-collapse li a:hover,
+    .mainNavi .nav-collapse li a:focus{
         color: white;
         background-color: #003b69;
     }    

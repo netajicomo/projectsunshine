@@ -16,6 +16,9 @@ PS\Bundle\BalanceBudgetBundle\Entity\VisitorActivity:
         issue_value:
             type: string
             length: 255
+        issue_percentage:
+            type: integer
+            nullable: true    
         has_touched:
             type: boolean
         created_at:

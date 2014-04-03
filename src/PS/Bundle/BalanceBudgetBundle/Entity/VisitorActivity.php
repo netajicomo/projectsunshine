@@ -173,4 +173,32 @@ class VisitorActivity
             $this->created_at = new \DateTime();
         }
     }
+    /**
+     * @var integer
+     */
+    private $issue_percentage;
+
+
+    /**
+     * Set issue_percentage
+     *
+     * @param integer $issuePercentage
+     * @return VisitorActivity
+     */
+    public function setIssuePercentage($issuePercentage)
+    {
+        $this->issue_percentage = $issuePercentage;
+
+        return $this;
+    }
+
+    /**
+     * Get issue_percentage
+     *
+     * @return integer 
+     */
+    public function getIssuePercentage()
+    {
+        return $this->issue_percentage;
+    }
 }

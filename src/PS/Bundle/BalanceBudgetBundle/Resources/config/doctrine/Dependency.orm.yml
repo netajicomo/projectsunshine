@@ -10,5 +10,8 @@ PS\Bundle\BalanceBudgetBundle\Entity\Dependency:
         name:
             type: string
             length: 255
-        
+    oneToMany:
+        dependantissues:
+            targetEntity: Issue
+            mappedBy: dependency    
     

@@ -33,6 +33,23 @@ class IssueRepository extends EntityRepository
             ->getQuery();
 
         return $q->getResult();
-    }
 
+   }
+   
+   public function getTheCumulativeId($depId){
+       
+        $dep = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Dependency')->findOneById($depId);
+        $deps = $dep->getDependantissues();
+        
+        foreach($deps as $issue)
+        {
+            if($issue->getIsCumulative())
+                return $issue;
+        }
+     
+    
+       
+   }
+   
+  
 }

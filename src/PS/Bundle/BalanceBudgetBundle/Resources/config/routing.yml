@@ -2,6 +2,10 @@ planner:
     pattern:  /planner/{slug}
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:index" }
     
+detailed_submission:
+    pattern: /detailedsubmission/{slug}
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:detailedSubmission" }
+    
 process_issue:
     pattern: /processissue
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:processIssue" }

@@ -99,6 +99,41 @@ class BudgetController extends Controller
         ));
     }
 
+  public function detailedSubmissionAction(Request $request, $slug){
+       // create the visitor
+        $service = $this->get('visitor_tracker_service');
+
+       
+       if(!$service->createVisitor($request))
+        return $this->redirect($this->generateUrl('postcode'));    
+       
+        $sessionId = $request->getSession()->get('id');  
+       $em = $this->getDoctrine()->getManager();
+       
+       
+        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->findOneBySlug($slug);
+        
+
+        $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
+
+        $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);
+        $sliderValue = intval($budgetData->getDebt()) - intval($currentdebt);
+         $id = $category->getId();  
+          $pagination = $this->getThePagination($id);  
+            
+          $next = $pagination['next'];
+          $prev = $pagination['prev'];
+        return $this->render('PSBalanceBudgetBundle:Planner:detailed.html.twig', array(
+            'category' => $category,
+            'budgetdata' => $budgetData,
+            'slidervalue' => $sliderValue,
+            'next' => $next,
+            'prev' => $prev
+
+        ));
+        
+      
+  }  
     
     public function getThePagination($id){
           $em = $this->getDoctrine()->getManager();

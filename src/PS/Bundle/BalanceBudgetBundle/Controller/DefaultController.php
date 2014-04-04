@@ -63,14 +63,14 @@ class DefaultController extends Controller
                 $session = $request->getSession();
                 $sessionId = $session->get('id');
                 try{
-                    $plannerPostCode = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
+                    $plannerPostCode_check = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
                 }
                 catch(\Exception $exception)
                 {
                     echo $exception->getMessage();
                 }
 
-                if(!isset($sessionId) || !$plannerPostCode)
+                if(!isset($sessionId) || !$plannerPostCode_check)
                 {
                     $session->set('id', $session->getId());
                     $plannerPostCode->setSessionId($sessionId);
@@ -78,8 +78,8 @@ class DefaultController extends Controller
                     $em->flush();
 
                 }
-
-                return $this->redirect($this->generateUrl('planner', array('id' => 1)));
+            $category = $em->getRepository('PSBalanceBudgetBundle:Category')->findOneBy(array('id'=>1));
+                return $this->redirect($this->generateUrl('planner', array('slug' => $category->getSlug())));
         }
         return $this->render($template,array(
             'errors' => $errors,

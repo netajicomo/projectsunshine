@@ -134,7 +134,31 @@ class BudgetController extends Controller
         
       
   }  
-    
+   
+  public function summaryAction(Request $request){
+      
+       $service = $this->get('visitor_tracker_service');
+
+       
+       if(!$service->createVisitor($request))
+        return $this->redirect($this->generateUrl('postcode'));    
+       
+        $sessionId = $request->getSession()->get('id');  
+       $em = $this->getDoctrine()->getManager();
+       $summaryValues = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getSummaryInformation($sessionId);
+     // print_r($summaryValues);exit;
+       return $this->render('PSBalanceBudgetBundle:Planner:summary.html.twig', array(
+          
+
+        ));
+      
+  }
+  
+  
+  
+  
+  
+  
     public function getThePagination($id){
           $em = $this->getDoctrine()->getManager();
           $pagination = array();

@@ -1,0 +1,143 @@
+{% extends 'PSBalanceBudgetBundle::base_functional_layout.html.twig' %}
+ {% block page_stylesheets %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+  
+ {% block content %}
+    {% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+      
+
+        <div id="main">
+            <section>
+                <div class="sectionHeader">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span12">
+                                <div class="span10 clearMargin">
+                                    <h2>You’ve completed the revenue and spending questions!</h2> 
+                                    <p>You can review the results below and continue to the savings portion of the questionnaire</p>          
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10 clearMargin">
+
+                                <div class="widgetContent clearfix">
+
+                                    <div class="span5 text-center">
+                                        <canvas id="barChart" height="200" width="380"></canvas>    
+                                    </div> 
+
+                                    <div class="span4 barChart chartData">
+                                        <h4>Your have reduced debt by</h4>
+                                        <h6>$34.5bn</h6>
+                                    </div>
+
+                                </div>                                
+
+                                <div class="widgetContent clearfix">
+
+                                    <div class="span5 text-center">
+                                        <canvas id="doughnutChart" height="280" width="280"></canvas>    
+                                    </div> 
+
+                                    <div class="span4 doughtChart chartData">
+                                        <h4>Your saving choices have been in the following sectors</h4>
+                                        <ul>
+                                            <li><span>Example #1</span> 54.52 <em class="colOption1"></em></li>
+                                            <li><span>Example #2</span> 48.21 <em class="colOption2"></em></li>
+                                            <li><span>Example #3</span> 15.26 <em class="colOption3"></em></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div class="widgetContent clearfix">
+
+                                    <div class="span5 text-center">
+                                        <div class="roundData">
+                                            $42b
+                                        </div>
+                                    </div>                                      
+
+                                    <div class="span4 roundChart chartData">
+                                        <h4>The interest savings now available for spending on nominated priorities</h4>
+                                    </div>
+                                                                      
+                                </div>
+
+                                <div class="contentSection finishedSection text-center finishChart">
+                                        <h4>Continue to spending questions</h4>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                        <a href="#" class="nextButton redButton">Spending Questions</a>
+                                </div>                                                                 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        {% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+
+ <script type="text/javascript">
+            $(document).ready(function(){
+                var barData = {
+                    labels : ["Example #1","Example #2","Example #3"],
+                        datasets : [
+                            {
+                                fillColor : ["#be461d", "#0d4058", "#8b2331"],
+                                strokeColor : ["#be461d", "#0d4058", "#8b2331"],
+                                data : [35,65,95]
+                            }
+                        ]                    
+                };
+                var barOptions = {
+                    scaleShowGridLines: false,
+                    scaleLineColor: "#fafafa",
+                    xAxisBottom: false,
+                    scaleFontFamily: "'Roboto', sans-serif",
+                    scaleFontSize: 14,
+                    scaleFontStyle: "bold",
+                    inGraphDataShow: true
+                };
+                var doughnutData = [
+                    {
+                        value: 30,
+                        color:"#be461d"
+                    },
+                    {
+                        value : 80,
+                        color : "#0d4058"
+                    },
+                    {
+                        value : 100,
+                        color : "#8b2331"
+                    }
+                        
+                ];
+
+                var doughtOptions = {
+                    segmentShowStroke: false,
+                    inGraphDataShow: true,
+                    dynamicDisplay : true
+                };                       
+                var myDoughnut = new Chart(document.getElementById("doughnutChart").getContext("2d")).Doughnut(doughnutData, doughtOptions);        
+                var myBar = new Chart(document.getElementById("barChart").getContext("2d")).HorizontalBar(barData, barOptions);        
+            })
+        </script>
+         
+    {% endblock %}
+  

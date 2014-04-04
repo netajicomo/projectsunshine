@@ -316,35 +316,37 @@
         if(typeof result !== 'undefined')
 
               {
-                      //  console.log(result.parentDebt);
-                        
+           //  console.log(result);         
+                      // update the main debt total slider  
                 $('#total_'+result.parentId).val(result.parentDebt);
                 $('#totalSlider').slider( "option", "value", result.sliderValue );
                  var debtHeader =  (result.sliderValue/1000).toFixed(2)
                  $('#totalSlider .sliderValue em').text(debtHeader);
                 
                     // update the regular slider value
-                 if(typeof result.isSlider != 'false'){
+                 if(result.isSlider != 'false'){
                      
                     $('#reducer_value_'+id).val(result.isSlider);   
-                            
+                 //    console.log('simple slider');     
+                 //    console.log(result.isSlider);  
                  
                  }
                 
                      // update the reduction slider value
-                 if(typeof result.newReducerValue != 'false'){
+                 if(result.newReducerValue != 'false'){
                      
                     $('#reducer_value_'+result.reducerId).val(result.newReducerValue);   
-                            
+                 //    console.log('reducer slider');  
+                 //       console.log(result.newReducerValue);  
                  
                  }
-                 
-                  if(typeof result.wogValue != 'false'){
-                      // console.log(result); 
-                     //  console.log(wogId); 
+                 // update the wog slider
+                  if(result.wogValue != 'false'){
+                    
                     $('#reducer_value_'+result.wogId).val(result.wogValue);   
-                     $('#total_'+result.wogParentId).val(result.wogTotal);           
-                 
+                     $('#total_'+result.wogParentId).val(result.wogTotal);  
+                   //   console.log('wog slider');      
+                   //   console.log(result.wogValue);
                  }
                
               } 

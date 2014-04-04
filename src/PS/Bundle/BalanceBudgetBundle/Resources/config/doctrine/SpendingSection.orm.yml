@@ -40,7 +40,6 @@ PS\Bundle\BalanceBudgetBundle\Entity\SpendingSection:
               referencedColumnName: id
     oneToMany:
         issues:
-            orderBy: { 'is_parent': 'ASC' }
             targetEntity: SpendingIssue
-            mappedBy: sectionissue
+            mappedBy: section
     

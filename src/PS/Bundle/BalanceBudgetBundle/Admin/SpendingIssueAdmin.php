@@ -21,7 +21,7 @@ class SpendingIssueAdmin extends Admin
             ->add('name')
             ->add('section')
             ->add('description')
-            ->add('option_values')
+//            ->add('option_values')
             ->add('created_at')
         ;
     }
@@ -36,7 +36,7 @@ class SpendingIssueAdmin extends Admin
             ->add('name')
             ->add('description')
             ->add('section')
-            ->add('controltype')
+//            ->add('controltype')
 //            ->add('option_values')
             ->add('created_at')
             ->add('_action', 'actions', array(
@@ -59,7 +59,7 @@ class SpendingIssueAdmin extends Admin
             ->add('name')
             ->add('description')
             ->add('section')
-            ->add('controltype')
+//            ->add('controltype')
 //            ->add('option_values')
             ->add('created_at')
         ;
@@ -75,7 +75,7 @@ class SpendingIssueAdmin extends Admin
             ->add('name')
             ->add('section')
             ->add('description')
-            ->add('option_values')
+//            ->add('option_values')
             ->add('created_at')
         ;
     }

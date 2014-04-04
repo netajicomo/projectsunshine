@@ -18,8 +18,10 @@ PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
             length: 255
         description:
             type: text
+            length: 255
         option_values:
             type: text
+            length: 255
         created_at:
             type: datetime
     manyToOne:

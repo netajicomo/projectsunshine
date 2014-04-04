@@ -3,7 +3,7 @@
 namespace PS\Bundle\BalanceBudgetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use PS\Bundle\BalanceBudgetBundle\Logic\Planner as Planner;
 /**
  * Category
  */
@@ -222,4 +222,39 @@ class Category
     public function __toString(){
        return $this->name;
    }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSlugValue()
+    {
+        $this->slug = Planner::slugify($this->getName());
+    }
 }

@@ -42,27 +42,33 @@ class VisitorTracker
         
       $session = $request->getSession();
       $sessionId = $session->get('id');
+      $postCode = $request->request->get('postcode');
+      $visitor =  $this->em->getRepository('PSBalanceBudgetBundle:Visitor')->findOneBy(array('session_id'=>$sessionId)); 
+      if(!$postCode && !$visitor)
+      return false;    
       
-      $visitor = $this->em->getRepository('PSBalanceBudgetBundle:Visitor')->findOneBy(array('session_id'=>$sessionId));
+     
       // check if the session id exists and if it exists in the DB
       if(!isset($sessionId) || !isset($visitor))
       {    
-           
+           //create the visitor object
            $session->set('id', $session->getId());
-          $this->createVisitorObject($session->getId());
+          $this->createVisitorObject($session->getId(),$postCode);
+          
       }  
-     
+     return true;
         
     }
 
 
 
-    public function createVisitorObject($sessionId){
+    public function createVisitorObject($sessionId, $postCode){
         
         $visitor = new Visitor();
         $visitor->setSessionId($sessionId);
         $visitor->setIp($this->getIP());
         $visitor->setUserAgent($this->getUserAgent());
+        $visitor->setPostCode($postCode);
         $this->em->persist($visitor);
         $this->em->flush();
     }

@@ -21,20 +21,21 @@ class BudgetController extends Controller
      * Lists all Issue entities.
      *
      */
-    public function indexAction(Request $request, $id)
+    public function indexAction(Request $request, $slug)
     {
         
        
        // create the visitor
         $service = $this->get('visitor_tracker_service');
        
-       $service->createVisitor($request);
-
+       if(!$service->createVisitor($request))
+        return $this->redirect($this->generateUrl('postcode'));    
+           
        $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
        
        
-        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->find($id);
+        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->findOneBySlug($slug);
         
         $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
         
@@ -81,8 +82,11 @@ class BudgetController extends Controller
             }
        // }
         //exit;
-          $next = $id+1;
-          $prev = $id-1;
+          $id = $category->getId();  
+          $pagination = $this->getThePagination($id);  
+            
+          $next = $pagination['next'];
+          $prev = $pagination['prev'];
         return $this->render('PSBalanceBudgetBundle:Planner:index.html.twig', array(
             'category' => $category,
             'budgetdata' => $budgetData,
@@ -92,6 +96,42 @@ class BudgetController extends Controller
             
         ));
     }
+    
+    public function getThePagination($id){
+          $em = $this->getDoctrine()->getManager();
+          $pagination = array();
+         $categories = $em->getRepository('PSBalanceBudgetBundle:Category')->findAll();
+     
+         foreach($categories as $k=>$category)
+         {
+             if($id == $category->getId())
+             { // for the next
+                if(isset($categories[$k+1]))
+                {
+                   $pagination['next'] = $categories[$k+1]->getSlug(); 
+                }
+                else
+                {
+                  $pagination['next'] = $category->getSlug();   
+                }
+                // for the previous
+                if(isset($categories[$k-1]))
+                {
+                   $pagination['prev'] = $categories[$k-1]->getSlug(); 
+                }
+                else
+                {
+                  $pagination['prev'] = $category->getSlug();   
+                }
+             }    
+             
+         }
+        
+     
+        return $pagination;
+    }
+    
+    
     
     public function updateDebtAction(Request $request){
          

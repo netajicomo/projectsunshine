@@ -79,7 +79,7 @@ class DefaultController extends Controller
 
                 }
 
-                return $this->redirect($this->generateUrl('planner', array('slug' => 1)));
+                return $this->redirect($this->generateUrl('planner', array('slug' => 'cost-savings')));
         }
         return $this->render($template,array(
             'errors' => $errors,

@@ -63,14 +63,14 @@ class DefaultController extends Controller
                 $session = $request->getSession();
                 $sessionId = $session->get('id');
                 try{
-                    $plannerPostCode = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
+                    $plannerPostCode_check = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
                 }
                 catch(\Exception $exception)
                 {
                     echo $exception->getMessage();
                 }
 
-                if(!isset($sessionId) || !$plannerPostCode)
+                if(!isset($sessionId) || !$plannerPostCode_check)
                 {
                    // $session->set('id', $session->getId());
                     $plannerPostCode->setSessionId($sessionId);

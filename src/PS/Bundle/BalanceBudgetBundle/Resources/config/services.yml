@@ -10,6 +10,11 @@ services:
 
    
     
+    ps_balance_budget.admin.spending_issue:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SpendingIssueAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue, PSBalanceBudgetBundle:SpendingIssueAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Spending, label: Issues}
 
     ps_balance_budget.admin.category:
         class: PS\Bundle\BalanceBudgetBundle\Admin\CategoryAdmin

@@ -1,7 +1,7 @@
 PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
     type: entity
     repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\SpendingIssueRepository
-    table: ps_issue
+    table: ps_spending_issue
     id:
         id:
             type: integer
@@ -19,9 +19,11 @@ PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
         description:
             type: text
             length: 255
+            nullable: true
         option_values:
             type: text
             length: 255
+            nullable: true
         created_at:
             type: datetime
     manyToOne:

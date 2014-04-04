@@ -5,9 +5,9 @@ namespace PS\Bundle\BalanceBudgetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Issue
+ * SpendingIssue
  */
-class Issue
+class SpendingIssue
 {
     /**
      * @var integer
@@ -42,19 +42,61 @@ class Issue
     /**
      * @var boolean
      */
-    private $is_active = true;
+    private $is_parent;
+
+    /**
+     * @var boolean
+     */
+    private $is_reduceBy;
+
+    /**
+     * @var boolean
+     */
+    private $is_active;
 
     /**
      * @var \DateTime
      */
     private $created_at;
 
-    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $children;
+
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue
+     */
+    private $parent;
 
     /**
      * @var \PS\Bundle\BalanceBudgetBundle\Entity\ControlType
      */
     private $controltype;
+
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Section
+     */
+    private $sectionissue;
+
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Dependency
+     */
+    private $dependency;
+
+    /**
+     * @var \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup
+     */
+    private $issuegroup;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -69,7 +111,7 @@ class Issue
      * Set name
      *
      * @param string $name
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setName($name)
     {
@@ -92,7 +134,7 @@ class Issue
      * Set title
      *
      * @param string $title
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setTitle($title)
     {
@@ -115,7 +157,7 @@ class Issue
      * Set lead
      *
      * @param string $lead
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setLead($lead)
     {
@@ -138,7 +180,7 @@ class Issue
      * Set description
      *
      * @param string $description
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setDescription($description)
     {
@@ -161,7 +203,7 @@ class Issue
      * Set option_values
      *
      * @param string $optionValues
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setOptionValues($optionValues)
     {
@@ -181,10 +223,56 @@ class Issue
     }
 
     /**
+     * Set is_parent
+     *
+     * @param boolean $isParent
+     * @return SpendingIssue
+     */
+    public function setIsParent($isParent)
+    {
+        $this->is_parent = $isParent;
+
+        return $this;
+    }
+
+    /**
+     * Get is_parent
+     *
+     * @return boolean 
+     */
+    public function getIsParent()
+    {
+        return $this->is_parent;
+    }
+
+    /**
+     * Set is_reduceBy
+     *
+     * @param boolean $isReduceBy
+     * @return SpendingIssue
+     */
+    public function setIsReduceBy($isReduceBy)
+    {
+        $this->is_reduceBy = $isReduceBy;
+
+        return $this;
+    }
+
+    /**
+     * Get is_reduceBy
+     *
+     * @return boolean 
+     */
+    public function getIsReduceBy()
+    {
+        return $this->is_reduceBy;
+    }
+
+    /**
      * Set is_active
      *
      * @param boolean $isActive
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setIsActive($isActive)
     {
@@ -207,7 +295,7 @@ class Issue
      * Set created_at
      *
      * @param \DateTime $createdAt
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setCreatedAt($createdAt)
     {
@@ -226,98 +314,11 @@ class Issue
         return $this->created_at;
     }
 
-    
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedAtValue()
-    {
-         if(!$this->getCreatedAt()) {
-            $this->created_at = new \DateTime();
-        }
-    }
-    
-
-
-    /**
-     * Set controltype
-     *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\ControlType $controltype
-     * @return Issue
-     */
-    public function setControltype(\PS\Bundle\BalanceBudgetBundle\Entity\ControlType $controltype = null)
-    {
-        $this->controltype = $controltype;
-
-        return $this;
-    }
-
-    /**
-     * Get controltype
-     *
-     * @return \PS\Bundle\BalanceBudgetBundle\Entity\ControlType 
-     */
-    public function getControltype()
-    {
-        return $this->controltype;
-    }
-    /**
-     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Section
-     */
-    private $sectionissue;
-
-
-    /**
-     * Set sectionissue
-     *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Section $sectionissue
-     * @return Issue
-     */
-    public function setSectionissue(\PS\Bundle\BalanceBudgetBundle\Entity\Section $sectionissue = null)
-    {
-        $this->sectionissue = $sectionissue;
-
-        return $this;
-    }
-
-    /**
-     * Get sectionissue
-     *
-     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Section 
-     */
-    public function getSectionissue()
-    {
-        return $this->sectionissue;
-    }
-    
-    public function getCategory()
-    {
-        return $this->sectionissue->getCategory();
-    }        
-    
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $children;
-
-    /**
-     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Issue
-     */
-    private $parent;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Add children
      *
      * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $children
-     * @return Issue
+     * @return SpendingIssue
      */
     public function addChild(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $children)
     {
@@ -349,10 +350,10 @@ class Issue
     /**
      * Set parent
      *
-     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $parent
-     * @return Issue
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue $parent
+     * @return SpendingIssue
      */
-    public function setParent(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $parent = null)
+    public function setParent(\PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue $parent = null)
     {
         $this->parent = $parent;
 
@@ -362,80 +363,64 @@ class Issue
     /**
      * Get parent
      *
-     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Issue 
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue 
      */
     public function getParent()
     {
         return $this->parent;
     }
-    /**
-     * @var boolean
-     */
-    private $is_parent;
-
 
     /**
-     * Set is_parent
+     * Set controltype
      *
-     * @param boolean $isParent
-     * @return Issue
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\ControlType $controltype
+     * @return SpendingIssue
      */
-    public function setIsParent($isParent)
+    public function setControltype(\PS\Bundle\BalanceBudgetBundle\Entity\ControlType $controltype = null)
     {
-        $this->is_parent = $isParent;
+        $this->controltype = $controltype;
 
         return $this;
     }
 
     /**
-     * Get is_parent
+     * Get controltype
      *
-     * @return boolean 
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\ControlType 
      */
-    public function getIsParent()
+    public function getControltype()
     {
-        return $this->is_parent;
+        return $this->controltype;
     }
 
     /**
-     * @var boolean
-     */
-    private $is_reduceBy;
-
-
-    /**
-     * Set is_reduceBy
+     * Set sectionissue
      *
-     * @param boolean $isReduceBy
-     * @return Issue
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Section $sectionissue
+     * @return SpendingIssue
      */
-    public function setIsReduceBy($isReduceBy)
+    public function setSectionissue(\PS\Bundle\BalanceBudgetBundle\Entity\Section $sectionissue = null)
     {
-        $this->is_reduceBy = $isReduceBy;
+        $this->sectionissue = $sectionissue;
 
         return $this;
     }
 
     /**
-     * Get is_reduceBy
+     * Get sectionissue
      *
-     * @return boolean 
+     * @return \PS\Bundle\BalanceBudgetBundle\Entity\Section 
      */
-    public function getIsReduceBy()
+    public function getSectionissue()
     {
-        return $this->is_reduceBy;
+        return $this->sectionissue;
     }
-    /**
-     * @var \PS\Bundle\BalanceBudgetBundle\Entity\Dependency
-     */
-    private $dependency;
-
 
     /**
      * Set dependency
      *
      * @param \PS\Bundle\BalanceBudgetBundle\Entity\Dependency $dependency
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setDependency(\PS\Bundle\BalanceBudgetBundle\Entity\Dependency $dependency = null)
     {
@@ -453,17 +438,12 @@ class Issue
     {
         return $this->dependency;
     }
-    /**
-     * @var \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup
-     */
-    private $issuegroup;
-
 
     /**
      * Set issuegroup
      *
      * @param \PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup
-     * @return Issue
+     * @return SpendingIssue
      */
     public function setIssuegroup(\PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup $issuegroup = null)
     {
@@ -481,35 +461,74 @@ class Issue
     {
         return $this->issuegroup;
     }
-<<<<<<< HEAD
     /**
-     * @var boolean
+     * @ORM\PrePersist
      */
-    private $is_cumulative;
-
-
-    /**
-     * Set is_cumulative
-     *
-     * @param boolean $isCumulative
-     * @return Issue
-     */
-    public function setIsCumulative($isCumulative)
+    public function setCreatedAtValue()
     {
-        $this->is_cumulative = $isCumulative;
+        if(!$this->getCreatedAt()) {
+            $this->created_at = new \DateTime();
+        }
+    }
+    /**
+     * @var string
+     */
+    private $section;
+
+    /**
+     * @var string
+     */
+    private $category;
+
+
+    /**
+     * Set section
+     *
+     * @param string $section
+     * @return SpendingIssue
+     */
+    public function setSection($section)
+    {
+        $this->section = $section;
 
         return $this;
     }
 
     /**
-     * Get is_cumulative
+     * Get section
      *
-     * @return boolean 
+     * @return string 
      */
-    public function getIsCumulative()
+    public function getSection()
     {
-        return $this->is_cumulative;
+        return $this->section;
     }
-=======
->>>>>>> d7645c544dcba00fb5519b4e4b67e54896dc9408
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     * @return SpendingIssue
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return string 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

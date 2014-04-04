@@ -48,6 +48,7 @@ class DefaultController extends Controller
                 $plannerPostCode->setPostCode($value);
                 $validator = $this->get('validator');
                 $errors = $validator->validate($plannerPostCode);
+            
 
                 if (count($errors) > 0) {
                     return $this->render($template, array(

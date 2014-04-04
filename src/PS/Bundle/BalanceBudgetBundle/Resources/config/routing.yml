@@ -15,7 +15,7 @@ ckeditorsave:
     defaults: { _controller: "PSBalanceBudgetBundle:Default:CKEditorSave" }
 
 postcode:
-    pattern: /planner_postcode
+    pattern: /postcode
     defaults: { _controller: "PSBalanceBudgetBundle:Default:plannerPostcode" }
 
 postcode_update:
@@ -23,7 +23,7 @@ postcode_update:
     defaults: { _controller: "PSBalanceBudgetBundle:Default:updatePostcode" }
 
 offline_submission:
-    pattern: /offline_submission
+    pattern: /offlinesubmission
     defaults: { _controller: "PSBalanceBudgetBundle:Default:offlineSubmission" }
 
 registration:

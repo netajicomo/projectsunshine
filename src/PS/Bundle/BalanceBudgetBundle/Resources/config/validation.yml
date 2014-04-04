@@ -1,0 +1,4 @@
+PS\Bundle\BlanceBudgetBundle\Entity\PlannerPostCode:
+    properties:
+        post_code:
+            - NotBlank: ~

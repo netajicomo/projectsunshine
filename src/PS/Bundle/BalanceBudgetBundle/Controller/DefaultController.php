@@ -78,8 +78,8 @@ class DefaultController extends Controller
                     $em->flush();
 
                 }
-
-                return $this->redirect($this->generateUrl('planner', array('slug' => 'cost-savings')));
+            $category = $em->getRepository('PSBalanceBudgetBundle:Category')->findOneBy(array('id'=>1));
+                return $this->redirect($this->generateUrl('planner', array('slug' => $category->getSlug())));
         }
         return $this->render($template,array(
             'errors' => $errors,

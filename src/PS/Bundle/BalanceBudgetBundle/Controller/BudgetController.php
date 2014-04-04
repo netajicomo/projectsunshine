@@ -146,9 +146,14 @@ class BudgetController extends Controller
         $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
        $summaryValues = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getSummaryInformation($sessionId);
-     // print_r($summaryValues);exit;
+       $sum = array_sum($summaryValues);
+      
+// echo '<pre>';
+//      print_r($summaryValues);
+//      echo $sum;exit;
        return $this->render('PSBalanceBudgetBundle:Planner:summary.html.twig', array(
-          
+        'summaryValues' => $summaryValues,
+          'sum'  => number_format((intval($sum)/1000),1),
 
         ));
       

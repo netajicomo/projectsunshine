@@ -36,12 +36,12 @@
                                 <div class="widgetContent clearfix">
 
                                     <div class="span5 text-center">
-                                        <canvas id="barChart" height="200" width="380"></canvas>    
+                                        <canvas id="barChart" height="200" width="500"></canvas>    
                                     </div> 
 
                                     <div class="span4 barChart chartData">
                                         <h4>Your have reduced debt by</h4>
-                                        <h6>$34.5bn</h6>
+                                        <h6>${{ sum }}bn</h6>
                                     </div>
 
                                 </div>                                
@@ -55,9 +55,10 @@
                                     <div class="span4 doughtChart chartData">
                                         <h4>Your saving choices have been in the following sectors</h4>
                                         <ul>
-                                            <li><span>Example #1</span> 54.52 <em class="colOption1"></em></li>
-                                            <li><span>Example #2</span> 48.21 <em class="colOption2"></em></li>
-                                            <li><span>Example #3</span> 15.26 <em class="colOption3"></em></li>
+                                            {% for key,value in summaryValues %}
+                                            <li><span>{{ key}}</span> {{ (value/1000)|number_format(1, '.') }}<em class="colOption{{loop.index}}"></em></li>
+                                         
+                                            {% endfor %}
                                         </ul>
                                     </div>
 
@@ -94,13 +95,23 @@
 
  <script type="text/javascript">
             $(document).ready(function(){
+                
+                var labels = [];
+                var data = [];
+               {% for key,value in summaryValues %}
+                
+                labels.push('{{key}}');
+                var value = parseInt({{ value}},10)/1000;
+                //var value = (value).toFixed(1);
+                data.push(value);
+                 {% endfor %}
                 var barData = {
-                    labels : ["Example #1","Example #2","Example #3"],
+                    labels : labels,
                         datasets : [
                             {
                                 fillColor : ["#be461d", "#0d4058", "#8b2331"],
                                 strokeColor : ["#be461d", "#0d4058", "#8b2331"],
-                                data : [35,65,95]
+                                data : data
                             }
                         ]                    
                 };
@@ -115,15 +126,15 @@
                 };
                 var doughnutData = [
                     {
-                        value: 30,
+                        value: data[0],
                         color:"#be461d"
                     },
                     {
-                        value : 80,
+                        value : data[1],
                         color : "#0d4058"
                     },
                     {
-                        value : 100,
+                        value : data[2],
                         color : "#8b2331"
                     }
                         

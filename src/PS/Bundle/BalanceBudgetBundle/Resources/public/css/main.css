@@ -1395,7 +1395,7 @@ cite {
     }
 
     .chartData ul{
-        text-align: center;
+        text-align: right;
     }
 
     .chartData ul li{
@@ -1415,6 +1415,7 @@ cite {
     .chartData ul li span{
         font-weight: 600;
         text-transform: uppercase;
+        max-width: 200px;
     }
 
     .chartData ul li em{
@@ -1424,8 +1425,8 @@ cite {
         top: 4px;
     }
 
-    .chartData ul li em.colOption1{ background-color: #0d4058; }
-    .chartData ul li em.colOption2{ background-color: #be461d; }
+    .chartData ul li em.colOption1{ background-color: #be461d; }
+    .chartData ul li em.colOption2{ background-color: #0d4058; }
     .chartData ul li em.colOption3{ background-color: #8b2331; }
 
     .doughtChart{ padding-top: 30px; }

@@ -192,9 +192,15 @@ $(document).ready(function(){
                     
                 }
 	});
-        
-        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em>"+(value/1000).toFixed(2)+"</em> B </span>" );
-
+        var debtValue = (value/1000).toFixed(2);
+        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em>"+debtValue+"</em> B </span>" );
+        if(debtValue > 50)
+        {   
+//            totalSlider.find( ".ui-slider-handle" ).css('margin-left', '95px');
+//            var width = totalSlider.find( ".ui-slider-range" ).css('width');
+//            var newWidth = width+20;
+//            totalSlider.find( ".ui-slider-range" ).css('width', '83%');
+        }
 	/** Planner page add comment toggle **/        
         $( ".add-comment" ).click(function(e) {
             e.preventDefault();

@@ -125,20 +125,23 @@ class BudgetController extends Controller
               $em = $this->getDoctrine()->getManager();
             //calculate the regular slider value  
            $newValue = $this->isSlider($issueId, $issueValue);
+           //var_dump($newValue);
            if($newValue)
            {    
-            if($reducerId != $issueId)   
-           
-           $isSlider = round($newValue);
-               $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $newValue, $issueValue);             
-           } 
+                if($reducerId != $issueId)   
+                {
+                    $isSlider = $newValue['value'];
+                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $isSlider, $issueValue);             
+
+                }
+            } 
            else   
            { // save the issue value to the db  
             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $issueValue);              
            }
             // return the section / parent total
           
-            $total = $this->getParentTotal($issueId);
+           // $total = $this->getParentTotal($issueId);
               
           
          
@@ -180,10 +183,13 @@ class BudgetController extends Controller
             }   
            
               $reducerPercentage = $this->getReducerPercentage($reducerId, $sessionId);
-             
+               // return the reducer total
+          
+            $total = $this->getReducerTotal($reducerId);
                 $childrenTotal = $this->getSectionTotal($issueId, $sessionId)  ;
                   //  echo $total.'<br>';
                   //  echo $childrenTotal.'<br>';
+                
                         $reducerValue = (intval($total) - intval($childrenTotal)) * intval($reducerPercentage)/100 ;
                        $newReducerValue = round( $reducerValue);
                            
@@ -300,6 +306,17 @@ class BudgetController extends Controller
           return $total;
           
   }
+  
+  public function getReducerTotal($reducerId) {
+      $em = $this->getDoctrine()->getManager();
+       $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($reducerId); 
+        $values = $issue->getOptionValues();
+         $valuesArray = json_decode($values,TRUE);
+          $total = $valuesArray['total'];
+          return $total;
+      
+  } 
+  
   public function isSlider($issueId, $issuevalue){
        $em = $this->getDoctrine()->getManager();
        $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->find($issueId);
@@ -308,9 +325,10 @@ class BudgetController extends Controller
          $valuesArray = json_decode($values,TRUE);
           $total = $valuesArray['total'];
           $finalvalue = $total * $issuevalue/100;
-          
-        
-          return $finalvalue;
+          //echo $finalvalue;
+        $result = array();
+         $result['value'] = (string)round($finalvalue);
+          return $result;
        }
        else
        return false;    

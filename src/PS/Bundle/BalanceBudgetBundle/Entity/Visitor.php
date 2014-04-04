@@ -145,4 +145,32 @@ class Visitor
             $this->created_at = new \DateTime();
         }
     }
+    /**
+     * @var integer
+     */
+    private $post_code;
+
+
+    /**
+     * Set post_code
+     *
+     * @param integer $postCode
+     * @return Visitor
+     */
+    public function setPostCode($postCode)
+    {
+        $this->post_code = $postCode;
+
+        return $this;
+    }
+
+    /**
+     * Get post_code
+     *
+     * @return integer 
+     */
+    public function getPostCode()
+    {
+        return $this->post_code;
+    }
 }

@@ -21,20 +21,23 @@ class BudgetController extends Controller
      * Lists all Issue entities.
      *
      */
-    public function indexAction(Request $request, $id)
+    public function indexAction(Request $request, $slug)
     {
 
 
        // create the visitor
         $service = $this->get('visitor_tracker_service');
 
-       $service->createVisitor($request);
-
-       $sessionId = $request->getSession()->get('id');
+       
+       if(!$service->createVisitor($request))
+        return $this->redirect($this->generateUrl('postcode'));    
+           
+       $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
-
-
-        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->find($id);
+       
+       
+        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->findOneBySlug($slug);
+        
 
         $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
 
@@ -81,8 +84,11 @@ class BudgetController extends Controller
             }
        // }
         //exit;
-          $next = $id+1;
-          $prev = $id-1;
+          $id = $category->getId();  
+          $pagination = $this->getThePagination($id);  
+            
+          $next = $pagination['next'];
+          $prev = $pagination['prev'];
         return $this->render('PSBalanceBudgetBundle:Planner:index.html.twig', array(
             'category' => $category,
             'budgetdata' => $budgetData,
@@ -92,6 +98,45 @@ class BudgetController extends Controller
 
         ));
     }
+
+    
+    public function getThePagination($id){
+          $em = $this->getDoctrine()->getManager();
+          $pagination = array();
+         $categories = $em->getRepository('PSBalanceBudgetBundle:Category')->findAll();
+     
+         foreach($categories as $k=>$category)
+         {
+             if($id == $category->getId())
+             { // for the next
+                if(isset($categories[$k+1]))
+                {
+                   $pagination['next'] = $categories[$k+1]->getSlug(); 
+                }
+                else
+                {
+                  $pagination['next'] = $category->getSlug();   
+                }
+                // for the previous
+                if(isset($categories[$k-1]))
+                {
+                   $pagination['prev'] = $categories[$k-1]->getSlug(); 
+                }
+                else
+                {
+                  $pagination['prev'] = $category->getSlug();   
+                }
+             }    
+             
+         }
+        
+     
+        return $pagination;
+    }
+    
+    
+    
+
 
     public function spendingAction(Request $request, $id)
     {
@@ -165,6 +210,7 @@ class BudgetController extends Controller
         ));
     }
 
+
     public function updateDebtAction(Request $request){
 
                 // visitor tracking
@@ -185,11 +231,11 @@ class BudgetController extends Controller
 
 
               //instantiate other variables
-                $newReducerValue = false;
-                $newWogValue = 0;
+                $newReducerValue = 'false';
+                $newWogValue = 'false';
                 $newWogTotal = 0;
                 $wogParentId = false;
-                $isSlider = false;
+                $isSlider = 'false';
                 $wogId = $this->hasWog($issueId);
                 $reducerId = $this->hasReducer($issueId);
 
@@ -197,26 +243,31 @@ class BudgetController extends Controller
               $em = $this->getDoctrine()->getManager();
             //calculate the regular slider value
            $newValue = $this->isSlider($issueId, $issueValue);
+           //var_dump($newValue);
            if($newValue)
-           {
-            if($reducerId != $issueId)
 
-           $isSlider = $newValue;
-               $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, round($newValue), $issueValue);
-           }
-           else
-           { // save the issue value to the db
-            $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, round($issueValue));
+           {    
+                if($reducerId != $issueId)   
+                {
+                    $isSlider = $newValue['value'];
+                   $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $isSlider, $issueValue);             
+
+                }
+            } 
+           else   
+           { // save the issue value to the db  
+            $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId, $issueValue);              
            }
             // return the section / parent total
-
-            $total = $this->getParentTotal($issueId);
-
-
-
-
-
-
+          
+           // $total = $this->getParentTotal($issueId);
+              
+          
+         
+            
+           
+            
+          
 
               // for the whole of the govt logic
 
@@ -229,22 +280,26 @@ class BudgetController extends Controller
                    $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$issueId,'0',$issueValue);
 
                }
-             // retreive it from the db
-             $wogPercentage = $this->getWOGPercentage($wogId, $sessionId);
-             $newWogValue = $this->calculateWOG($wogId, $wogPercentage, $sessionId);
 
+             // retreive it from the db  
+             $wogPercentage = $this->getWOGPercentage($wogId, $sessionId);  
+             $wogValue = $this->calculateWOG($wogId, $wogPercentage, $sessionId);
+             $newWogValue = round($wogValue);
              // save the wog value
-             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogId, round($newWogValue), $wogPercentage);
+             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogId, $newWogValue, $wogPercentage);               
+
             // now get the total wog
              $newWogTotal = $this->getWOGSectionTotal($wogId, $sessionId);
              $wogParentId = $this->getWogParent($wogId);
              // update the parent id
-             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogParentId, round($newWogTotal));
 
-         }
-         // to check if it has a reduction slider
+             $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$wogParentId, $newWogTotal);             
+           
+         }     
+         // to check if it has a reduction slider 
+        
+         if($reducerId)  
 
-         if($reducerId)
          {
             if($reducerId == $issueId)
             {
@@ -253,11 +308,16 @@ class BudgetController extends Controller
 
               $reducerPercentage = $this->getReducerPercentage($reducerId, $sessionId);
 
+               // return the reducer total
+          
+            $total = $this->getReducerTotal($reducerId);
                 $childrenTotal = $this->getSectionTotal($issueId, $sessionId)  ;
                   //  echo $total.'<br>';
                   //  echo $childrenTotal.'<br>';
-                        $newReducerValue = (intval($total) - intval($childrenTotal)) * intval($reducerPercentage)/100 ;
-
+                
+                        $reducerValue = (intval($total) - intval($childrenTotal)) * intval($reducerPercentage)/100 ;
+                       $newReducerValue = round( $reducerValue);
+                           
 
                              $parentDebt = intval($childrenTotal) + intval($newReducerValue);
 
@@ -268,10 +328,12 @@ class BudgetController extends Controller
 
                 // savereducer slider in DB
 
-                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, round($newReducerValue), $reducerPercentage);
-                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, round($parentDebt));
+                
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$reducerId, $newReducerValue, $reducerPercentage);               
+                  $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->saveActivity($sessionId,$parentId, $parentDebt);             
+                  
+                  $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);        
 
-                  $totalDebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);
                 // echo $totalDebt.'<br>';
                   $sliderValue = intval($currentDebt) - intval($totalDebt);
 
@@ -298,19 +360,23 @@ class BudgetController extends Controller
 
                 //$result = array('parentDebt' => $parentDebt, 'sliderValue' => $sliderValue,'wogValue' => $newWogValue,'wogTotal' => $newWogTotal, 'wogParentId' => $wogParentId);
 
-
-         }
-          $result = array(
+               
+                    
+         } 
+         
+        
+          $result = array(  
                                         'reducerId'  => $reducerId,
                                         'isSlider' => $isSlider,
-                                        'newReducerValue' => round($newReducerValue),
+                                        'newReducerValue' => $newReducerValue, 
+
                                         'parentId' => $parentId,
                                         'parentDebt' => $parentDebt,
                                         'sliderValue' => $sliderValue,
                                         'totalDebt' => $totalDebt,
                                         'wogId' => $wogId,
-                                        'wogValue' => round($newWogValue),
-                                        'wogTotal' => $newWogTotal,
+                                        'wogValue' => $newWogValue, 
+                                        'wogTotal' => $newWogTotal, 
                                         'wogParentId' => $wogParentId
                               );
 
@@ -370,6 +436,17 @@ class BudgetController extends Controller
           return $total;
 
   }
+  
+  public function getReducerTotal($reducerId) {
+      $em = $this->getDoctrine()->getManager();
+       $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($reducerId); 
+        $values = $issue->getOptionValues();
+         $valuesArray = json_decode($values,TRUE);
+          $total = $valuesArray['total'];
+          return $total;
+      
+  } 
+  
   public function isSlider($issueId, $issuevalue){
        $em = $this->getDoctrine()->getManager();
        $issue = $em->getRepository('PSBalanceBudgetBundle:Issue')->find($issueId);
@@ -378,9 +455,11 @@ class BudgetController extends Controller
          $valuesArray = json_decode($values,TRUE);
           $total = $valuesArray['total'];
           $finalvalue = $total * $issuevalue/100;
+          //echo $finalvalue;
+        $result = array();
+         $result['value'] = (string)round($finalvalue);
+          return $result;
 
-
-          return $finalvalue;
        }
        else
        return false;

@@ -41,7 +41,7 @@ class IssueAdmin extends Admin
             ->add('sectionissue',null, array('label' => 'Section'))
             ->add('category','entity', array('code'=> 'getCategory'))    
             ->add('controltype',null, array('label' => 'Control Type'))
-            ->add('parent',null, array('label' => 'Parent Issue'))    
+            ->add('parent',null, array('label' => 'Section Total Issue'))    
             ->add('dependency',null, array('label' => 'Dependency'))        
             ->add('created_at')
             ->add('_action', 'actions', array(
@@ -66,10 +66,16 @@ class IssueAdmin extends Admin
             ->add('title')
             ->add('lead',null, array('required' => false))
             ->add('is_reduceBy',null, array('required' => false, 'label' => 'Is a reduction slider'))       
-             ->add('is_parent',null, array('required' => false))    
+             ->add('is_parent',null, array('required' => false, 'label' => 'Is the section total Issue'))    
          
-            ->add('parent','entity',array('class' => 'PSBalanceBudgetBundle:Issue','property' => 'name', 'empty_value' => 'Select an Issue', 'required' =>false))        
-             ->add('is_cumulative',null, array('required' => false))   
+            ->add('parent','entity',array('class' => 'PSBalanceBudgetBundle:Issue','property' => 'name', 'empty_value' => 'Select the Section total issue', 'required' =>false, 'label' =>'Select the Section total issue','query_builder' => function (\Doctrine\ORM\EntityRepository $repository) {
+                   return $repository->createQueryBuilder('t')
+                           ->Where('t.is_parent  =1');
+                        
+               }))        
+            
+                
+                ->add('is_cumulative',null, array('required' => false))   
                 ->add('dependency','entity',array('class' => 'PSBalanceBudgetBundle:Dependency','property' => 'name', 'empty_value' => 'Select a Dependency', 'required' =>false))        
                 ->add('issuegroup','entity',array('class' => 'PSBalanceBudgetBundle:IssueGroup','property' => 'name', 'empty_value' => 'Select an Issue Group', 'required' =>false))        
                 ->add('description')
@@ -114,3 +120,5 @@ class IssueAdmin extends Admin
     
     }
 }
+
+

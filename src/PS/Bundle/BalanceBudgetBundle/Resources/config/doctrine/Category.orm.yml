@@ -15,6 +15,10 @@ PS\Bundle\BalanceBudgetBundle\Entity\Category:
             length: 255    
         description:
             type: text
+        slug:
+            type: string
+            length: 255
+              
         is_active:
             type: boolean
             default: true
@@ -25,6 +29,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\Category:
             targetEntity: Section
             mappedBy: category       
     lifecycleCallbacks:
-        prePersist: [  setCreatedAtValue]
+        prePersist: [  setCreatedAtValue,setSlugValue]
+        preUpdate: [ setSlugValue ]
         
     

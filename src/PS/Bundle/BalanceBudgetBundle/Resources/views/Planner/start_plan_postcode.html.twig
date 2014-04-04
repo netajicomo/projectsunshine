@@ -33,8 +33,8 @@
                                 <h3 class="title">What is your post code?</h3>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
                                 {% for error in errors %}
-                                    <li>{{ error.message }}</li>
-                                {% endfor %}
+                                    <span class="alert alert-error" style="width: 253px; display: inline-block; ">{{ error.message }}</span>
+                                {% endfor %}                                 
                                 <form action="{{ path('postcode') }}" method="post" class="pincodeForm"     >
                                     <input type="text" name="postcode" placeholder="Enter your post code" required maxlength="4" number>
                                     <button type="submit" name="submit" value="submit" class="btn btn-submit">Start Planning</button>

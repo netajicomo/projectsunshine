@@ -72,7 +72,7 @@ class DefaultController extends Controller
 
                 if(!isset($sessionId) || !$plannerPostCode)
                 {
-                    $session->set('id', $session->getId());
+                   // $session->set('id', $session->getId());
                     $plannerPostCode->setSessionId($sessionId);
                     $em->persist($plannerPostCode);
                     $em->flush();

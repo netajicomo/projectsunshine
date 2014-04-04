@@ -82,7 +82,7 @@ $(document).ready(function(){
 		change: function( event, ui ) {
                               
                         var theId = $(this).attr('id').replace('issuegroupslider_',''); 
-                        console.log(ui.value)
+                        //console.log(ui.value)
                          $('#value_'+theId).val(ui.value); 
                     saveIssue(theId, ui.value);  
                    for(var key in sliderIds)

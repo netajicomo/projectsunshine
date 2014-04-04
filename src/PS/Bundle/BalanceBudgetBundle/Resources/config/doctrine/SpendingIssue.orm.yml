@@ -1,0 +1,36 @@
+PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\SpendingIssueRepository
+    table: ps_spending_issue
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+            length: 255
+            nullable: true
+        option_values:
+            type: text
+            length: 255
+            nullable: true
+        created_at:
+            type: datetime
+    manyToOne:
+            section:
+                targetEntity: SpendingSection
+                inversedBy: issues
+                joinColumn:
+                    name: section_id
+                    referencedColumnName: id
+            controltype:
+                targetEntity: ControlType
+                joinColumn:
+                    name: control_type_id
+                    referencedColumnName: id
+
+

@@ -29,7 +29,8 @@ sonata_page:
         - sonata_cache_apc
         - planner
         - ckeditorsave
-        - postcode_update
+        - postcode
+        - update_postcode
         - offline_submission
         - update_debt
         - registration

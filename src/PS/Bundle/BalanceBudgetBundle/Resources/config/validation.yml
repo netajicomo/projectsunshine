@@ -5,7 +5,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\PlannerPostCode:
                   message: Required
             - Type:
                   type: numeric
-                  message: Only numeric value acceptedssss
+                  message: Only numeric value accepted
             - Length:
                    min: 4
                    max: 4

@@ -35,7 +35,7 @@
                                 {% for error in errors %}
                                     <li>{{ error.message }}</li>
                                 {% endfor %}
-                                <form action="{{ path('postcode') }}" method="post" class="pincodeForm" >
+                                <form action="{{ path('postcode') }}" method="post" class="pincodeForm"     >
                                     <input type="text" name="postcode" placeholder="Enter your post code" required maxlength="4" number>
                                     <button type="submit" name="submit" value="submit" class="btn btn-submit">Start Planning</button>
                                 </form>

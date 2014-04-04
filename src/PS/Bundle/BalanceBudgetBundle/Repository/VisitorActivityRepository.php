@@ -119,4 +119,29 @@ class VisitorActivityRepository extends EntityRepository
       
     }
     
+    
+    public function getSummaryInformation($sessionId){
+        
+       $results = array();
+      $value = 0;
+       $parentIssues = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Issue')->getParentIssues(); 
+      
+       
+       foreach($parentIssues as $parentIssue){
+           $savedParent = $this->findOneBy(array('issue_id' => $parentIssue->getId(), 'session_id' => $sessionId));
+           if(isset($savedParent))
+           {
+              $parentIssueCategoryId = $parentIssue->getSectionissue()->getCategory()->getId();
+              $key =  $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Category')->find($parentIssueCategoryId)->getSlug();
+               
+             // echo 'cat:'.$parentIssueCategoryId.' valu:'.$savedParent->getIssueValue().'<br>';
+              $value += $savedParent->getIssueValue();
+               $results[$key] = $value;
+           }  
+           
+       }
+       
+       return $results; 
+    }
+    
 }

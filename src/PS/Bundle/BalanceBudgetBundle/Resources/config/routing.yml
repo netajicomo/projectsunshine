@@ -6,6 +6,10 @@ detailed_submission:
     pattern: /detailedsubmission/{slug}
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:detailedSubmission" }
     
+summary:
+    pattern: /summary
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:summary" }    
+    
 process_issue:
     pattern: /processissue
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:processIssue" }

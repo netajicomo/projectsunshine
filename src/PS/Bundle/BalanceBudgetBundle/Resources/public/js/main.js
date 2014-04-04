@@ -1,29 +1,29 @@
 $(document).ready(function(){
   // for the sliders
-   $('.slider').each(function(){
+    $('.slider').each(function(){
         var max = parseInt($(this).attr('data-max'), 10);
         var min = parseInt($(this).attr('data-min'), 10);
-      
+
         var step = parseInt($(this).attr('data-step'), 10);
         var value = Math.floor(parseInt($(this).attr('data-value'), 10));
-       
-       $(this).slider({
-                value: value,
-                step: step,
-		min: min,
-		max: max,
-		range: "min",
-		change: function( event, ui ) {
-                    var id = $(this).attr('id').replace('slider_','');
-			//var value = total*ui.value/100;
-                         
-                      //    $('#value_'+id).val(value);
-                         $('#value_'+id).val(ui.value); 
-                    saveIssue(id, ui.value);    
-      	}
-	});
-   }) 
-   // for the select boxes
+
+        $(this).slider({
+            value: value,
+            step: step,
+            min: min,
+            max: max,
+            range: "min",
+            change: function( event, ui ) {
+                var id = $(this).attr('id').replace('slider_','');
+                //var value = total*ui.value/100;
+
+                //    $('#value_'+id).val(value);
+                $('#value_'+id).val(ui.value);
+                saveIssue(id, ui.value);
+            }
+        });
+    })
+    // for the select boxes
    $('.selectType').each(function(){
          var value = parseInt($(this).attr('data-value'), 10);  
          $(this).val(value);

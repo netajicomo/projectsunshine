@@ -1,0 +1,46 @@
+PS\Bundle\BalanceBudgetBundle\Entity\SpendingSection:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\SpendingSectionRepository
+    table: ps_spending_section
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+            nullable: true
+        lead:
+            type: text
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        file:
+            type: string
+            lenght: 100
+            nullable: true
+        video:
+            type: text
+            nullable: true
+        is_active:
+            type: boolean
+            default: true
+            nullable: true
+    manyToOne:
+        category:
+            targetEntity: SpendingCategory
+            inversedBy: sections
+            joinColumn:
+              name: category_id
+              referencedColumnName: id
+    oneToMany:
+        issues:
+            orderBy: { 'is_parent': 'ASC' }
+            targetEntity: SpendingIssue
+            mappedBy: sectionissue
+    

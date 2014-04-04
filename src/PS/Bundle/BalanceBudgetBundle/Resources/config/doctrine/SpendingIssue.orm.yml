@@ -7,12 +7,6 @@ PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
             type: integer
             generator: { strategy: AUTO }
     fields:
-        section:
-            type: string
-            length: 255
-        category:
-            type: string
-            length: 255
         name:
             type: string
             length: 255
@@ -27,11 +21,16 @@ PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue:
         created_at:
             type: datetime
     manyToOne:
-        controltype:
-            targetEntity: ControlType
-            joinColumn:
-                name: control_type_id
-                referencedColumnName: id
-    lifecycleCallbacks:
-        prePersist: [  setCreatedAtValue]
+            section:
+                targetEntity: SpendingSection
+                inversedBy: issues
+                joinColumn:
+                    name: section_id
+                    referencedColumnName: id
+            controltype:
+                targetEntity: ControlType
+                joinColumn:
+                    name: control_type_id
+                    referencedColumnName: id
+
 

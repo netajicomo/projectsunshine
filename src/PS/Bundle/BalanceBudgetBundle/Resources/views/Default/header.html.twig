@@ -31,20 +31,21 @@
                             <div class="nav-collapse collapse">
 
                                 <ul class="nav">
-                                    <li><a href="#">Home</a></li>
+                                    <li><a href="/">Home</a></li>
                                     <li class="dropdown">
-                                        <a href="#" data-toggle="dropdown">About <i class="icon-angle-down"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Detailed Submission</a></li>
-                                            <li><a href="#">Standard Submission</a></li>
-                                            <li><a href="#">What’s the difference?</a></li>
-                                        </ul>                                        
+                                        <a href="#" >About</a>
+                                        {#<ul class="dropdown-menu">#}
+                                            {#<li><a href="{{ path('offline_submission') }}">Offline Submission</a></li>#}
+                                            {#<li><a href="{{ path('postcode') }}">Detailed Submission</a></li>#}
+                                            {#<li><a href="#">Standard Submission</a></li>#}
+                                            {#<li><a href="#">What’s the difference?</a></li>#}
+                                        {#</ul>                                        #}
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" data-toggle="dropdown">Budget Planner <i class="icon-angle-down"></i></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ path('offline_submission') }}">Offline Submission</a></li>
-                                            <li><a href="#">Detailed Submission</a></li>
+                                            <li><a href="{{ path('postcode') }}">Detailed Submission</a></li>
                                             <li><a href="#">Standard Submission</a></li>
                                             <li><a href="#">What’s the difference?</a></li>
                                         </ul>

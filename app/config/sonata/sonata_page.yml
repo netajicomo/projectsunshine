@@ -29,7 +29,11 @@ sonata_page:
         - sonata_cache_apc
         - planner
         - ckeditorsave
-        - postcode_update
+        - postcode
+        - update_postcode
+        - offline_submission
+        - update_debt
+        - registration
         
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'

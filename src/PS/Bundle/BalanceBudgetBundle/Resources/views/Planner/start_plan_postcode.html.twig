@@ -30,10 +30,13 @@
                     <div class="span12">
                         <div class="span10 clearMargin">
                             <div class="widgetContent text-center">
-                                <h3>What is your post code?</h3>
+                                <h3 class="title">What is your post code?</h3>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                <form action="{{ path('postcode_update') }}" method="post" class="pincodeForm">
-                                    <input type="text" name="postcode" placeholder="Enter your post code" required maxlength="4">
+                                {% for error in errors %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                                <form action="{{ path('postcode') }}" method="post" class="pincodeForm"     >
+                                    <input type="text" name="postcode" placeholder="Enter your post code" required maxlength="4" number>
                                     <button type="submit" name="submit" value="submit" class="btn btn-submit">Start Planning</button>
                                 </form>
                             </div>

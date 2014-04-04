@@ -8,8 +8,6 @@ services:
         scope: request
    
 
-   
-    
     ps_balance_budget.admin.header_menu:
             class: PS\Bundle\BalanceBudgetBundle\Admin\HeaderMenuAdmin
             arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu, PSBalanceBudgetBundle:HeaderMenuAdmin]
@@ -30,11 +28,6 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: Issues, label: Sections}
 
-    ps_balance_budget.admin.issue:
-        class: PS\Bundle\BalanceBudgetBundle\Admin\IssueAdmin
-        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Issue, PSBalanceBudgetBundle:IssueAdmin]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Issues, label: Issues}
 
     ps_balance_budget.admin.control_type:
         class: PS\Bundle\BalanceBudgetBundle\Admin\ControlTypeAdmin
@@ -72,3 +65,39 @@ services:
         arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\IssueGroup, PSBalanceBudgetBundle:IssueGroupAdmin]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Settings, label: IssueGroup}
+
+    ps_balance_budget.admin.category:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\CategoryAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Category, PSBalanceBudgetBundle:CategoryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Saving, label: Categories}
+
+    ps_balance_budget.admin.section:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SectionAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Section, PSBalanceBudgetBundle:SectionAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Saving, label: Sections}
+
+    ps_balance_budget.admin.issue:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\IssueAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Issue, PSBalanceBudgetBundle:IssueAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Saving, label: Issues}
+
+    ps_balance_budget.admin.spending_category:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SpendingCategoryAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\SpendingCategory, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Spending, label: Category}
+
+    ps_balance_budget.admin.spending_section:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SpendingSectionAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\SpendingSection, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Spending, label: Section}
+
+    ps_balance_budget.admin.spending_issue:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SpendingIssueAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Spending, label: Issue}

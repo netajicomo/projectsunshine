@@ -12,13 +12,15 @@ use PS\Bundle\BalanceBudgetBundle\Entity\VisitorActivity;
  */
 class VisitorActivityRepository extends EntityRepository
 {
-    public function saveActivity($sessionId, $issueId, $value){
+    public function saveActivity($sessionId, $issueId, $value, $percentage=null){
         
         $visitorActivity  = $this->findOneBy(array('session_id'=>$sessionId, 'issue_id' => $issueId));
         // update the row
         if(isset($visitorActivity))
         {
           $visitorActivity->setIssueValue($value);  
+          if(isset($percentage))
+          $visitorActivity->setIssuePercentage($percentage);      
         }
         else // create the row
         {
@@ -27,6 +29,8 @@ class VisitorActivityRepository extends EntityRepository
            $visitorActivity->setIssueId($issueId);
            $visitorActivity->setIssueValue($value);
            $visitorActivity->setHasTouched(true);
+           if(isset($percentage))
+          $visitorActivity->setIssuePercentage($percentage);  
         }
         
         $em = $this->getEntityManager();
@@ -49,6 +53,70 @@ class VisitorActivityRepository extends EntityRepository
            
         }
         return $totalDebt;
-    }       
+    } 
+    
+    public function getCumulativeValue($session_id, $issueId, $depId)
+    {
+        $dep = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Dependency')->find($depId);
+        $depIssues = $dep->getDependantissues();
+        $debMax = 0;
+        foreach($depIssues as $issue){
+            if($issue->getId() != $issueId)
+            {
+                $debIssue = $this->findOneBy(array('issue_id' => $issue->getId(), 'session_id' => $session_id));
+                if($debIssue)
+                $debMax += $debIssue->getIssueValue();
+            }
+            
+        } 
+        
+       return $debMax; 
+    }
+    
+    public function getSectionTotal($issueId, $sessionId, $reducerId){
+          // echo $reducerId.'<br>';
+                       
+                       
+       $parentIssue =  $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($issueId)->getParent();
+       $children = $parentIssue->getChildren();
+       $sectionTotal = 0;
+       foreach($children as $child){
+             $childresult = $this->findOneBy(array('issue_id' => $child->getId(), 'session_id' => $sessionId)); 
+             if(isset($childresult))
+             {
+                if($reducerId != $child->getId())
+                {  $sectionTotal += $childresult->getIssueValue();
+                
+                }
+                
+                
+             }
+             
+       }
+       
+       return $sectionTotal; 
+    }
+    
+    
+    
+    public function getWOGsectionTotal($wogId, $sessionId){
+        
+       
+      //get the WOG parent id from the wog issue
+        $wogIssue = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($wogId);
+        $wogParentId = $wogIssue->getParent()->getId();
+        $issues = $this->getEntityManager()->getRepository('PSBalanceBudgetBundle:Issue')->findOneById($wogParentId)->getChildren();
+
+      $wogTotal = 0;
+      foreach($issues as $issue){
+        $wog = $this->findOneBy(array('session_id' => $sessionId, 'issue_id' => $issue->getId()));  
+        if(isset($wog))
+        $wogTotal += $wog->getIssueValue();
+        
+      }
+    
+      return $wogTotal;
+      
+    }
     
 }

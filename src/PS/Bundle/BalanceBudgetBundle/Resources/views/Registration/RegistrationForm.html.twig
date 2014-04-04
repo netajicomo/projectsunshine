@@ -1,0 +1,87 @@
+{% extends 'PSBalanceBudgetBundle::base_functional_layout.html.twig' %}
+
+{% block page_stylesheets %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+  
+{% endblock %}
+
+{% block content %}
+    {% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+        <div id="main">
+            <section>
+                <div class="sectionHeader">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span12">
+                                <div class="span10 clearMargin">
+                                    <h2>You’ve completed the budget!</h2>            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10 register-form-wrapper clearMargin">
+                                <div class="widgetContent text-center">
+                                    <h3>Register and submit your budget</h3>
+                                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                    <div class="register-form row">
+                                        <div class="span1 hidden-phone"></div>
+                                        <form name="registration" id="planneruser" action="{{ path('registration')}}" method="post" class="span8">
+                                            <div class="form-item-wrapper row clearfix">
+                                                <div class="form-item span4">
+                                                   {{ form_label(form.firstname ,'First Name *') }} 
+                                                   {{ form_widget(form.firstname , {'attr': {'placeholder': 'Enter your first name', 'class': 'input-block-level'} }) }}
+                                                </div>
+                                                <div class="form-item span4">
+                                                   {{ form_label(form.lastname ,'Last Name *') }} 
+                                                   {{ form_widget(form.lastname , {'attr': {'placeholder': 'Enter your last name', 'class': 'input-block-level'} }) }}  
+                                                </div>
+                                            </div>
+                                            <div class="form-item-wrapper row clearfix">
+                                                <div class="form-item span4">
+                                                   {{ form_label(form.email ,'Email *') }} 
+                                                   {{ form_widget(form.email , {'attr': {'placeholder': 'Enter your email address', 'class': 'input-block-level'} }) }}
+                                                </div>
+                                                <div class="form-item span4">
+                                                   {{ form_label(form.confirmemail ,'Confirm Email *') }} 
+                                                   {{ form_widget(form.confirmemail , {'attr': {'placeholder': 'Confirm your email address', 'class': 'input-block-level'} }) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-item-wrapper row clearfix">
+                                                <div class="form-item span4">
+                                                   {{ form_label(form.mobilenumber ,'Mobile Number (optional)') }} 
+                                                   {{ form_widget(form.mobilenumber , {'attr': {'placeholder': 'Enter your mobile number', 'class': 'input-block-level'} }) }}
+                                                </div>
+                                                <div class="form-item span4">
+                                                   {{ form_label(form.phonenumber ,'Phone Number (optional)') }} 
+                                                   {{ form_widget(form.phonenumber , {'attr': {'placeholder': 'Enter your phone number', 'class': 'input-block-level'} }) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-item-wrapper row clearfix">
+                                                <div class="form-item span4">
+                                                 <label>{{ form_widget(form.agreestatus) }}I agree to be contacted by XXXX</label>
+                                                </div>
+                                                <div style="display: none;">{{ form_widget(form.sessionid , {'attr': {'value': app.session.id} }) }}</div>    
+                                                <div class="form-item form-submit span4">
+                                                   <input type="submit" name="submit" value="Register and submit" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+{% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+{% endblock %}

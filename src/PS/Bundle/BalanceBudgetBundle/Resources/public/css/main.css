@@ -29,6 +29,8 @@ a:hover{
     text-shadow: none;
 }
 
+:focus{ outline: none !important; }
+
 hr {
     display: block;
     height: 1px;
@@ -57,6 +59,23 @@ textarea {
     background: #ccc;
     color: #000;
     padding: 0.2em 0;
+}
+
+.psVideo {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+
+.psVideo iframe,  
+.psVideo object,  
+.psVideo embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 
@@ -158,32 +177,72 @@ h1, h2, h3, h4, h5, h6, ul{
     margin-bottom: 30px;
 }
 
-.mainNav .nav {
+.mainNavi .nav {
     float: none
 }
 
-.mainNav .nav>ul>li {
-    float: left
+.mainNavi .navbar {
+    margin-bottom: 0;
 }
 
-.mainNav .nav>ul>li>a{
+.mainNavi .nav>li>a{
     color: #003c69;
     font-size: 14px;
     padding-left: 0;
     padding-right: 0;
-    margin-right: 30px;
+    margin-right: 42px;
     font-weight: 500;
+    text-shadow: none;
+}
+.mainNavi .nav>li.dropdown>a{
+    padding-left: 12px;
+    padding-right: 12px;
+     margin-right: 30px;
 }
 
-.mainNav .nav i {
+.mainNavi .nav>li.open>a{
+    color: white;
+    background-color: #002d4f;
+}
+
+.mainNavi .nav i {
     font-weight: bold;
     margin-left: 4px
 }
 
-.mainNav .nav i:before {
+.mainNavi .nav i:before {
     content: "\f107";
     position: relative;
     top: 1px;
+}
+
+.mainNavi .nav>li>.dropdown-menu:after,
+.mainNavi .nav>li>.dropdown-menu:before{
+    display: none;
+}
+
+.mainNavi .nav>li>.dropdown-menu{
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: #002d4f;
+}
+
+.mainNavi .nav>li>.dropdown-menu a{
+    color: white;
+    padding: 18px 24px;
+}
+
+.mainNavi .nav>li>.dropdown-menu a:hover,
+.mainNavi .nav>li>.dropdown-menu a:focus{
+    background-image: none;
+    filter: -;
+    background-color: #003b69;
+}
+
+.mainNavi .submission-close{
+    font-size: 14px;
+    line-height: 40px;
 }
 
 /* ==========================================================================
@@ -222,7 +281,7 @@ section + section{
     height: 4px;
     left: -1px;
     right: -1px;
-    background-color: #4b131b;
+    background-color: #235F8C;
 }
 
 .promotSection .span12:after {
@@ -247,12 +306,15 @@ section + section{
 
 .subSection .moreInfo{
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    background-color: #4b131b;
+    font-family: 'Architects Daughter', cursive;
+    
+    background-color: #464646;
     display: inline-block;
     padding: 6px 18px;
-    text-transform:  uppercase;;
+    text-transform:  uppercase;
+    border-radius: 12px;
 }
 
 .subSection .moreInfo i{
@@ -272,23 +334,46 @@ section + section{
     background-color: #8b2331;
 }
 
+/* ==========================================================================
+   Title Styles
+   ========================================================================== */
+.titleSection .span12:after{
+    display: none;
+}
+
+.titleSection h2{
+    color: white;
+    font-size: 36px;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
+    background: url(../img/sectiontitle-bg.jpg) no-repeat 0 0;
+    background-size: cover;
+}
+
+.titleSection h2 span{
+    display: inline-block;
+    padding: 30px;
+    background-color: #235f8c;
+}
+
 .contentSection .span12{
     padding: 42px 0;
-    border-top: 1px solid #4b131b;
-    border-bottom: 1px solid #4b131b;
+    border: 1px solid #EBEBEB;
 
     text-align: center;
 }
 .contentSection h2, .contentSection h4{
-    color: #8b2331;
+    color: #235F8C;
     font-size: 48px;
-    font-weight: 300;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
 
     margin-bottom: 36px;
 }
 
 .contentSection h4{
-    font-size: 30px;
+    color: #8B2331;
+    font-size: 36px;
     font-weight: 500;
 
     margin-bottom: 24px;
@@ -299,14 +384,23 @@ section + section{
     float: none;
 }
 
+.contentSection .prevButton,
 .contentSection .nextButton{
     color: white;
-    font-size: 18px;
-    background-color: #53984c;
+    font-size: 17px;
+    font-family: 'Architects Daughter', cursive;
+    background-color: #235F8C;
     display: inline-block;
-    width: 300px;
 
-    padding: 12px 0;
+    padding: 9px 30px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.contentSection .nextButton{
+    margin-left: 18px;
+    background-color: #8B2331;
 }
 
 .finishedSection .span12{
@@ -508,6 +602,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .primeSlider .ui-slider-handle:before{
+    content: '';
+}
+
+.primeSlider .ui-slider-handle span{
     font-size: 32px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
@@ -515,20 +613,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     color: white;
     background-color: #8b2331;
 
-    content: '$0B DEBT';
-
     min-width: 200px;
     height: 58px;
     right: 0;
+    padding-left: 12px;
+    padding-right: 12px;
 
     line-height: 58px;
+    position: absolute;
+    display: block;
+    text-align: center;    
 }
+
+.primeSlider .ui-slider-handle span em{ font-style: normal; }
 
 .totalSliderLabel{
     display: table;
     width: 100%;
 
     margin-top: 24px;
+    table-layout: fixed;
 }
 
 .totalSliderLabel li{
@@ -560,7 +664,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     margin: 0;
     margin-bottom: 24px;
 
-    margin-left: -63px;
+    margin-left: -60px;
 }
 
 .totalSliderLabel.topLabel li:after{
@@ -619,6 +723,72 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     position: relative;
     top: 3px;    
     padding-left: 0;
+}
+
+a.add-comment {
+    background-color: #0d4058;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 18px;
+    text-transform: uppercase
+}
+
+.add-comment i {
+    background-color: #fff;
+    border-radius: 8px;
+    color: #0d4058;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    width: 16px;
+}
+
+.add-comment i:before {
+    font-size: 10px;
+    position: relative;
+    top: 1px;
+    vertical-align: middle
+}
+
+.add-comment-open i:before {
+    content: "\f068" 
+}
+
+.row div.comment-wrapper {
+    border: none;
+    display: none;
+}
+
+.comment-wrapper form {
+    padding: 0 30px 16px;
+}
+
+.comment-wrapper textarea {
+    border-color: #d7d7d7;
+    border-radius: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: #a2a2a2;
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 15px 18px;
+    width: 100%;
+}
+
+.comment-wrapper p {
+    margin-bottom: 0;
+    padding-top: 10px
+}
+
+.total-val-column {
+    padding-top: 35px
+}
+
+.total-val-column span {
+    margin-left: 10px
 }
 
 /**
@@ -682,8 +852,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     background-color: #fafafa;
     border-top: none;
     font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
     padding: 15px 15px 35px 30px;
     text-align: left
+}
+#watch-video{ width: 640px; }
+#watch-video .custom-modal-body,
+#watch-video .custom-modal-footer{
+    padding: 0;
+}
+
+#watch-video .get-involved-wrapper h2{
+    font-size: 26px;
 }
 
 .source-wrapper {
@@ -709,12 +890,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     height: 324px;
     padding: 86px 0 92px;
     width: 100%;
+    display: table;
+}
+
+.banner-wrapper > .container-wrapper{
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .banner-wrapper h1 {
-    color: #fff;
-    font-family: 'sketch_blockbold';
-    font-size: 40px;
+    color: #343434;
+    font-size: 48px;
 }
 
 .banner-wrapper span.span-block {
@@ -727,28 +913,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 }
 
 .span-block span {
-    background-color: #731d28;
+    background-color: #fff;
     display: inline-block;
-    padding: 18px 34px 12px
+    padding: 18px 34px 18px
 }
 
 .link > a {
     background-color: #0d4058;
     color: #fff;
     display: inline-block;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
     height: 50px;
     line-height: 50px;
-    padding-left: 70px;
+    padding-left: 50px;
     padding-right: 27px;
     position: relative;
     text-transform: uppercase;
     vertical-align: middle;
+    border-radius: 14px;
 }
 
 .link > a i {
-    background-color: #0a2f40;
+    font-size: 15px;
     display: inline-block;
     height: 50px;
     left: 0;
@@ -770,10 +958,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 .get-involved-wrapper h2 {
     color: #fff;
     display: inline-block;
-    font-family: 'sketch_blockbold';
-    margin-right: 27px;
+    font-weight: normal;
+    font-family: 'Architects Daughter', cursive;
+    margin-right: 24px;
     position: relative;
-    text-transform: uppercase;
+    text-transform: capitalize;
     top: 4px;
 }
 
@@ -783,7 +972,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
 
 .get-involved-wrapper .link > a {
     background-color: #fff;
-    color: #300c12
+    color: #731d28;
+    border-radius: 15px;
+    padding-left: 27px;
 }
 
 .get-involved-wrapper a i {
@@ -821,7 +1012,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     font-weight: 500
 }
 
-.top-content p {
+.generic-content-wrapper h1 + p {
     font-size: 21px
 }
 
@@ -835,22 +1026,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab800', end
     margin-bottom: 0
 }
 
-.margin-t60 {
+.generic-content-wrapper img {
+    border: 6px solid #ebebeb;
     margin-top: 60px
 }
 
-.img-wrapper {
-    border: 6px solid #ebebeb
-}
-
-.bottom-row {
-    margin-top: 50px
-}
-
 .generic-content-wrapper h3 {
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 40px
+    font: 500 36px 'Architects Daughter', sans-serif;
+    margin-bottom: 40px;
+    margin-top: 50px;
 }
 
 .generic-content-wrapper ul {
@@ -889,12 +1073,11 @@ blockquote {
 
 .generic-content-wrapper blockquote p {
     color: #8b2331;
-    font-size: 24px;
-    font-weight: 500;
+    font: 500 24px 'Architects Daughter', sans-serif;
     line-height: 36px;
     margin-bottom: 12px;
     position: relative;
-    top: -10px
+    top: -8px
 }
 
 cite {
@@ -1009,6 +1192,7 @@ cite {
 
 .sectionHeader h2{
     font-size: 42px;
+    font-weight: 500;
     line-height: 1em;
 }
 
@@ -1022,9 +1206,15 @@ cite {
 
 .widgetContent h3{
     color: #8b2331;
-    font-size: 42px;
+    font-size: 30px;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: normal;
     line-height: 1em;
     margin-bottom: 24px;
+}
+
+.widgetContent h3.title {
+    font-family: 'Architects Daughter', sans-serif;
 }
 
 .widgetContent h3 + p{
@@ -1040,17 +1230,18 @@ cite {
 
 .pincodeForm .btn-submit{
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Architects Daughter', sans-serif;
     font-size: 18px;
+    text-transform: uppercase;
 
     background: none;    
     background-color: #8b2331;
-    border-radius: 0;
+    border-radius: 10px;
     border: none;
 
     display: block;
 
-    width: 300px;
+    width: 214px;
     padding: 12px 0;
     margin: auto;
 
@@ -1094,6 +1285,122 @@ cite {
     .socialBtn li.google-btn a{ background-color: #dd4b39; }
     .socialBtn li.twitter-btn a{ background-color: #55acee; }
     .socialBtn li.linkedin-btn a{ background-color: #0977b5; }
+    
+/* ==========================================================================
+   Register Form Styles Starts
+   ========================================================================== */
+
+    .register-form {
+        text-align: left
+    }
+    
+    .form-item-wrapper {
+        margin-bottom: 25px
+    }
+    
+    .register-form label {
+        cursor: default;
+        font-size: 18px;
+        margin-bottom: 9px
+    }
+    
+    .register-form label.checkbox {
+        padding-top: 10px
+    }
+    
+    .register-form input {
+        margin-bottom: 0
+    }
+    
+    .register-form input[type="checkbox"]{
+        margin-right: 6px;
+        vertical-align: top;
+    }
+    
+    .register-form input[type="text"],
+    .register-form input[type="email"]{
+        border-radius: 0;
+        color: #464646;
+        font-size: 16px;
+        height: 47px;
+        opacity: .5;
+        filter: alpha(opacity=50);
+        padding: 0 16px;
+    }
+    
+    .form-submit {
+        position: relative
+    }
+    
+    .form-submit input {
+        background-color: #8b2331;
+        border: 0;
+        color: #fff;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 38px 0 50px
+    }
+    
+    .form-submit:before {
+        color: #fff;
+        content: "\f00c";
+        font-family: 'FontAwesome';
+        margin-left: 15px;
+        position: absolute;
+        top: 11px
+    }    
+    
+/* ==========================================================================
+   Offline Submission Page Styles
+   ========================================================================== */
+    
+    .download-link a {
+        background-color: #8b2331;
+        color: #fff;
+        display: inline-block;
+        font-size: 21px;
+        font-family: 'Architects Daughter', cursive;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 28px;
+        border-radius: 14px;
+    }
+    
+    .download-link i {
+        margin-right: 10px
+    }
+    
+    .offline-form-submit input {
+        width: 250px
+    }
+   
+    .offline-form-submit:before {
+        margin-left: 80px
+    }
+    
+/* ==========================================================================
+   Notification Styles
+   ========================================================================== */    
+   .notificationSection{
+    color: white;
+    background-color: #235F8C;
+    padding: 18px;
+   }
+
+   .notificationSection li{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+   }
+
+   .notificationSection h5{ font-size: 17px; font-weight: 500; margin-bottom: 9px; }
+   .notificationSection span{ font-size: 15px; }
+
+   .notificationSection .icon-exclamation-sign{ font-size: 36px; }
+   .notificationSection li:first-child + li{ width: 800px; margin-left: 18px; }
+   .notificationSection li:first-child + li > a{ font-weight: 500; color: white; }
+   .notificationSection li.last a{ display: inline-block; font-size: 30px; background-color: #1A4566; padding: 10px 15px; color: white; }    
 
 
 /* ==========================================================================
@@ -1304,13 +1611,13 @@ footer h5{
         position: relative
     }
     
-    .mainNav .navbar {
+    .mainNavi .navbar {
         position: absolute;
         top: 0;
         right: 0;
     }
     
-    .mainNav .navbar .btn-navbar {
+    .mainNavi .navbar .btn-navbar {
         background: none;
         border: none;
         font-size: 34px;
@@ -1319,18 +1626,45 @@ footer h5{
         text-shadow: none;
     }
     
-    .mainNav .nav>ul>li {
+    .mainNavi .nav>ul>li {
         float: none
     }
     
+    #watch-video{ width: auto; }
+    
+/* ==========================================================================
+   Mobile Menu styles
+   ========================================================================== */    
+    .mainNavi .submission-close{ display: none; }
+    .mainNavi .nav-collapse{
+        color: white;
+        background-color: #002d4f;
+        min-width: 200px;
+    }
+    
+    .mainNavi .nav-collapse li a,
+    .mainNavi .nav>li.dropdown>a{
+        color: white;
+        font-size: 14px;
+        display: block;
+        padding: 9px 18px;
+        margin: 0;
+    }
+    
+    .mainNavi .nav-collapse li a:hover,
+    .mainNavi .nav-collapse li a:focus{
+        color: white;
+        background-color: #003b69;
+    }    
+    
     .iconmoon-menu2 {
-        color: #BE461D
+         color: #002d4f;
     }
     
     /** Home Page Styles Starts Here **/
     
     .banner-wrapper h1 {
-        font-size: 20px
+        font-size: 26px
     }
 }
 
@@ -1357,7 +1691,7 @@ footer h5{
     }
     
     .iconmoon-menu2 {
-        color: #003c69
+        color: #002d4f
     }
     
     .content {
@@ -1425,6 +1759,13 @@ footer h5{
         width: 227px
     }
     
+    .pincodeForm input[type="text"] {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        height: 44px;
+        width: 100%
+    }
+    
     footer {
         padding: 30px 20px;
     }
@@ -1449,19 +1790,21 @@ footer h5{
         padding-bottom: 58px
     }
     
-    .get-involved-wrapper {
+/*    .get-involved-wrapper {
         padding-bottom: 0;
         padding-top: 0;
+    }*/
+    
+    .get-involved-wrapper h2{
+        font-size: 24px;
+        display: block;
     }
     
     .get-involved-wrapper .link > a {
-        background-color: #4b131b;
-        color: #fff;
-        display: block
+        margin-top: 18px;
     }
     
     .get-involved-wrapper .link  h2 + a {
-        background-color: #8b2331;
         margin-right: 0
     }
     
@@ -1496,16 +1839,14 @@ footer h5{
         font-size: 15px
     }
     
-    .margin-t60 {
-        margin-top: 25px
-    }
-    
-    .bottom-row {
-        margin-top: 30px
+    .generic-content-wrapper img {
+        margin-top: 25px;
+        max-width: 97%;
     }
     
     .generic-content-wrapper h3 {
-        margin-bottom: 28px
+        margin-bottom: 28px;
+        margin-top: 30px
     }
     
     .generic-content-wrapper ul {
@@ -1586,6 +1927,18 @@ footer h5{
     .socialBtn li + li{
         margin-left: 0;
     }
+    
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+
+   .register-form {
+        padding: 0 15px
+    }
+    
+    .form-item:first-child {
+        margin-bottom: 25px
+    }    
 
 }
 
@@ -1614,11 +1967,11 @@ footer h5{
         margin-right: 17px
     }
     
-    .link > a {
+/*    .link > a {
         font-size: 14px;
         padding-left: 60px;
         padding-right: 20px;
-    }
+    }*/
     
     .get-involved-wrapper h2 + a {
         margin-right: 8px
@@ -1648,6 +2001,14 @@ footer h5{
         font-size: 30px;
         font-weight: 500;
    }
+   
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+
+   .register-form-wrapper {
+        width: 600px
+    }   
 }
 
 /**
@@ -1671,7 +2032,7 @@ footer h5{
     /** Home Page Styles Starts Here **/
     
     .banner-wrapper h1 {
-        font-size: 30px
+        font-size: 36px
     }
 }
 

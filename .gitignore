@@ -22,3 +22,4 @@ acceptance_config.yml
 boxes/*
 .DS_Store
 nbproject/
+*php~*

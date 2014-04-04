@@ -1,0 +1,31 @@
+PS\Bundle\BalanceBudgetBundle\Entity\VisitorSpendingActivity:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\VisitorSpendingActivityRepository
+    table: ps_visitor_spending_activity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        session_id:
+            type: string
+            length: 255
+        issue_value:
+            type: string
+            length: 255
+        issue_percentage:
+            type: integer
+            nullable: true    
+        has_touched:
+            type: boolean
+        created_at:
+            type: datetime
+    manyToOne:
+        issue:
+            targetEntity: SpendingIssue
+            mappedBy: issues
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]        
+           
+        
+    

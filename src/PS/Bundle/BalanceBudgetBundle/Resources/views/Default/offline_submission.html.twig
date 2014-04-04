@@ -1,0 +1,63 @@
+{% extends 'PSBalanceBudgetBundle::base_functional_layout.html.twig' %}
+{% block page_stylesheets %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+    {% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+
+    <div id="main">
+        <section>
+            <div class="sectionHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10 clearMargin">
+                                <h2>Offline Submission</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="span10 register-form-wrapper clearMargin">
+
+                            <!--[if lt IE 8]>
+                            <div class="widgetContent notificationSection">
+                                <ul>
+                                    <li><i class="icon-exclamation-sign"></i></li>
+                                    <li>
+                                        <h5>This is an IE6/7 notification</h5>
+                                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic doloremque distinctio ipsa. Aspernatur, soluta, asperiores reprehenderit laborum odit optio enim. <a href="">UPGRADE NOW</a></span>
+                                    </li>
+                                    <li class="last"><a href=""><i class="icon-remove"></i></a></li>
+                                </ul>
+                            </div>
+                            <!--<![endif]-->
+
+                            <div class="widgetContent text-center">
+                                <h3>Download PDF Submission</h3>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                <div class="download-link text-center"><a href="#" title=""><i class="icon-download-alt"></i> Download</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+
+{% endblock %}

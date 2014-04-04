@@ -9,6 +9,7 @@ web/sitemap-*.xml
 web/.htaccess
 web/robots.txt
 web/uploads
+web/*
 app/*.cache
 app/cache/*
 app/logs/*

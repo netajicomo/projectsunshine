@@ -1,0 +1,48 @@
+PS\Bundle\BalanceBudgetBundle\Entity\PlannerUser:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\PlannerUserRepository
+    table: planner_user
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        firstname:
+            type: string
+            length: 255
+            column: first_name
+        lastname:
+            type: string
+            length: 255
+            column: last_name
+        email:
+            type: string
+            length: 255
+            column: email
+        confirmemail:
+            type: string
+            length: 255
+            column: confirm_email
+        mobilenumber:
+            type: integer
+            nullable: TRUE
+            column: mobile_number
+        phonenumber:
+            type: integer
+            nullable: TRUE
+            column: phone_number
+        agreestatus:
+            type: boolean
+            default: false
+            nullable: TRUE
+            column: agree_status
+        sessionid:
+            type: string
+            length: 255
+            nullable: TRUE
+            column: session_id
+            
+    
+
+        
+    

@@ -57,4 +57,51 @@ class Dependency
     {
           return $this->name;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $dependantissues;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dependantissues = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add dependantissues
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $dependantissues
+     * @return Dependency
+     */
+    public function addDependantissue(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $dependantissues)
+    {
+        $this->dependantissues[] = $dependantissues;
+
+        return $this;
+    }
+
+    /**
+     * Remove dependantissues
+     *
+     * @param \PS\Bundle\BalanceBudgetBundle\Entity\Issue $dependantissues
+     */
+    public function removeDependantissue(\PS\Bundle\BalanceBudgetBundle\Entity\Issue $dependantissues)
+    {
+        $this->dependantissues->removeElement($dependantissues);
+    }
+
+    /**
+     * Get dependantissues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDependantissues()
+    {
+        return $this->dependantissues;
+    }
+    
+    
 }

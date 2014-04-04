@@ -10,8 +10,8 @@ sonata_media:
                 mode: http # X-Sendfile | http
             providers:
                 - sonata.media.provider.image
-                - sonata.media.provider.file                
-                - sonata.media.provider.youtube                                
+                - sonata.media.provider.file
+                - sonata.media.provider.youtube
                 - sonata.media.provider.vimeo
                 - sonata.media.provider.dailymotion
 
@@ -23,14 +23,14 @@ sonata_media:
                 banner: { width: 1170, quality: 100 }
                 op_detail_banner: { width: 800, quality: 100 }
                 block_small: { width: 330, quality: 100 }
-                
+
         ATDW:  # the default context is mandatory
             download:
                 mode: http # X-Sendfile | http
             providers:
                 - sonata.media.provider.image
-                - sonata.media.provider.file                
-                - sonata.media.provider.youtube                                
+                - sonata.media.provider.file
+                - sonata.media.provider.youtube
                 - sonata.media.provider.vimeo
                 - sonata.media.provider.dailymotion
 
@@ -58,10 +58,10 @@ sonata_media:
         file:
             resizer:    false
 
-    pixlr:
-        enabled:  true
-        secret:   test1234
-        referrer: Agile Content
+#    pixlr:
+#        enabled:  true
+#        secret:   test1234
+#        referrer: Agile Content
 
     resizer:
         simple:

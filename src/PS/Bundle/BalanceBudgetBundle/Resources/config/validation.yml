@@ -1,4 +1,13 @@
-PS\Bundle\BlanceBudgetBundle\Entity\PlannerPostCode:
+PS\Bundle\BalanceBudgetBundle\Entity\PlannerPostCode:
     properties:
         post_code:
-            - NotBlank: ~
+            - NotBlank:
+                  message: Required
+            - Type:
+                  type: numeric
+                  message: Only numeric value acceptedssss
+            - Length:
+                   min: 4
+                   max: 4
+                   minMessage: "Your first name must be at least {{ limit }} characters length"
+                   maxMessage: "Your first name cannot be longer than {{ limit }} characters length"

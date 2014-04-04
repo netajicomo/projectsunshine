@@ -30,6 +30,7 @@ sonata_page:
         - planner
         - ckeditorsave
         - postcode
+        - update_postcode
         - offline_submission
         - update_debt
         - registration

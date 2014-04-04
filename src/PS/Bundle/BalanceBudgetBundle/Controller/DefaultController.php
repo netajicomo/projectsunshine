@@ -36,43 +36,56 @@ class DefaultController extends Controller
         return new \Symfony\Component\HttpFoundation\Response('success');
     }
 
-    public function plannerPostcodeAction()
+    public function plannerPostcodeAction($errors = null)
     {
+        $errors = null;
+        $request = $this->get('request');
         $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Planner:start_plan_postcode.html.twig';
+        if($request->getMethod() == 'POST')
+        {
+                $value = $request->request->get('postcode');
+                $plannerPostCode = new PlannerPostCode();
+                $plannerPostCode->setPostCode($value);
+                $validator = $this->get('validator');
+                $errors = $validator->validate($plannerPostCode);
 
-        return $this->render($template);
+                if (count($errors) > 0) {
+                    return $this->render($template, array(
+                        'errors' => $errors,
+                    ));;
+                }
+
+                $service = $this->get('visitor_tracker_service');
+                $service->createVisitor($request);
+                $em = $this->getDoctrine()->getManager();
+                //$issueId = $request->request->get('id');
+                $session = $request->getSession();
+                $sessionId = $session->get('id');
+                try{
+                    $plannerPostCode = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
+                }
+                catch(\Exception $exception)
+                {
+                    echo $exception->getMessage();
+                }
+
+                if(!isset($sessionId) || !$plannerPostCode)
+                {
+                    $session->set('id', $session->getId());
+                    $plannerPostCode->setSessionId($sessionId);
+                    $em->persist($plannerPostCode);
+                    $em->flush();
+
+                }
+
+                return $this->redirect($this->generateUrl('planner', array('id' => 1)));
+        }
+        return $this->render($template,array(
+            'errors' => $errors,
+                    ));
     }
 
-    public function updatePostCodeAction(Request $request){
 
-        $service = $this->get('visitor_tracker_service');
-        $service->createVisitor($request);
-        $em = $this->getDoctrine()->getManager();
-        //$issueId = $request->request->get('id');
-        $value = $request->request->get('postcode');
-        $session = $request->getSession();
-        $sessionId = $session->get('id');
-        try{
-            $plannerPostCode = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
-        }
-        catch(\Exception $exception)
-        {
-            echo $exception->getMessage();
-        }
-
-        if(!isset($sessionId) || !$plannerPostCode instanceof PlannerPostCode )
-        {
-            $session->set('id', $session->getId());
-            $plannerPostCode = new PlannerPostCode();
-            $plannerPostCode->setSessionId($sessionId);
-        }
-        $plannerPostCode->setPostCode($value);
-        $em->persist($plannerPostCode);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('planner', array('id' => 1)));
-
-    }
     public function offlineSubmissionAction()
     {
         $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Default:offline_submission.html.twig';

@@ -192,6 +192,7 @@ $(document).ready(function(){
                     
                 }
 	});
+        $(totalSlider).find( ".ui-slider-range" ).append("<div class='ui-slider-inner'><ul><li>Sustainable Level</li><li>Target</li><li>Unsustainable Level</li></ul></div>");
         var debtValue = (value/1000).toFixed(2);
         totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em>"+debtValue+"</em> B </span>" );
         if(debtValue > 50)

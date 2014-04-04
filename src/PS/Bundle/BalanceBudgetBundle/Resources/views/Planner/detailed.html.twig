@@ -1,0 +1,264 @@
+{% extends 'PSBalanceBudgetBundle::base_functional_layout.html.twig' %}
+ {% block page_stylesheets %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+  
+ {% block content %}
+    {% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+        <div class="content">
+
+            <section class="leadSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span8">
+                            <h2>{{ budgetdata.title}}</h2>
+                            <p class="descriptionLead">{{ budgetdata.description}}</p>
+                        </div>
+                        <div class="span4">
+                            <img src="{{ asset('bundles/psbalancebudget/img/video-sample-1.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="primeSlider" id="fixedheader">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span10">
+                                <ul class="totalSliderLabel topLabel">
+                                    <li>$0</li>
+                                    <li>$10b</li>
+                                    <li>$20b</li>
+                                    <li>$30b</li>
+                                    <li>$40b</li>
+                                    <li>$50b</li>
+                                    <li>$60b</li>
+                                    <li>$70b</li>
+                                </ul>                                
+                                <div id="totalSlider" data-total="{{budgetdata.debt}}" data-value="{{ slidervalue }}"></div>
+                                <ul class="totalSliderLabel">
+                                    <li>$5b</li>
+                                    <li>$15b</li>
+                                    <li>$25b</li>
+                                    <li>$35b</li>
+                                    <li>$45b</li>
+                                    <li>$55b</li>
+                                    <li>$65b</li>
+                                    <li>$75b</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+              {#{% for category in categories%}#}
+            <section class="contentSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span8">
+                                <h2>{{ category.title}}</h2>
+                                <p>{{ category.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+
+            <!-- Start of First Row -->
+          {% for section in  category.sections%}
+            <!--<section class="subSection promotSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ section.title}}</h3>
+                                        <p>{{ section.lead}}</p>
+                                        <a href="#promo-section" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
+                                        <div id="promo-section" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-header custom-modal-header clearfix">
+                                              <button type="button" class="close text-upper" data-dismiss="modal" aria-hidden="true">Close <i class="icon-remove"></i></button>
+                                            </div>
+                                            <div class="modal-body custom-modal-body">
+                                                <h3>This is the title</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation <a href="#" title="ullamco laboris">ullamco laboris</a> nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            </div>
+                                            <div class="modal-footer custom-modal-footer">
+                                                <ul>
+                                                    <li><sup>#</sup>SOURCE: <span>Government Department Report 2014</span></li>
+                                                    <li><sub>*</sub>SOURCE: <span><a href="#">http://www.google.com.au</a></span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll">
+                                        <img src="{{ asset('bundles/psbalancebudget/img/video-sample-2.jpg') }}" alt="" class="pull-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>-->     
+            
+            <section class="subSection titleSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <h2><span>{{ section.title}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </section> 
+            
+           {% for issue in section.issues%}
+
+              {% if  issue.isparent != '1'%}
+            <section class="subSection subSection-row">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ issue.title}}  </h3>
+                                        <p>{{ issue.lead}}</p>
+                                        <!--<a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>-->
+                                        <a href="#subsection_{{loop.index}}" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
+                                        <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-header custom-modal-header clearfix">
+                                              <button type="button" class="close text-upper" data-dismiss="modal" aria-hidden="true">Close <i class="icon-remove"></i></button>
+                                            </div>
+                                            <div class="modal-body custom-modal-body">
+                                                <h3>This is the title</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation <a href="#" title="ullamco laboris">ullamco laboris</a> nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            </div>
+                                            <div class="modal-footer custom-modal-footer">
+                                                <ul>
+                                                    <li><sup>#</sup>SOURCE: <span>Government Department Report 2014</span></li>
+                                                    <li><sub>*</sub>SOURCE: <span><a href="#">http://www.google.com.au</a></span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="span12 comment-wrapper">
+                                    <form action="#" method="post">
+                                        <div>
+                                            <div class="form-textarea">
+                                                <textarea rows="4" cols="50">Enter your response...</textarea>
+                                            </div>
+                                            <p>By adding your comments you will be required to complete a short registration at the end of the survery</p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>                      
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+              {% endif %} 
+        
+            {% endfor%}
+                   
+                {% endfor%}
+     {#       {% endfor%}#}
+                            
+
+           <section class="contentSection finishedSection">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span8">
+                                <h4>{{ category.title}}</h4>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+                                <a href='{{path('planner',{'slug': prev })}}' class="prevButton">Previous Section</a>
+                                <a href='{{path('planner',{'slug': next })}}' class="nextButton">Next Section</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>           
+
+        </div>
+
+        {% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+
+<script type="text/javascript">
+// save the users values
+          
+          function saveIssue(id,value){
+
+          var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max"); 
+
+              $.ajax({
+  type: "POST",
+  url: "{{ path('update_debt')}}",
+  data:{issueId: id, value: value,currentDebt:currentTotalSliderValue},
+  success: function(result){
+
+
+        if(typeof result !== 'undefined')
+
+              {
+           //  console.log(result);         
+                      // update the main debt total slider  
+                $('#total_'+result.parentId).val(result.parentDebt);
+                $('#totalSlider').slider( "option", "value", result.sliderValue );
+                 var debtHeader =  (result.sliderValue/1000).toFixed(2)
+                 $('#totalSlider .sliderValue em').text(debtHeader);
+                
+                    // update the regular slider value
+                 if(result.isSlider != 'false'){
+                     
+                    $('#reducer_value_'+id).val(result.isSlider);   
+                 //    console.log('simple slider');     
+                 //    console.log(result.isSlider);  
+                 
+                 }
+                
+                     // update the reduction slider value
+                 if(result.newReducerValue != 'false'){
+                     
+                    $('#reducer_value_'+result.reducerId).val(result.newReducerValue);   
+                 //    console.log('reducer slider');  
+                 //       console.log(result.newReducerValue);  
+                 
+                 }
+                 // update the wog slider
+                  if(result.wogValue != 'false'){
+                    
+                    $('#reducer_value_'+result.wogId).val(result.wogValue);   
+                     $('#total_'+result.wogParentId).val(result.wogTotal);  
+                   //   console.log('wog slider');      
+                   //   console.log(result.wogValue);
+                 }
+               
+              } 
+        
+  }
+  
+})
+  }
+  
+   
+      </script>
+         
+    {% endblock %}
+  

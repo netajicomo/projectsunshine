@@ -34,6 +34,7 @@ sonata_page:
         - offline_submission
         - update_debt
         - registration
+        - detailed_submission
         
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'

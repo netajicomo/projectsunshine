@@ -1,0 +1,239 @@
+{% extends 'PSBalanceBudgetBundle::base_functional_layout.html.twig' %}
+ {% block page_stylesheets %}
+
+     {{ parent() }}
+ {% endblock %}
+
+{% block page_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+ {% block content %}
+     {% include 'PSBalanceBudgetBundle:Default:header.html.twig'%}
+<div class="content">
+
+    <section class="leadSection">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <h2>{{ budgetdata.title}}</h2>
+                    <p class="descriptionLead">{{ budgetdata.description}}</p>
+                </div>
+                <div class="span4">
+                    <img src="{{ asset('bundles/psbalancebudget/img/video-sample-1.jpg') }}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="primeSlider" id="fixedheader">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="span10">
+                        <ul class="totalSliderLabel topLabel">
+                            <li>$0</li>
+                            <li>$10b</li>
+                            <li>$20b</li>
+                            <li>$30b</li>
+                            <li>$40b</li>
+                            <li>$50b</li>
+                            <li>$60b</li>
+                            <li>$70b</li>
+                        </ul>
+                        <div id="totalSlider" data-total="{{budgetdata.debt}}" data-value="{{ slidervalue }}"></div>
+                        <ul class="totalSliderLabel">
+                            <li>$5b</li>
+                            <li>$15b</li>
+                            <li>$25b</li>
+                            <li>$35b</li>
+                            <li>$45b</li>
+                            <li>$55b</li>
+                            <li>$65b</li>
+                            <li>$75b</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <form name="spending_form" action="{{ path('spending_save') }}" method="post">
+    {% for category in categories %}
+    <section class="contentSection">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="span8">
+                        <h2>{{ category.name}}</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start of First Row -->
+    {% for section in  category.sections%}
+        <section class="subSection titleSection">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h2><span>{{ section.name}}</span></h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% for issue in section.issues%}
+            <section class="subSection subSection-row">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span7">
+                                    <div class="spacingAll">
+                                        <h3>{{ issue.name}}  </h3>
+                                        {#<p>{{ issue.lead}}</p>#}
+                                        {#<a href="#subsection_{{loop.index}}" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>#}
+                                        <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span5">
+                                    <div class="spacingAll costSlider">
+                                        <div id="slider_{{issue.id}}" class="spending-slider" data-value=""  data-max="100" data-min="0" data-step="1" data-start="0"></div>
+                                        <div class="sliderLabel clearfix">
+                                            <span class="pull-left">0%</span>
+                                            <span class="pull-right">100%</span>
+                                        </div>
+                                        <label class="redLabel">cutting <span>$</span>
+                                            <input type="text" readonly id="reducer_value_{{issue.id}}" name="issue[{{issue.id}}][value]"  class="value" value="0">M
+                                            (<input type="text" readonly id="value_{{issue.id}}" name="issue[{{issue.id}}][percent]" class="percent" value="0" style="width:30px">%)
+                                        </label>
+                                        {#<input type="hidden" readonly id="debt_value_{{issue.id}}" value="100">#}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endfor%}
+        <section class="subSection section-total">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h2><span>$100,000</span></h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor%}
+    {% endfor%}
+    <section class="contentSection finishedSection">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="span8">
+
+                        {#<h4>{{ category.title}}</h4>#}
+                        {#<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>#}
+                        {#<a href='{{path('spending',{'slug': prev })}}' class="prevButton">Previous Section</a>#}
+                        {#<a href='{{path('spending',{'slug': next })}}' class="nextButton">Next Section</a>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <input type="submit" value="Submit Spendings" />
+     </form>
+</div>
+
+{% include 'PSBalanceBudgetBundle:Default:footer.html.twig' %}
+
+<script type="text/javascript">
+    // save the users values
+
+    function saveIssue(id,value){
+
+        var currentTotalSliderValue =  $('#totalSlider').slider( "option", "max");
+
+        $.ajax({
+            type: "POST",
+            url: "{{ path('update_debt')}}",
+            data:{issueId: id, value: value,currentDebt:currentTotalSliderValue},
+            success: function(result){
+
+
+                if(typeof result !== 'undefined')
+
+                {
+                    //  console.log(result);
+                    // update the main debt total slider
+                    $('#total_'+result.parentId).val(result.parentDebt);
+                    $('#totalSlider').slider( "option", "value", result.sliderValue );
+                    var debtHeader =  (result.sliderValue/1000).toFixed(2)
+                    $('#totalSlider .sliderValue em').text(debtHeader);
+
+                    // update the regular slider value
+                    if(result.isSlider != 'false'){
+
+                        $('#reducer_value_'+id).val(result.isSlider);
+                        //    console.log('simple slider');
+                        //    console.log(result.isSlider);
+
+                    }
+
+                    // update the reduction slider value
+                    if(result.newReducerValue != 'false'){
+
+                        $('#reducer_value_'+result.reducerId).val(result.newReducerValue);
+                        //    console.log('reducer slider');
+                        //       console.log(result.newReducerValue);
+
+                    }
+                    // update the wog slider
+                    if(result.wogValue != 'false'){
+
+                        $('#reducer_value_'+result.wogId).val(result.wogValue);
+                        $('#total_'+result.wogParentId).val(result.wogTotal);
+                        //   console.log('wog slider');
+                        //   console.log(result.wogValue);
+                    }
+
+                }
+
+            }
+
+        })
+    }
+
+    $(document).ready(function(){
+        $('.spending-slider').slider({
+            min: 0,
+            max: 100,
+            range: "min",
+            change: function( event, ui ) {
+                var totalVal = 0;
+                $(this).parent().find('input.value').val($(this).slider('value')*1000);
+                $(this).parent().find('input.percent').val($(this).slider('value'));
+//                $('.spending-slider').each(function(){
+//                    totalVal += $(this).slider('value');
+//                    var id = $(this).attr('id').replace('slider_','');
+//                    $('#value_'+id).val(ui.value);
+//                });
+            }
+        });
+    })
+
+    function sliderState(status)
+    {
+    }
+
+</script>
+
+{% endblock %}
+

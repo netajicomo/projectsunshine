@@ -37,3 +37,11 @@ offline_submission:
 registration:
     pattern: /registration
     defaults: { _controller: "PSBalanceBudgetBundle:Registration:registration" }    
+
+spending:
+    pattern: /spending
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:spending" }
+
+spending_save:
+    pattern: /spendingSave
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:spendingSave" }

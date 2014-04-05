@@ -138,6 +138,16 @@ class BudgetController extends Controller
         
       
   }  
+  
+  public function saveDetailedSubmissionAction(Request $request){
+      
+       $sessionId = $request->getSession()->get('id'); 
+       $em = $this->getDoctrine()->getManager();
+      
+      
+  }
+  
+  
    
   public function summaryAction(Request $request){
       
@@ -183,7 +193,7 @@ class BudgetController extends Controller
                 }
                 else
                 {
-                  $pagination['next'] = $category->getSlug();   
+                  $pagination['next'] = 'summary';  
                 }
                 // for the previous
                 if(isset($categories[$k-1]))
@@ -192,7 +202,7 @@ class BudgetController extends Controller
                 }
                 else
                 {
-                  $pagination['prev'] = 'summary';   
+                  $pagination['prev'] = $category->getSlug();   
                 }
              }    
              
@@ -247,6 +257,10 @@ class BudgetController extends Controller
         exit;
     }
 
+    
+    /* 
+     * Here begin the application critical functions
+    */
 
     public function updateDebtAction(Request $request){
 

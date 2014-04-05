@@ -53,7 +53,7 @@ class FooterMenuAdmin extends Admin
         $formMapper
 //            ->add('id')
             ->add('title')
-            ->add('url_type','choice',array('required' => true,'label' => 'URL type','choices' => array('main' => 'Main','internal' => 'Internal','external' => 'External')))
+//            ->add('url_type','choice',array('required' => true,'label' => 'URL type','choices' => array('main' => 'Main','internal' => 'Internal','external' => 'External')))
             ->add('url')
             ->add('target',null,array('required' => false))
         ;

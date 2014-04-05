@@ -32,19 +32,26 @@
                     <div class="row">
                         <div class="span12">
                             <div class="span10">
-                                <div id="totalSlider" class="totalSlider" data-total="{{budgetdata.debt}}" data-value="{{ slidervalue }}"></div>
+                                <ul class="totalSliderLabel topLabel">
+                                    <li>$0</li>
+                                    <li>$10b</li>
+                                    <li>$20b</li>
+                                    <li>$30b</li>
+                                    <li>$40b</li>
+                                    <li>$50b</li>
+                                    <li>$60b</li>
+                                    <li>$70b</li>
+                                </ul>                                
+                                <div id="totalSlider" data-total="{{budgetdata.debt}}" data-value="{{ slidervalue }}"></div>
                                 <ul class="totalSliderLabel">
-                                    <li style="width: 68px;"><span>0bn</span></li>
-                                    <li style="width: 68px;"><span>10bn</span></li>
-                                    <li style="width: 68px;"><span>20bn</span></li>
-                                    <li style="width: 68px;"><span>30bn</span></li>
-                                    <li style="width: 68px;"><span>40bn</span></li>
-                                    <li style="width: 102px;"><span>50bn</span></li>
-                                    <li style="width: 102px;"><span>55bn</span></li>
-                                    <li style="width: 102px;"><span>60bn</span></li>
-                                    <li style="width: 102px;"><span>65bn</span></li>
-                                    <li style="width: 102px;"><span>70bn</span></li>
-                                    <li style="width: 102px;"><span>75bn</span></li>
+                                    <li>$5b</li>
+                                    <li>$15b</li>
+                                    <li>$25b</li>
+                                    <li>$35b</li>
+                                    <li>$45b</li>
+                                    <li>$55b</li>
+                                    <li>$65b</li>
+                                    <li>$75b</li>
                                 </ul>
                             </div>
                         </div>
@@ -149,85 +156,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% if  'slider' in issue.controltype.name %}
-
-                                       <div class="span5">
-                                           <div class="spacingAll costSlider">
-                                                {% if (issue.isreduceby != '1') %}
-                                               <label class="blueLabel">current cost <span>${{ issue.optionvalues['total']|number_format}}M</span></label>
-                                               {% endif%}
-                                                {% if  issue.issuegroup %}
-                                               <div id="issuegroupslider_{{issue.id}}"class="issuegroupslider" data-value="{{ issue.optionvalues['value']}}"  data-max="{{ issue.optionvalues['max']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
-                                               {% else %}
-                                               <div id="slider_{{issue.id}}"class="slider" data-value="{{ issue.optionvalues['value']}}"  data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" data-step="{{ issue.optionvalues['step']}}" data-start="{{ issue.optionvalues['start']}}"></div>
-                                                {% endif %}  
-                                               <div class="sliderLabel clearfix">
-                                                     
-                                                  
-                                                   <span class="pull-left">{{ issue.optionvalues['min'] }}%</span>
-                                                   <span class="pull-right">{{ issue.optionvalues['max'] }}%</span> 
-                                                   
-                                                 
-                                               </div>
-
-
-                                               <label class="redLabel">cutting <span>$</span>
-                                                   
-                                                   
-                                                     <input type="text" readonly id="reducer_value_{{issue.id}}" value="{{ issue.optionvalues['cost']}}">M
-                                                    (<input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['value']}}" style="width:30px">%)
-                                                   
-                                               </label>
-                                                  <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
-                                           </div>
-                                       </div>
-                                
-                                 {% endif %} 
-                                 {% if  'switch' in issue.controltype.name|lower%}
-                                <div class="span5">
-                                    <div class="spacingAll costSlider">
-
-                                        <label class="blueLabel">current cost <span>${{ issue.optionvalues['max']|number_format}}M</span></label>
-                                        
-                                        <div class="switchButtonWrapper">
-                                            <input class="switch" type="checkbox" value="0"  id="switch_{{issue.id}}">
-                                        </div>
-                                        <input type="hidden" id="options_{{issue.id}}" data-value="{{ issue.optionvalues['value']}}" data-max="{{ issue.optionvalues['max']}}" data-min="{{ issue.optionvalues['min']}}" >
-                                        <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{ issue.optionvalues['min']}}M"></label>
-                                        <input type="hidden" readonly id="debt_value_{{issue.id}}" value="{{ issue.optionvalues['min']}}">
-                                    </div>
-                                </div>
-                               {% endif %}
-                                {% if  'select' in issue.controltype.name|lower %}
-                                <div class="span5">
-                                    <div class="spacingAll costSlider">
-                                        <select id="select_{{issue.id}}" class="selectType" data-value="{{ issue.optionvalues['value']}}">
-                                           <option value="0">Select a Value</option>     
-                                           {% for key,value in issue.optionvalues %}
-                                           {% if( key != 'value') and ( key != 'cost')%}
-                                          <option value="{{ value }}">{{ key }}</option>    
-                                            {% endif %}
-                                            {% endfor %} 
-                                        </select>
-                                      <label class="redLabel">cutting <span>$</span> <input type="text" readonly id="value_{{issue.id}}" value="0"> M</label>  
-                                    </div>
-                                </div>
-                               {% endif %}
-                                 {% if  'radio' in issue.controltype.name|lower %}
-                                      {% if  issue.issuegroup is not null %} 
-                                       <div class="span5">
-                                           <div class="spacingAll costSlider">
-
-
-
-                                               <input type="radio" data-value="{{ issue.optionvalues['value']}}" class="issuegroupradio" name="{{ issue.issuegroup.name}}" id="radio_{{ issue.id }}" value="{{issue.optionvalues['max']}}">{{issue.optionvalues['max']}}
-                                             <label class="redLabel">cutting <span>$</span><input type="text" readonly id="value_{{issue.id}}" value="{{issue.optionvalues['min']}}">M</label>  
-                                           </div>
-                                       </div>
-                                      {% endif %}
-                            
-                                     
-                             {% endif %}   
+                               
                                 <div class="span12 comment-wrapper">
                                     <form action="#" method="post">
                                         <div>
@@ -245,28 +174,7 @@
                 </div>
             </section>
               {% endif %} 
-            {#for the parent of the section#}
-         {% if  issue.isparent == '1'%}
-            <section class="subSection">
-                <div class="container">
-                    <div class="row">
-                        <div class="span12">
-                            <div class="row">
-                                <div class="span7">
-                                   <div class="spacingAll">
-                                       <h3>{{ issue.title}}</h3>
-                                   </div>
-                                </div>
-                               <div class="span5 total-val-column">
-                                      <label class="redLabel" style="font-weight: 600;">TOTAL <span>$</span><input type="text" readonly id="total_{{issue.id}}" value="{{ issue.optionvalues['value']}}" style="border-radius: 0; margin-left: 4px; margin-right: 4px;">M</label>
-                               </div>
-                            </div>   
-                            
-                        </div>
-                    </div>
-                </div>
-            </section>    
-            {% endif %} 
+        
             {% endfor%}
                    
                 {% endfor%}
@@ -280,8 +188,8 @@
                             <div class="span8">
                                 <h4>{{ category.title}}</h4>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                <a href='{{path('planner',{'slug': prev })}}' class="prevButton">Previous Section</a>
-                                <a href='{{path('planner',{'slug': next })}}' class="nextButton">Next Section</a>
+                                <a href='{{path('detailed_submission',{'slug': prev })}}' class="prevButton">Previous Section</a>
+                                <a href='{{path('detailed_submission',{'slug': next })}}' class="nextButton">Next Section</a>
                             </div>
                         </div>
                     </div>

@@ -1,29 +1,29 @@
 $(document).ready(function(){
   // for the sliders
-   $('.slider').each(function(){
+    $('.slider').each(function(){
         var max = parseInt($(this).attr('data-max'), 10);
         var min = parseInt($(this).attr('data-min'), 10);
-      
+
         var step = parseInt($(this).attr('data-step'), 10);
         var value = Math.floor(parseInt($(this).attr('data-value'), 10));
-       
-       $(this).slider({
-                value: value,
-                step: step,
-		min: min,
-		max: max,
-		range: "min",
-		change: function( event, ui ) {
-                    var id = $(this).attr('id').replace('slider_','');
-			//var value = total*ui.value/100;
-                         
-                      //    $('#value_'+id).val(value);
-                         $('#value_'+id).val(ui.value); 
-                    saveIssue(id, ui.value);    
-      	}
-	});
-   }) 
-   // for the select boxes
+
+        $(this).slider({
+            value: value,
+            step: step,
+            min: min,
+            max: max,
+            range: "min",
+            change: function( event, ui ) {
+                var id = $(this).attr('id').replace('slider_','');
+                //var value = total*ui.value/100;
+
+                //    $('#value_'+id).val(value);
+                $('#value_'+id).val(ui.value);
+                saveIssue(id, ui.value);
+            }
+        });
+    })
+    // for the select boxes
    $('.selectType').each(function(){
          var value = parseInt($(this).attr('data-value'), 10);  
          $(this).val(value);
@@ -192,9 +192,16 @@ $(document).ready(function(){
                     
                 }
 	});
-        
-        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em>"+(value/1000).toFixed(2)+"</em> B </span>" );
-
+        $(totalSlider).find( ".ui-slider-range" ).append("<div class='ui-slider-inner'><ul><li>Sustainable Level</li><li>Target</li><li>Unsustainable Level</li></ul></div>");
+        var debtValue = (value/1000).toFixed(2);
+        totalSlider.find( ".ui-slider-handle" ).append( "<span class='sliderValue'>$<em>"+debtValue+"</em> B </span>" );
+        if(debtValue > 50)
+        {   
+//            totalSlider.find( ".ui-slider-handle" ).css('margin-left', '95px');
+//            var width = totalSlider.find( ".ui-slider-range" ).css('width');
+//            var newWidth = width+20;
+//            totalSlider.find( ".ui-slider-range" ).css('width', '83%');
+        }
 	/** Planner page add comment toggle **/        
         $( ".add-comment" ).click(function(e) {
             e.preventDefault();

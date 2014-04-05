@@ -2,6 +2,7 @@
 
 namespace PS\Bundle\BalanceBudgetBundle\Controller;
 
+use PS\Bundle\BalanceBudgetBundle\Entity\VisitorSpendingActivity;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,9 +29,13 @@ class BudgetController extends Controller
        // create the visitor
         $service = $this->get('visitor_tracker_service');
 
-       
+       // if its a new user
        if(!$service->createVisitor($request))
-        return $this->redirect($this->generateUrl('postcode'));    
+       { return $this->redirect($this->generateUrl('postcode'));  }
+       
+       //if its the summary page
+       if($slug == 'summary')
+       {return $this->redirect($this->generateUrl('summary'));   } 
            
        $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
@@ -99,7 +104,81 @@ class BudgetController extends Controller
         ));
     }
 
-    
+  public function detailedSubmissionAction(Request $request, $slug){
+       // create the visitor
+        $service = $this->get('visitor_tracker_service');
+
+       // if its a new user
+       if(!$service->createVisitor($request))
+        return $this->redirect($this->generateUrl('postcode'));    
+       
+        $sessionId = $request->getSession()->get('id');  
+       $em = $this->getDoctrine()->getManager();
+       
+       
+        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->findOneBySlug($slug);
+        
+
+        $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
+
+        $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);
+        $sliderValue = intval($budgetData->getDebt()) - intval($currentdebt);
+         $id = $category->getId();  
+          $pagination = $this->getThePagination($id);  
+            
+          $next = $pagination['next'];
+          $prev = $pagination['prev'];
+        return $this->render('PSBalanceBudgetBundle:Planner:detailed.html.twig', array(
+            'category' => $category,
+            'budgetdata' => $budgetData,
+            'slidervalue' => $sliderValue,
+            'next' => $next,
+            'prev' => $prev
+
+        ));
+        
+      
+  }  
+  
+  public function saveDetailedSubmissionAction(Request $request){
+      
+       $sessionId = $request->getSession()->get('id'); 
+       $em = $this->getDoctrine()->getManager();
+      
+      
+  }
+  
+  
+   
+  public function summaryAction(Request $request){
+      
+       $service = $this->get('visitor_tracker_service');
+
+       
+       if(!$service->createVisitor($request))
+        return $this->redirect($this->generateUrl('postcode'));    
+       
+        $sessionId = $request->getSession()->get('id');  
+       $em = $this->getDoctrine()->getManager();
+       $summaryValues = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getSummaryInformation($sessionId);
+       $sum = array_sum($summaryValues);
+      
+// echo '<pre>';
+//      print_r($summaryValues);
+//      echo $sum;exit;
+       return $this->render('PSBalanceBudgetBundle:Planner:summary.html.twig', array(
+        'summaryValues' => $summaryValues,
+          'sum'  => number_format((intval($sum)/1000),1),
+
+        ));
+      
+  }
+  
+  
+  
+  
+  
+  
     public function getThePagination($id){
           $em = $this->getDoctrine()->getManager();
           $pagination = array();
@@ -115,7 +194,7 @@ class BudgetController extends Controller
                 }
                 else
                 {
-                  $pagination['next'] = $category->getSlug();   
+                  $pagination['next'] = 'summary';  
                 }
                 // for the previous
                 if(isset($categories[$k-1]))
@@ -138,10 +217,8 @@ class BudgetController extends Controller
     
 
 
-    public function spendingAction(Request $request, $id)
+    public function spendingAction(Request $request)
     {
-
-
         // create the visitor
         $service = $this->get('visitor_tracker_service');
 
@@ -151,57 +228,16 @@ class BudgetController extends Controller
         $em = $this->getDoctrine()->getManager();
 
 
-        $category = $em->getRepository('PSBalanceBudgetBundle:Category')->find($id);
+        $category = $em->getRepository('PSBalanceBudgetBundle:SpendingCategory')->findAll();
 
         $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
 
-        $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getTheSetParentValues($sessionId);
-        $sliderValue = intval($budgetData->getDebt()) - intval($currentdebt);
-
-        // json decode the issue option values string
-        // foreach($categories as $category)
-        // {
-        foreach($category->getSections() as $section){
-            foreach($section->getIssues() as $issue){
-                $optionValues = json_decode($issue->getOptionValues(), TRUE);
-                if($sessionId)
-                {
-                    $savedIssue = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->findOneBy(array('issue_id' => $issue->getId(),'session_id' => $sessionId));
-                    if(isset($savedIssue))
-                    {
-                        if($savedIssue->getIssuePercentage())
-                        {
-                            $value = $savedIssue->getIssuePercentage();
-                            $cost = $savedIssue->getIssueValue();
-                        }
-                        else
-                        {
-                            $value =  $savedIssue->getIssueValue();
-                            $cost = $savedIssue->getIssueValue();
-                        }
-                    }
-                    else
-                    {
-                        $value = 0;
-                        $cost = 0;
-                    }
-
-                }
-
-                $optionValues['value'] = $value;
-                $optionValues['cost'] = $cost;
-                $issue->setOptionValues($optionValues);
-
-
-
-            }
-        }
-        // }
-        //exit;
-        $next = $id+1;
-        $prev = $id-1;
-        return $this->render('PSBalanceBudgetBundle:Planner:index.html.twig', array(
-            'category' => $category,
+//        $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorSpendingActivity')->getTheSetParentValues($sessionId);
+        $sliderValue = 0;
+        $next = 1;
+        $prev = 1;
+        return $this->render('PSBalanceBudgetBundle:Planner:spending.html.twig', array(
+            'categories' => $category,
             'budgetdata' => $budgetData,
             'slidervalue' => $sliderValue,
             'next' => $next,
@@ -210,6 +246,25 @@ class BudgetController extends Controller
         ));
     }
 
+    public function spendingSaveAction(Request $request)
+    {
+        $session_id = $request->getSession()->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+
+        foreach($request->request->get('issue') as $issue_id => $issue)
+        {
+            $em->getRepository('PSBalanceBudgetBundle:VisitorSpendingActivity')->saveActivity( $session_id, $issue_id,$issue['value'],$issue['percent'] );
+
+        }
+
+
+    }
+
+    
+    /* 
+     * Here begin the application critical functions
+    */
 
     public function updateDebtAction(Request $request){
 

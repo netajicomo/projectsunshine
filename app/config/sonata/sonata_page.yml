@@ -34,12 +34,15 @@ sonata_page:
         - offline_submission
         - update_debt
         - registration
+        - detailed_submission
+        - summary
         
     ignore_uri_patterns:
         - admin(.*)         # ignore admin route, ie route containing 'admin'
         - /booking/*
         - /planner*
         - /ckeditorsave*
+        - /spending*
 
     cache_invalidation:
         service:  sonata.page.cache.invalidation.simple

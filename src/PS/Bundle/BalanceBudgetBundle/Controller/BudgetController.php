@@ -245,7 +245,35 @@ class BudgetController extends Controller
 
         ));
     }
+public function spendingDetailedAction(Request $request)
+    {
+        // create the visitor
+        $service = $this->get('visitor_tracker_service');
 
+        $service->createVisitor($request);
+
+        $sessionId = $request->getSession()->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+
+        $category = $em->getRepository('PSBalanceBudgetBundle:SpendingCategory')->findAll();
+
+        $budgetData = $em->getRepository('PSBalanceBudgetBundle:BudgetPlanner')->find(1);
+
+//        $currentdebt = $em->getRepository('PSBalanceBudgetBundle:VisitorSpendingActivity')->getTheSetParentValues($sessionId);
+        $sliderValue = 0;
+        $next = 1;
+        $prev = 1;
+        return $this->render('PSBalanceBudgetBundle:Planner:spending_detailed.html.twig', array(
+            'categories' => $category,
+            'budgetdata' => $budgetData,
+            'slidervalue' => $sliderValue,
+            'next' => $next,
+            'prev' => $prev
+
+        ));
+    }
+    
     public function spendingSaveAction(Request $request)
     {
         $session_id = $request->getSession()->get('id');

@@ -385,7 +385,8 @@ section + section{
 }
 
 .contentSection .prevButton,
-.contentSection .nextButton{
+.contentSection .nextButton,
+input.custom-submit {
     color: white;
     font-size: 17px;
     font-family: 'Architects Daughter', cursive;
@@ -396,6 +397,12 @@ section + section{
     border-radius: 14px;
     margin-bottom: 12px;
     text-transform: uppercase;
+}
+
+input.custom-submit {
+    border: none;
+    height: 43px;
+    margin-bottom: 0;
 }
 
 .contentSection .nextButton{
@@ -896,7 +903,7 @@ a.add-comment {
     padding: 0 30px 16px;
 }
 
-.comment-wrapper textarea {
+.subSection textarea {
     border-color: #d7d7d7;
     border-radius: 0;
     box-sizing: border-box;
@@ -1629,6 +1636,64 @@ cite {
    .notificationSection li:first-child + li > a{ font-weight: 500; color: white; }
    .notificationSection li.last a{ display: inline-block; font-size: 30px; background-color: #1A4566; padding: 10px 15px; color: white; }    
 
+   
+/* ==========================================================================
+   Deatiled Submission Page Styles
+   ========================================================================== */  
+    .priority-select label {
+        float: left;
+        font-size: 18px;
+        margin-right: 10px;
+        padding-top: 4px;
+    }
+    
+    .priority-select .btn-group>.btn:first-child {
+        background: #fff;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        height: 33px;
+        text-shadow: none;
+    }
+    
+    .priority-select .bootstrap-select.form-control:not([class*="span"]) {
+        border: 1px solid #d7d7d7;
+        width: 77px;
+    }
+    
+    .priority-select button {
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .priority-select .bootstrap-select.btn-group .btn .caret {
+        border: none;
+        height: 10px;
+        width: 15px;
+    }
+    
+    .priority-select .btn .caret:after {
+        color: #464646;
+        content: "\f078";
+        font-family: FontAwesome;
+        font-size: 16px;
+        height: 10px;
+        position: absolute;
+        top: -8px;
+        right: -1px;
+        width: 15px;
+    }
+    
+/* ==========================================================================
+   Admin Nav Bar Styles
+   ========================================================================== */
+    .navbar-top-links.breadcrumb {
+        width: 100%
+    }
+    
+    .navbar-top-links.breadcrumb {
+        float: left
+    }
+    
 
 /* ==========================================================================
    Footer Styles
@@ -1892,6 +1957,14 @@ footer h5{
     
     .banner-wrapper h1 {
         font-size: 26px
+    }
+    
+/* ==========================================================================
+   Deatiled Submission Page Styles
+   ========================================================================== */
+    
+    .detailed-subSection .det-span12 {
+        background-color: #ebebeb
     }
 }
 
@@ -2165,7 +2238,15 @@ footer h5{
     
     .form-item:first-child {
         margin-bottom: 25px
-    }    
+    }
+    
+/* ==========================================================================
+   Deatiled Submission Page Styles
+   ========================================================================== */
+
+    .detailed-finishedSection .span12 {
+        padding: 0
+    }
 
 }
 

@@ -126,18 +126,20 @@
            {% for issue in section.issues%}
 
               {% if  issue.isparent != '1'%}
-            <section class="subSection subSection-row">
+            <section class="subSection detailed-subSection subSection-row">
 
                 <div class="container">
                     <div class="row">
-                        <div class="span12">
+                        <div class="span12 det-span12">
                             <div class="row">
-                                <div class="span7">
+                                <div class="span6">
                                     <div class="spacingAll">
                                         <h3>{{ issue.title}}  </h3>
                                         <p>{{ issue.lead}}</p>
                                         <!--<a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>-->
-                                        <a href="#subsection_{{loop.index}}" class="moreInfo" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
+                                        <div class="clearfix">
+                                            <a href="#subsection_{{loop.index}}" class="moreInfo pull-left" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
+                                        </div>
                                         <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header custom-modal-header clearfix">
                                               <button type="button" class="close text-upper" data-dismiss="modal" aria-hidden="true">Close <i class="icon-remove"></i></button>
@@ -156,7 +158,17 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+                               <div class="span6">
+                                    <div class="spacingAll">
+                                        <form action="#" method="post">
+                                             <div>
+                                                 <div class="form-textarea">
+                                                     <textarea rows="4" cols="50">Enter your response...</textarea>
+                                                 </div>
+                                             </div>
+                                         </form>
+                                    </div>
+                               </div>
                                 <div class="span12 comment-wrapper">
                                     <form action="#" method="post">
                                         <div>
@@ -181,7 +193,7 @@
      {#       {% endfor%}#}
                             
 
-           <section class="contentSection finishedSection">
+           <section class="contentSection finishedSection detailed-finishedSection">
                 <div class="container">
                     <div class="row">
                         <div class="span12">
@@ -257,6 +269,9 @@
 })
   }
   
+        $(function(){				 
+		$('.selectpicker').selectpicker();
+	});
    
       </script>
          

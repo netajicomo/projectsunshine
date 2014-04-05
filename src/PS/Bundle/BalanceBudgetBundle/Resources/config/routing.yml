@@ -50,6 +50,10 @@ spending:
     pattern: /spending
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:spending" }
 
+spending_detailed:
+    pattern: /spending-detailed
+    defaults: { _controller: "PSBalanceBudgetBundle:Budget:spendingDetailed" }
+
 spending_save:
     pattern: /spendingSave
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:spendingSave" }

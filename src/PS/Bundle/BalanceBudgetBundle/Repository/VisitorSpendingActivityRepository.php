@@ -3,6 +3,7 @@
 namespace PS\Bundle\BalanceBudgetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use PS\Bundle\BalanceBudgetBundle\Entity\VisitorSpendingActivity;
 
 /**
  * VisitorSpendingActivityRepository
@@ -12,4 +13,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class VisitorSpendingActivityRepository extends EntityRepository
 {
+    public function saveActivity($sessionId, $issueId, $value=0, $percentage=0)
+    {
+        $em = $this->getEntityManager();
+
+        $issue = $em->getRepository('PSBalanceBudgetBundle:SpendingIssue')->find($issueId);
+        $visitorActivity  = $this->findOneBy(array('session_id'=>$sessionId, 'issue' => $issue));
+        // update the row
+        if(!$visitorActivity)
+        {
+            $visitorActivity = new VisitorSpendingActivity();
+        }
+
+        $visitorActivity->setSessionId($sessionId);
+        $visitorActivity->setIssue($issue);
+        $visitorActivity->setIssueValue($value);
+        $visitorActivity->setHasTouched(true);
+        $visitorActivity->setCreatedAt(new \DateTime());
+        $visitorActivity->setIssuePercentage($percentage);
+
+
+        $em->persist($visitorActivity);
+        $em->flush();
+
+    }
 }

@@ -29,3 +29,11 @@ offline_submission:
 registration:
     pattern: /registration
     defaults: { _controller: "PSBalanceBudgetBundle:Registration:registration" }    
+
+header_menu:
+    pattern: /dynamicheader
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:dynamicHeader" }
+
+footer_menu:
+    pattern: /dynamicfooter
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:dynamicFooter" }

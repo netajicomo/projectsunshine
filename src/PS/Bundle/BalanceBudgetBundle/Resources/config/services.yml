@@ -12,7 +12,7 @@ services:
             class: PS\Bundle\BalanceBudgetBundle\Admin\HeaderMenuAdmin
             arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu, PSBalanceBudgetBundle:HeaderMenuAdmin]
             tags:
-                - {name: sonata.admin, manager_type: orm, group: Issues, label: HeaderMenu}
+                - {name: sonata.admin, manager_type: orm, group: Navigations, label: HeaderMenu}
             calls:
                 - [ setTranslationDomain, [PSBalanceBudgetBundle]]
 
@@ -101,3 +101,9 @@ services:
         arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Spending, label: Issue}
+
+    ps_balance_budget.admin.footer_menu:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\FooterMenuAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\FooterMenu, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Navigations, label: FooterMenu}

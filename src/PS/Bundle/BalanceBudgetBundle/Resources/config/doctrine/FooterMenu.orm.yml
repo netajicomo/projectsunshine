@@ -1,7 +1,7 @@
-PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu:
+PS\Bundle\BalanceBudgetBundle\Entity\FooterMenu:
     type: entity
-    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\HeaderMenuRepository
-    table: ps_header_menu
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\FooterMenuRepository
+    table: ps_footer_menu
     id:
         id:
             type: integer
@@ -19,11 +19,3 @@ PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu:
         target:
             type: string
             length: 255
-    oneToMany:
-        children:
-            targetEntity: HeaderMenu
-            mappedBy: parent
-    manyToOne:
-        parent:
-            targetEntity: HeaderMenu
-            inversedBy: children

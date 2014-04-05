@@ -2,6 +2,7 @@
 
 namespace PS\Bundle\BalanceBudgetBundle\Controller;
 
+use PS\Bundle\BalanceBudgetBundle\Entity\VisitorSpendingActivity;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -275,14 +276,17 @@ public function spendingDetailedAction(Request $request)
     
     public function spendingSaveAction(Request $request)
     {
-        echo $sessionId = $request->getSession()->get('id');
+        $session_id = $request->getSession()->get('id');
+        $em = $this->getDoctrine()->getManager();
 
-        echo "<pre>";
+
         foreach($request->request->get('issue') as $issue_id => $issue)
         {
+            $em->getRepository('PSBalanceBudgetBundle:VisitorSpendingActivity')->saveActivity( $session_id, $issue_id,$issue['value'],$issue['percent'] );
 
         }
-        exit;
+
+
     }
 
     

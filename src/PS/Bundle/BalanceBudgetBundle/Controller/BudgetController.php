@@ -244,7 +244,7 @@ public function spendingDetailedAction(Request $request)
         $sliderValue = 0;
         $next = 1;
         $prev = 1;
-        return $this->render('PSBalanceBudgetBundle:Planner:spending.html.twig', array(
+        return $this->render('PSBalanceBudgetBundle:Planner:spending_detailed.html.twig', array(
             'categories' => $category,
             'budgetdata' => $budgetData,
             'slidervalue' => $sliderValue,

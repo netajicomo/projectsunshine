@@ -126,7 +126,7 @@
            {% for issue in section.issues%}
 
               {% if  issue.isparent != '1'%}
-            <section class="subSection subSection-row">
+            <section class="subSection detailed-subSection subSection-row">
 
                 <div class="container">
                     <div class="row">
@@ -139,14 +139,6 @@
                                         <!--<a class="add-comment" href="#" title="Add Comment"><i class="icon-plus"></i> Add Comment</a>-->
                                         <div class="clearfix">
                                             <a href="#subsection_{{loop.index}}" class="moreInfo pull-left" data-toggle="modal"><i class="icon-info-sign"></i> more info</a>
-                                            <div class="form-group pull-right priority-select">
-                                                <label>Priority</label>
-                                                <select class="form-control selectpicker">
-                                                    <option>Set</option>
-                                                    <option>select type1</option>
-                                                    <option>select type2</option>
-                                                </select>
-                                            </div>
                                         </div>
                                         <div id="subsection_{{loop.index}}" class="modal custom-modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header custom-modal-header clearfix">

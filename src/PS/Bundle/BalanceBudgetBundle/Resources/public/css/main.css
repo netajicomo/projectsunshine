@@ -385,7 +385,8 @@ section + section{
 }
 
 .contentSection .prevButton,
-.contentSection .nextButton{
+.contentSection .nextButton,
+input.custom-submit {
     color: white;
     font-size: 17px;
     font-family: 'Architects Daughter', cursive;
@@ -396,6 +397,12 @@ section + section{
     border-radius: 14px;
     margin-bottom: 12px;
     text-transform: uppercase;
+}
+
+input.custom-submit {
+    border: none;
+    height: 43px;
+    margin-bottom: 0;
 }
 
 .contentSection .nextButton{
@@ -1408,19 +1415,45 @@ cite {
    ========================================================================== */  
     .priority-select label {
         float: left;
+        font-size: 18px;
         margin-right: 10px;
         padding-top: 4px;
     }
     
     .priority-select .btn-group>.btn:first-child {
         background: #fff;
-        box-shadow: none;
         border-radius: 0;
+        border: none;
+        box-shadow: none;
+        height: 33px;
+        text-shadow: none;
     }
     
     .priority-select .bootstrap-select.form-control:not([class*="span"]) {
         border: 1px solid #d7d7d7;
         width: 77px;
+    }
+    
+    .priority-select button {
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .priority-select .bootstrap-select.btn-group .btn .caret {
+        border: none;
+        height: 10px;
+        width: 15px;
+    }
+    
+    .priority-select .btn .caret:after {
+        color: #464646;
+        content: "\f078";
+        font-family: FontAwesome;
+        font-size: 16px;
+        height: 10px;
+        position: absolute;
+        top: -8px;
+        right: -1px;
+        width: 15px;
     }
 
 /* ==========================================================================

@@ -28,9 +28,13 @@ class BudgetController extends Controller
        // create the visitor
         $service = $this->get('visitor_tracker_service');
 
-       
+       // if its a new user
        if(!$service->createVisitor($request))
-        return $this->redirect($this->generateUrl('postcode'));    
+       { return $this->redirect($this->generateUrl('postcode'));  }
+       
+       //if its the summary page
+       if($slug == 'summary')
+       {return $this->redirect($this->generateUrl('summary'));   } 
            
        $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
@@ -103,7 +107,7 @@ class BudgetController extends Controller
        // create the visitor
         $service = $this->get('visitor_tracker_service');
 
-       
+       // if its a new user
        if(!$service->createVisitor($request))
         return $this->redirect($this->generateUrl('postcode'));    
        
@@ -134,6 +138,16 @@ class BudgetController extends Controller
         
       
   }  
+  
+  public function saveDetailedSubmissionAction(Request $request){
+      
+       $sessionId = $request->getSession()->get('id'); 
+       $em = $this->getDoctrine()->getManager();
+      
+      
+  }
+  
+  
    
   public function summaryAction(Request $request){
       
@@ -146,9 +160,14 @@ class BudgetController extends Controller
         $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
        $summaryValues = $em->getRepository('PSBalanceBudgetBundle:VisitorActivity')->getSummaryInformation($sessionId);
-     // print_r($summaryValues);exit;
+       $sum = array_sum($summaryValues);
+      
+// echo '<pre>';
+//      print_r($summaryValues);
+//      echo $sum;exit;
        return $this->render('PSBalanceBudgetBundle:Planner:summary.html.twig', array(
-          
+        'summaryValues' => $summaryValues,
+          'sum'  => number_format((intval($sum)/1000),1),
 
         ));
       
@@ -174,7 +193,7 @@ class BudgetController extends Controller
                 }
                 else
                 {
-                  $pagination['next'] = $category->getSlug();   
+                  $pagination['next'] = 'summary';  
                 }
                 // for the previous
                 if(isset($categories[$k-1]))
@@ -266,6 +285,10 @@ public function spendingDetailedAction(Request $request)
         exit;
     }
 
+    
+    /* 
+     * Here begin the application critical functions
+    */
 
     public function updateDebtAction(Request $request){
 

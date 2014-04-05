@@ -1682,6 +1682,18 @@ cite {
         right: -1px;
         width: 15px;
     }
+    
+/* ==========================================================================
+   Admin Nav Bar Styles
+   ========================================================================== */
+    .navbar-top-links.breadcrumb {
+        width: 100%
+    }
+    
+    .navbar-top-links.breadcrumb {
+        float: left
+    }
+    
 
 /* ==========================================================================
    Footer Styles
@@ -1945,6 +1957,14 @@ footer h5{
     
     .banner-wrapper h1 {
         font-size: 26px
+    }
+    
+/* ==========================================================================
+   Deatiled Submission Page Styles
+   ========================================================================== */
+    
+    .detailed-subSection .det-span12 {
+        background-color: #ebebeb
     }
 }
 
@@ -2218,7 +2238,15 @@ footer h5{
     
     .form-item:first-child {
         margin-bottom: 25px
-    }    
+    }
+    
+/* ==========================================================================
+   Deatiled Submission Page Styles
+   ========================================================================== */
+
+    .detailed-finishedSection .span12 {
+        padding: 0
+    }
 
 }
 

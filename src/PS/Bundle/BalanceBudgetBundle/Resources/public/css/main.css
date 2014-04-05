@@ -765,7 +765,7 @@ a.add-comment {
     padding: 0 30px 16px;
 }
 
-.comment-wrapper textarea {
+.subSection textarea {
     border-color: #d7d7d7;
     border-radius: 0;
     box-sizing: border-box;
@@ -1402,6 +1402,26 @@ cite {
    .notificationSection li:first-child + li > a{ font-weight: 500; color: white; }
    .notificationSection li.last a{ display: inline-block; font-size: 30px; background-color: #1A4566; padding: 10px 15px; color: white; }    
 
+   
+/* ==========================================================================
+   Deatiled Submission Page Styles
+   ========================================================================== */  
+    .priority-select label {
+        float: left;
+        margin-right: 10px;
+        padding-top: 4px;
+    }
+    
+    .priority-select .btn-group>.btn:first-child {
+        background: #fff;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .priority-select .bootstrap-select.form-control:not([class*="span"]) {
+        border: 1px solid #d7d7d7;
+        width: 77px;
+    }
 
 /* ==========================================================================
    Footer Styles

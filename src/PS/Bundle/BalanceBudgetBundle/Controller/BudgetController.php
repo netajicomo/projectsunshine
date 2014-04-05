@@ -28,9 +28,13 @@ class BudgetController extends Controller
        // create the visitor
         $service = $this->get('visitor_tracker_service');
 
-       
+       // if its a new user
        if(!$service->createVisitor($request))
-        return $this->redirect($this->generateUrl('postcode'));    
+       { return $this->redirect($this->generateUrl('postcode'));  }
+       
+       //if its the summary page
+       if($slug == 'summary')
+       {return $this->redirect($this->generateUrl('summary'));   } 
            
        $sessionId = $request->getSession()->get('id');  
        $em = $this->getDoctrine()->getManager();
@@ -103,7 +107,7 @@ class BudgetController extends Controller
        // create the visitor
         $service = $this->get('visitor_tracker_service');
 
-       
+       // if its a new user
        if(!$service->createVisitor($request))
         return $this->redirect($this->generateUrl('postcode'));    
        
@@ -188,7 +192,7 @@ class BudgetController extends Controller
                 }
                 else
                 {
-                  $pagination['prev'] = $category->getSlug();   
+                  $pagination['prev'] = 'summary';   
                 }
              }    
              

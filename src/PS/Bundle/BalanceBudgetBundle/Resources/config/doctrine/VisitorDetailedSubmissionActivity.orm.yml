@@ -1,0 +1,27 @@
+PS\Bundle\BalanceBudgetBundle\Entity\VisitorDetailedSubmissionActivity:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\VisitorDetailedSubmissionActivityRepository
+    table: ps_visitor_detailed_submission_activity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        session_id:
+            type: string
+            length: 255    
+        issue_id:
+            type: string
+            length: 255   
+        issue_value:
+            type: text
+               
+        has_touched:
+            type: boolean
+        created_at:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [  setCreatedAtValue]        
+           
+        
+    

@@ -995,7 +995,7 @@ a.add-comment {
     padding: 15px 15px 35px 30px;
     text-align: left
 }
-#watch-video{ width: 640px; }
+#watch-video{ width: 640px; margin-left: -320px}
 #watch-video .custom-modal-body,
 #watch-video .custom-modal-footer{
     padding: 0;
@@ -1223,21 +1223,14 @@ cite {
     text-transform: uppercase
 }
 
-.iframe-wrapper {
-    margin-top: 65px;
-    /*position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;*/
+.generic-content-wrapper blockquote + p {
+    text-align: center
 }
 
-/*.iframe-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}*/
+.generic-content-wrapper iframe {
+    margin-top: 20px;
+    max-width: 100%;
+}
 
 /**
 * Generic Content Page Styles Ends Here
@@ -1368,6 +1361,7 @@ cite {
     border-radius: 0;
     padding: 12px 18px;
     margin-bottom: 24px;
+    text-align: center;
 }
 
 .pincodeForm .btn-submit{
@@ -1922,8 +1916,6 @@ footer h5{
         float: none
     }
     
-    #watch-video{ width: auto; }
-    
 /* ==========================================================================
    Mobile Menu styles
    ========================================================================== */    
@@ -1953,18 +1945,16 @@ footer h5{
          color: #002d4f;
     }
     
-    /** Home Page Styles Starts Here **/
-    
-    .banner-wrapper h1 {
-        font-size: 26px
-    }
-    
 /* ==========================================================================
    Deatiled Submission Page Styles
    ========================================================================== */
     
     .detailed-subSection .det-span12 {
         background-color: #ebebeb
+    }
+    
+    .widgetContent{
+        background-color: #ebebeb;
     }
 }
 
@@ -2080,24 +2070,31 @@ footer h5{
     }
     
     footer h5 {
+        font-size: 18px;
         margin-bottom: 0
     }
     
     /** Home Page Styles Starts Here **/
+    
+   .banner-wrapper h1 {
+        font-size: 20px
+    }
     
     .banner-wrapper {
         height: 214px;
         padding-bottom: 58px
     }
     
-/*    .get-involved-wrapper {
-        padding-bottom: 0;
-        padding-top: 0;
-    }*/
+    .span-block span {
+        min-width: 154px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
     
     .get-involved-wrapper h2{
         font-size: 24px;
         display: block;
+        margin-right: 0;
     }
     
     .get-involved-wrapper .link > a {
@@ -2115,6 +2112,8 @@ footer h5{
     .get-involved-wrapper .link  h2 + a i {
         background-color: rgba(115, 29, 40, .6);
     }
+    
+    #watch-video{ width: auto; margin-left: 0}
     
     /** Generic Content Page Styles Starts Here **/
 
@@ -2140,8 +2139,10 @@ footer h5{
     }
     
     .generic-content-wrapper img {
+        height: auto !important;
         margin-top: 25px;
         max-width: 97%;
+        width: auto !important;
     }
     
     .generic-content-wrapper h3 {
@@ -2174,10 +2175,6 @@ footer h5{
     cite {
         margin-left: 15px
     }
-    
-    .iframe-wrapper {
-        margin-top: 25px
-    }
 
 /* ==========================================================================
    News styles
@@ -2204,11 +2201,16 @@ footer h5{
         font-weight: 500;
         line-height: 1.25em;
    }
+   
+   .sectionHeader h2 span {
+       display: block
+   }
 
    .widgetContent{
-        background-color: #ebebeb;
-        margin-left: 12px;
-        margin-right: 12px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
    }
 
    .widgetContent h3{
@@ -2259,6 +2261,13 @@ footer h5{
 */
 
 @media (min-width: 768px) and (max-width: 979px) {
+    
+    /** Home Page Styles Starts Here **/
+    
+    .banner-wrapper h1 {
+        font-size: 26px
+    }
+    
     .subSection-row .costSlider {
         padding: 0;
         width: auto
@@ -2316,7 +2325,15 @@ footer h5{
 
    .register-form-wrapper {
         width: 600px
-    }   
+    }
+    
+/* ==========================================================================
+   Register Form styles
+   ========================================================================== */
+    
+    .generic-content-inner {
+        padding-left: 55px
+    }
 }
 
 /**
@@ -2347,3 +2364,7 @@ footer h5{
 /**
 * 940 View Media Queries Ends Here
 */
+
+@media (min-width: 980px) {
+    .generic-content-inner {padding-left: 79px}
+}

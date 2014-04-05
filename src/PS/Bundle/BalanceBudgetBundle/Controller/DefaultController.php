@@ -63,7 +63,7 @@ class DefaultController extends Controller
                 $session = $request->getSession();
                 $sessionId = $session->get('id');
                 try{
-                    $plannerPostCode_check = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
+                        $plannerPostCode_check = $em->getRepository('PSBalanceBudgetBundle:PlannerPostCode')->findOneBy(array('session_id'=>$sessionId));
                 }
                 catch(\Exception $exception)
                 {
@@ -72,7 +72,7 @@ class DefaultController extends Controller
 
                 if(!isset($sessionId) || !$plannerPostCode_check)
                 {
-                    $session->set('id', $session->getId());
+                    //$session->set('id', $session->getId());
                     $plannerPostCode->setSessionId($sessionId);
                     $em->persist($plannerPostCode);
                     $em->flush();
@@ -92,7 +92,20 @@ class DefaultController extends Controller
         $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Default:offline_submission.html.twig';
         return $this->render($template);
     }
-
+    public function dynamicHeaderAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $header_menu = $em->getRepository('PSBalanceBudgetBundle:HeaderMenu')->findBy(array('parent' =>  NULL));
+        $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Default:dynamic_header.html.twig';
+        return $this->render($template,array('header_menu' => $header_menu));
+    }
+    public function dynamicFooterAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $footer_menu = $em->getRepository('PSBalanceBudgetBundle:FooterMenu')->findAll();
+        $template = $this->getRequest()->get('template')?$this->getRequest()->get('template'):'PSBalanceBudgetBundle:Default:dynamic_footer.html.twig';
+        return $this->render($template,array('footer_menu' => $footer_menu));
+    }
 
 }
 

@@ -8,6 +8,25 @@ services:
         scope: request
    
 
+    ps_balance_budget.admin.header_menu:
+            class: PS\Bundle\BalanceBudgetBundle\Admin\HeaderMenuAdmin
+            arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu, PSBalanceBudgetBundle:HeaderMenuAdmin]
+            tags:
+                - {name: sonata.admin, manager_type: orm, group: Navigations, label: HeaderMenu}
+            calls:
+                - [ setTranslationDomain, [PSBalanceBudgetBundle]]
+
+    ps_balance_budget.admin.category:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\CategoryAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Category, PSBalanceBudgetBundle:CategoryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: Categories}
+
+    ps_balance_budget.admin.section:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\SectionAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\Section, PSBalanceBudgetBundle:SectionAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Issues, label: Sections}
 
 
     ps_balance_budget.admin.control_type:
@@ -82,3 +101,9 @@ services:
         arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\SpendingIssue, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Spending, label: Issue}
+
+    ps_balance_budget.admin.footer_menu:
+        class: PS\Bundle\BalanceBudgetBundle\Admin\FooterMenuAdmin
+        arguments: [~, PS\Bundle\BalanceBudgetBundle\Entity\FooterMenu, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Navigations, label: FooterMenu}

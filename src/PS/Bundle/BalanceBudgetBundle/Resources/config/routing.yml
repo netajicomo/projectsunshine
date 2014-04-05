@@ -38,6 +38,14 @@ registration:
     pattern: /registration
     defaults: { _controller: "PSBalanceBudgetBundle:Registration:registration" }    
 
+header_menu:
+    pattern: /dynamicheader
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:dynamicHeader" }
+
+footer_menu:
+    pattern: /dynamicfooter
+    defaults: { _controller: "PSBalanceBudgetBundle:Default:dynamicFooter" }
+
 spending:
     pattern: /spending
     defaults: { _controller: "PSBalanceBudgetBundle:Budget:spending" }

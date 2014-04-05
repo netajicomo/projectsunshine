@@ -1,0 +1,31 @@
+PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu:
+    type: entity
+    repositoryClass: PS\Bundle\BalanceBudgetBundle\Repository\HeaderMenuRepository
+    table: ps_header_menu
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        title:
+            type: string
+            length: 255
+        url_type:
+            type: string
+            length: 255
+            nullable: TRUE
+        url:
+            type: string
+            length: 255
+        target:
+            type: string
+            length: 255
+            nullable: TRUE
+    oneToMany:
+        children:
+            targetEntity: HeaderMenu
+            mappedBy: parent
+    manyToOne:
+        parent:
+            targetEntity: HeaderMenu
+            inversedBy: children

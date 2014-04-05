@@ -1,0 +1,32 @@
+<div class="span12 mainNavi">
+    <div class="navbar">
+
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="iconmoon-menu2"></span>
+        </a>
+        <div class="nav-collapse collapse">
+
+            <ul class="nav">
+
+                {% for menu in header_menu %}
+                    <li class="{{ menu.children | length > 0 ?"dropdown":"" }}">
+                        <a data-toggle="{{ menu.children | length > 0 ?"dropdown":"" }}" target="{{ menu.target }}" href="{{ menu.url }}" >{{ menu.title }}{{ menu.children | length > 0 ? "<i class='icon-angle-down'></i>":"" }} </a>
+                        {% if (menu.children | length > 0) %}
+                            <ul class="dropdown-menu">
+                                {% for submenu_menu in menu.children %}
+                                    <li><a href="{{ submenu_menu.url }}">{{ submenu_menu.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+
+                {% endfor %}
+            </ul>
+
+
+            <span class="pull-right submission-close">Submissions close May 19, 2014</span>
+
+        </div>
+
+    </div>
+</div>

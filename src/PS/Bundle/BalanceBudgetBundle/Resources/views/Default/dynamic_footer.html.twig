@@ -1,0 +1,5 @@
+{% for menu in footer_menu %}
+    <li>
+        <a target="{{ menu.target }}" href="{{ menu.url }}" >{{ menu.title }}s</a>
+    </li>
+{% endfor %}

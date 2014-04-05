@@ -20,3 +20,4 @@ PS\Bundle\BalanceBudgetBundle\Entity\FooterMenu:
         target:
             type: string
             length: 255
+            nullable: TRUE

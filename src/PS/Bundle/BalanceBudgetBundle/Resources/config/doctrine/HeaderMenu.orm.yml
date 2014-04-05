@@ -20,6 +20,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu:
         target:
             type: string
             length: 255
+            nullable: TRUE
     oneToMany:
         children:
             targetEntity: HeaderMenu

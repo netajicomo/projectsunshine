@@ -13,6 +13,7 @@ PS\Bundle\BalanceBudgetBundle\Entity\HeaderMenu:
         url_type:
             type: string
             length: 255
+            nullable: TRUE
         url:
             type: string
             length: 255
